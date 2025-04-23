@@ -1,0 +1,42 @@
+function StepRespFinan({ onNext, onBack }) {
+  return (
+    <div className="step" id="resp-financeiro">
+      <div className="row g-3">
+        <h3 className="mt-4">Responsável Financeiro</h3>
+        <div className="col-md-6">
+          <label htmlFor="inputRespName" className="form-label">
+            Nome
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputRespName"
+            name="resp_nome"
+            placeholder="João da Silva"
+            required
+          />
+        </div>
+        <div className="col-md-6">
+          <label htmlFor="inputRespFone" className="form-label">
+            Telefone
+          </label>
+          <input
+            type="tel"
+            className="form-control"
+            id="inputRespFone"
+            name="resp_fone"
+            placeholder="(00) 00000-0000"
+          />
+        </div>
+      </div>
+      <button type="button" className="btn btn-nav" onClick={onBack}>
+        Anterior
+      </button>
+      <button type="button" className="btn btn-nav" onClick={onNext}>
+        Próximo
+      </button>
+    </div>
+  );
+}
+
+export default StepRespFinan;
