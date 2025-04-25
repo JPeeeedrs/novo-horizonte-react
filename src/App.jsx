@@ -1,20 +1,22 @@
-import "./global.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Footer from "./common/Footer";
-import Header from "./common/Header";
-import Forms from "./components/Formulario/Forms";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// importar Paginas
+import Home from "./pages/Home";
+import Formulario from "./pages/Formulario";
+import Alunos from "./pages/Alunos";
+
+// importar icons
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
   return (
-    <div className="Formulario d-flex flex-column min-vh-100">
-      <Header />
-
-      <main>
-        <Forms />
-      </main>
-
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/formulario" element={<Formulario />} />
+        <Route path="/alunos" element={<Alunos />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,6 +1,7 @@
 import logo from "../assets/images/logo.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./header.css";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -25,15 +26,15 @@ function Header() {
         </div>
       </nav>
       <nav className="navbar" id="nav-elementos">
-        <a className="nav-link" href="index.html">
+        <Link to="/" className="text-white text-decoration-none">
           Início
-        </a>
-        <a className="nav-link" href="formulario.html">
-          Matrículas
-        </a>
-        <a className="nav-link" href="">
+        </Link>
+        <Link to="/formulario" className="text-white text-decoration-none">
+          Formulário
+        </Link>
+        <Link to="/alunos" className="text-white text-decoration-none">
           Alunos
-        </a>
+        </Link>
       </nav>
     </header>
   );

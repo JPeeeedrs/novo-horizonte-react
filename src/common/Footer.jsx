@@ -23,7 +23,7 @@ function Footer() {
             href="https://www.instagram.com/centroeducnovohorizonteoficial/"
             target="_blank"
           >
-            <a className="fab fa-instagram fa-2x"></a>
+            <i className="fab fa-instagram fa-2x"></i>
           </a>
         </div>
       </div>

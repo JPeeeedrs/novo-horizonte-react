@@ -1,4 +1,6 @@
 import termos from "../../assets/images/termos.pdf";
+
+// expotação para CSV e PDF
 import { exportarParaCsv } from "../../utils/exportCsv";
 import { exportarParaPdf } from "../../utils/exportPdf";
 
