@@ -1,4 +1,4 @@
-function StepRespFinan({ onNext, onBack }) {
+function StepRespFinan({ onNext, onBack, formData, onChange }) {
   return (
     <div className="step" id="resp-financeiro">
       <div className="row g-3">
@@ -12,8 +12,9 @@ function StepRespFinan({ onNext, onBack }) {
             className="form-control"
             id="inputRespName"
             name="resp_nome"
+            value={formData.respFinan.resp_nome || ""}
+            onChange={onChange}
             placeholder="João da Silva"
-            required
           />
         </div>
         <div className="col-md-6">
@@ -25,6 +26,8 @@ function StepRespFinan({ onNext, onBack }) {
             className="form-control"
             id="inputRespFone"
             name="resp_fone"
+            value={formData.respFinan.resp_fone || ""}
+            onChange={onChange}
             placeholder="(00) 00000-0000"
           />
         </div>

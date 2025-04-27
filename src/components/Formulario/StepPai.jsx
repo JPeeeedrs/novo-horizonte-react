@@ -1,21 +1,25 @@
-function StepPai({ onNext, onBack }) {
+function StepPai({ onNext, onBack, formData, onChange }) {
   return (
     <div className="step" id="pai">
       <div className="row g-3">
         <h3 className="mt-4">Dados dos Familiares</h3>
-        <h5>Dados da Pai</h5>
+        <h5>Dados do Pai</h5> {/* Corrigido para "do Pai" */}
+        {/* Nome do Pai */}
         <div className="col-md-4">
           <label htmlFor="inputFatherName" className="form-label">
-            Nome da Pai
+            Nome do Pai
           </label>
           <input
             type="text"
             className="form-control"
             id="inputFatherName"
-            name="nome_pai"
+            name="nomePai"
+            value={formData.pai.nomePai || ""}
+            onChange={onChange}
             placeholder="Julio da Silva"
           />
         </div>
+        {/* Data de Nascimento */}
         <div className="col-md-4">
           <label htmlFor="inputFatherBirthDate" className="form-label">
             Data de Nascimento
@@ -24,9 +28,12 @@ function StepPai({ onNext, onBack }) {
             type="date"
             className="form-control"
             id="inputFatherBirthDate"
-            name="nascimento_pai"
+            name="nascimentoPai"
+            value={formData.pai.nascimentoPai || ""}
+            onChange={onChange}
           />
         </div>
+        {/* Endereço */}
         <div className="col-md-4">
           <label htmlFor="inputFatherAddress" className="form-label">
             Endereço
@@ -35,11 +42,13 @@ function StepPai({ onNext, onBack }) {
             type="text"
             className="form-control"
             id="inputFatherAddress"
-            name="endereco_pai"
+            name="enderecoPai"
+            value={formData.pai.enderecoPai || ""}
+            onChange={onChange}
             placeholder="Rua Manoel Gomes, 000"
-            required
           />
         </div>
+        {/* CEP */}
         <div className="col-md-4">
           <label htmlFor="inputFatherCEP" className="form-label">
             CEP
@@ -48,10 +57,13 @@ function StepPai({ onNext, onBack }) {
             type="text"
             className="form-control"
             id="inputFatherCEP"
-            name="cep_pai"
+            name="cepPai"
+            value={formData.pai.cepPai || ""}
+            onChange={onChange}
             placeholder="00000-000"
           />
         </div>
+        {/* CPF */}
         <div className="col-md-4">
           <label htmlFor="inputFatherCPF" className="form-label">
             CPF
@@ -60,11 +72,13 @@ function StepPai({ onNext, onBack }) {
             type="text"
             className="form-control"
             id="inputFatherCPF"
-            name="cpf_pai"
+            name="cpfPai"
+            value={formData.pai.cpfPai || ""}
+            onChange={onChange}
             placeholder="000.000.000-00"
-            required
           />
         </div>
+        {/* RG */}
         <div className="col-md-4">
           <label htmlFor="inputFatherRG" className="form-label">
             RG
@@ -73,11 +87,13 @@ function StepPai({ onNext, onBack }) {
             type="text"
             className="form-control"
             id="inputFatherRG"
-            name="rg_pai"
+            name="rgPai"
+            value={formData.pai.rgPai || ""}
+            onChange={onChange}
             placeholder="00.000.000-0"
-            required
           />
         </div>
+        {/* Telefone */}
         <div className="col-md-4">
           <label htmlFor="inputFatherFone" className="form-label">
             Telefone
@@ -86,10 +102,13 @@ function StepPai({ onNext, onBack }) {
             type="tel"
             className="form-control"
             id="inputFatherFone"
-            name="fone_pai"
+            name="fonePai"
+            value={formData.pai.fonePai || ""}
+            onChange={onChange}
             placeholder="(00) 00000-0000"
           />
         </div>
+        {/* Email */}
         <div className="col-md-4">
           <label htmlFor="inputFatherEmail" className="form-label">
             Email
@@ -98,13 +117,15 @@ function StepPai({ onNext, onBack }) {
             type="email"
             className="form-control"
             id="inputFatherEmail"
-            name="email_pai"
+            name="emailPai"
+            value={formData.pai.emailPai || ""}
+            onChange={onChange}
             placeholder="nome@example.com"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             title="Digite um email válido (exemplo: usuario@provedor.com)"
-            required
           />
         </div>
+        {/* Profissão */}
         <div className="col-md-4">
           <label htmlFor="inputFatherProfession" className="form-label">
             Profissão
@@ -113,9 +134,12 @@ function StepPai({ onNext, onBack }) {
             type="text"
             className="form-control"
             id="inputFatherProfession"
-            name="profissao_pai"
+            name="profissaoPai"
+            value={formData.pai.profissaoPai || ""}
+            onChange={onChange}
           />
         </div>
+        {/* Local de Trabalho */}
         <div className="col-md-4">
           <label htmlFor="inputFatherWorkplace" className="form-label">
             Local de Trabalho
@@ -124,9 +148,12 @@ function StepPai({ onNext, onBack }) {
             type="text"
             className="form-control"
             id="inputFatherWorkplace"
-            name="trabalho_pai"
+            name="trabalhoPai"
+            value={formData.pai.trabalhoPai || ""}
+            onChange={onChange}
           />
         </div>
+        {/* Telefone do Trabalho */}
         <div className="col-md-4">
           <label htmlFor="inputFatherWorkFone" className="form-label">
             Telefone do Trabalho
@@ -135,7 +162,9 @@ function StepPai({ onNext, onBack }) {
             type="tel"
             className="form-control"
             id="inputFatherWorkFone"
-            name="fone_trabalho_pai"
+            name="fone_trabalhoPai"
+            value={formData.pai.fone_trabalhoPai || ""}
+            onChange={onChange}
             placeholder="(00) 00000-0000"
           />
         </div>

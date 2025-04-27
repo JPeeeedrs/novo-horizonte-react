@@ -1,14 +1,14 @@
 // importar header e footer
 import Footer from "../common/Footer";
 import Header from "../common/Header";
-import EscolaCarrossel from "../components/Cards/EscolaCarrossel";
+import EscolaCarrossel from "../components/HomePage/EscolaCarrossel";
 
 // importar comoponentes
-import ProfGen from "../components/Cards/ProfGen";
-import Diretora from "../components/Cards/Diretora";
-import Seguimentos from "../components/Cards/Segmentos";
-import AtividadesCarrossel from "../components/Cards/AtividadesCarrossel";
-import Map from "../components/Cards/Map";
+import ProfGen from "../components/HomePage/ProfGen";
+import Diretora from "../components/HomePage/Diretora";
+import Seguimentos from "../components/HomePage/Segmentos";
+import AtividadesCarrossel from "../components/HomePage/AtividadesCarrossel";
+import Map from "../components/HomePage/Map";
 
 // importar css
 import "../global.css";

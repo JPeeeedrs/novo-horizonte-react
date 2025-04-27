@@ -1,12 +1,4 @@
-import { useState } from "react";
-
-function StepAnamnese({ onNext, onBack }) {
-  const [matriculaTipo, setMatriculaTipo] = useState("");
-  const [temIrmaos, setTemIrmaos] = useState("");
-  const [temEspecialista, setTemEspecialista] = useState("");
-  const [temAlergias, setTemAlergias] = useState("");
-  const [temMedicamento, setTemMedicamento] = useState("");
-
+function StepAnamnese({ onNext, onBack, formData, onChange }) {
   return (
     <div className="step" id="anamnese">
       <div className="row g-3">
@@ -18,11 +10,11 @@ function StepAnamnese({ onNext, onBack }) {
             Matrícula
           </label>
           <select
-            name="inputMatri"
+            name="matriculaTipo"
             className="form-select"
             id="selectMatri"
-            value={matriculaTipo}
-            onChange={(e) => setMatriculaTipo(e.target.value)}
+            value={formData.anamnese.matriculaTipo || ""}
+            onChange={onChange}
           >
             <option disabled value="">
               Selecione
@@ -33,8 +25,8 @@ function StepAnamnese({ onNext, onBack }) {
           </select>
         </div>
         <div className="col-md-8">
-          {(matriculaTipo === "municipal" ||
-            matriculaTipo === "particular") && (
+          {(formData.anamnese.matriculaTipo === "municipal" ||
+            formData.anamnese.matriculaTipo === "particular") && (
             <div>
               <label htmlFor="inputSchool" className="form-label">
                 Qual Escola
@@ -44,6 +36,8 @@ function StepAnamnese({ onNext, onBack }) {
                 id="inputSchool"
                 className="form-control"
                 name="escola"
+                value={formData.anamnese.escola || ""}
+                onChange={onChange}
                 placeholder="Escola"
               />
             </div>
@@ -56,11 +50,11 @@ function StepAnamnese({ onNext, onBack }) {
             Irmão(s)
           </label>
           <select
-            name="inputBrothers"
+            name="temIrmaos"
             className="form-select"
             id="selectBrothers"
-            value={temIrmaos}
-            onChange={(e) => setTemIrmaos(e.target.value)}
+            value={formData.anamnese.temIrmaos || ""}
+            onChange={onChange}
           >
             <option disabled value="">
               Selecione
@@ -70,7 +64,7 @@ function StepAnamnese({ onNext, onBack }) {
           </select>
         </div>
         <div className="col-md-8">
-          {temIrmaos === "sim" && (
+          {formData.anamnese.temIrmaos === "sim" && (
             <div className="d-flex">
               <div className="flex-grow-1 me-3">
                 <label htmlFor="inputBrothersName" className="form-label">
@@ -81,6 +75,8 @@ function StepAnamnese({ onNext, onBack }) {
                   id="inputBrothersName"
                   className="form-control"
                   name="irmaos_nome"
+                  value={formData.anamnese.irmaos_nome || ""}
+                  onChange={onChange}
                   placeholder="Ex: João, Maria, Pedro"
                 />
               </div>
@@ -93,6 +89,8 @@ function StepAnamnese({ onNext, onBack }) {
                   id="inputBrothersClass"
                   className="form-control"
                   name="irmaos_turma"
+                  value={formData.anamnese.irmaos_turma || ""}
+                  onChange={onChange}
                   placeholder="Ex: 1A, 2B, 3C"
                 />
               </div>
@@ -106,11 +104,11 @@ function StepAnamnese({ onNext, onBack }) {
             Especialista
           </label>
           <select
-            name="inputSpecial"
+            name="temEspecialista"
             className="form-select"
             id="selectSpecial"
-            value={temEspecialista}
-            onChange={(e) => setTemEspecialista(e.target.value)}
+            value={formData.anamnese.temEspecialista || ""}
+            onChange={onChange}
           >
             <option disabled value="">
               Selecione
@@ -120,7 +118,7 @@ function StepAnamnese({ onNext, onBack }) {
           </select>
         </div>
         <div className="col-md-8">
-          {temEspecialista === "sim" && (
+          {formData.anamnese.temEspecialista === "sim" && (
             <div>
               <label htmlFor="inputQualEspecialista" className="form-label">
                 Qual especialista?
@@ -130,6 +128,8 @@ function StepAnamnese({ onNext, onBack }) {
                 id="inputQualEspecialista"
                 className="form-control"
                 name="especialista"
+                value={formData.anamnese.especialista || ""}
+                onChange={onChange}
                 placeholder="Ex: Neurologista, Fonoaudiólogo"
               />
             </div>
@@ -142,11 +142,11 @@ function StepAnamnese({ onNext, onBack }) {
             Alergias
           </label>
           <select
-            name="inputAlergias"
+            name="temAlergias"
             className="form-select"
             id="selectAlergias"
-            value={temAlergias}
-            onChange={(e) => setTemAlergias(e.target.value)}
+            value={formData.anamnese.temAlergias || ""}
+            onChange={onChange}
           >
             <option disabled value="">
               Selecione
@@ -156,7 +156,7 @@ function StepAnamnese({ onNext, onBack }) {
           </select>
         </div>
         <div className="col-md-8">
-          {temAlergias === "sim" && (
+          {formData.anamnese.temAlergias === "sim" && (
             <div>
               <label htmlFor="inputQualAlergia" className="form-label">
                 Qual alergia?
@@ -166,6 +166,8 @@ function StepAnamnese({ onNext, onBack }) {
                 id="inputQualAlergia"
                 className="form-control"
                 name="alergia"
+                value={formData.anamnese.alergia || ""}
+                onChange={onChange}
                 placeholder="Ex: Alimentação, Remédios..."
               />
             </div>
@@ -178,11 +180,11 @@ function StepAnamnese({ onNext, onBack }) {
             Medicamento em uso
           </label>
           <select
-            name="inputMedicine"
+            name="temMedicamento"
             className="form-select"
             id="selectMedicine"
-            value={temMedicamento}
-            onChange={(e) => setTemMedicamento(e.target.value)}
+            value={formData.anamnese.temMedicamento || ""}
+            onChange={onChange}
           >
             <option disabled value="">
               Selecione
@@ -192,7 +194,7 @@ function StepAnamnese({ onNext, onBack }) {
           </select>
         </div>
         <div className="col-md-8">
-          {temMedicamento === "sim" && (
+          {formData.anamnese.temMedicamento === "sim" && (
             <div>
               <label htmlFor="inputQualMedicine" className="form-label">
                 Qual medicamento?
@@ -202,6 +204,8 @@ function StepAnamnese({ onNext, onBack }) {
                 id="inputQualMedicine"
                 className="form-control"
                 name="medicamento"
+                value={formData.anamnese.medicamento || ""}
+                onChange={onChange}
                 placeholder="Ex: Aspirina, Paracetamol..."
               />
             </div>
@@ -218,6 +222,8 @@ function StepAnamnese({ onNext, onBack }) {
             className="form-control"
             id="inputReside"
             name="reside"
+            value={formData.anamnese.reside || ""}
+            onChange={onChange}
           />
         </div>
       </div>

@@ -1,32 +1,33 @@
-import Papa from "papaparse";
+export const exportarParaCsv = (formData) => {
+  // 1. Preparar dados formatados
+  const dadosFormatados = {};
 
-export function exportarParaCsv() {
-  const formElement = document.getElementById("form");
+  // Processar cada seção do formulário
+  Object.entries(formData).forEach(([secao, valores]) => {
+    Object.entries(valores).forEach(([chave, valor]) => {
+      // Tratar arrays (como documentos)
+      const valorFormatado = Array.isArray(valor) ? valor.join(", ") : valor;
+      dadosFormatados[`${secao}_${chave}`] = valorFormatado || "";
+    });
+  });
 
-  if (!formElement) {
-    console.error("Formulário não encontrado.");
-    return;
-  }
+  // 2. Criar conteúdo CSV
+  const cabecalho = Object.keys(dadosFormatados).join(";");
+  const linhaDados = Object.values(dadosFormatados)
+    .map((v) => `"${v?.toString().replace(/"/g, '""')}"`)
+    .join(";");
 
-  const formData = new FormData(formElement);
-  const dados = {};
-
-  for (const [key, value] of formData.entries()) {
-    if (dados[key]) {
-      dados[key] = Array.isArray(dados[key])
-        ? [...dados[key], value]
-        : [dados[key], value];
-    } else {
-      dados[key] = value;
-    }
-  }
-
-  const csv = Papa.unparse([dados]);
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  // 3. Gerar e baixar arquivo
+  const conteudoCsv = `${cabecalho}\n${linhaDados}`;
+  const blob = new Blob(["\uFEFF" + conteudoCsv], {
+    type: "text/csv;charset=utf-8;",
+  });
   const url = URL.createObjectURL(blob);
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "formulario.csv";
-  a.click();
-}
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `dados_aluno_${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
