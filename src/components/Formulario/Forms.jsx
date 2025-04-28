@@ -35,12 +35,54 @@ function Forms() {
     }));
   };
 
-  const handleSubimit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Preparar os dados para envio
+    const dadosCompletos = {
+      ...formData.aluno,
+      ...formData.mae,
+      ...formData.pai,
+      ...formData.respFinan,
+      pessoasAutorizadas: formData.observacoes.pessoas_autorizadas,
+      documentosApresentados: formData.observacoes.documentos,
+      valorContrato: formData.observacoes.valor_contrato,
+      vencimento: formData.observacoes.vencimento,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/aluno", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dadosCompletos),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert(`Aluno ${data.nome} cadastrado com sucesso! ID: ${data.id}`);
+        // Resetar formulário
+        setFormData({
+          aluno: {},
+          anamnese: {},
+          mae: {},
+          pai: {},
+          respFinan: {},
+          observacoes: { documentos: [] },
+        });
+        setStep(1);
+      } else {
+        throw new Error("Erro ao cadastrar");
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("Erro ao cadastrar aluno. Verifique o console para mais detalhes.");
+    }
   };
 
   return (
-    <form id="form">
+    <form id="form" onSubmit={handleSubmit}>
       {step === 1 && (
         <StepAluno
           onNext={nextStep}
@@ -91,7 +133,7 @@ function Forms() {
           formData={formData}
           setFormData={setFormData}
           onChange={(e) => handleChange("observacoes", e)}
-          onSubmit={handleSubimit}
+          onSubmit={handleSubmit}
         />
       )}
     </form>

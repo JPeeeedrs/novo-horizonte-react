@@ -4,7 +4,7 @@ import termos from "../../assets/images/termos.pdf";
 import { exportarParaCsv } from "../../utils/exportCsv";
 import { exportarParaPdf } from "../../utils/exportPdf";
 
-function StepObservacoes({ onBack, formData, onChange, onSubmit }) {
+function StepObservacoes({ onBack, formData, onChange, handleSubmit }) {
   const handleExportPdf = () => {
     const formElement = document.querySelector("form");
     if (formElement) {
@@ -121,7 +121,11 @@ function StepObservacoes({ onBack, formData, onChange, onSubmit }) {
             Anterior
           </button>
 
-          <button type="button" className="btn btn-submit" onClick={onSubmit}>
+          <button
+            type="submit"
+            className="btn btn-submit"
+            onClick={handleSubmit}
+          >
             Cadastrar
           </button>
 
