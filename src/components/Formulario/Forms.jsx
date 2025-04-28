@@ -10,7 +10,7 @@ import "../../styles/forms.css";
 
 // Configuração global do Axios
 const api = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "http://localhost:8080",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
@@ -87,7 +87,7 @@ function Forms() {
       valor_contrato: "",
       vencimento: "",
     },
-  });
+});
 
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -216,12 +216,12 @@ function Forms() {
         resp_fone: "",
       },
       observacoes: { documentos: [] },
-    });
+  });
     setStep(1);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form id="form"  onSubmit={handleSubmit}>
       {error && <div className="alert alert-danger mb-3">{error}</div>}
 
       {step === 1 && (

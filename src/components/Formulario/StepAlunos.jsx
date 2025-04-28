@@ -2,19 +2,19 @@ function StepAluno({ onNext, formData = {}, onChange }) {
   const safeFormData = {
     nome: formData.nome || "",
     idade: formData.idade || "",
-    data_nascimento: formData.data_nascimento || "",
+    dataNascimento: formData.dataNascimento || "",
     naturalidade: formData.naturalidade || "",
     nacionalidade: formData.nacionalidade || "",
     sexo: formData.sexo || "",
-    cpf_aluno: formData.cpf_aluno || "",
-    rg_aluno: formData.rg_aluno || "",
-    ano_letivo: formData.ano_letivo || "",
+    cpf: formData.cpf || "",
+    rg: formData.rg || "",
+    anoLetivo: formData.anoLetivo || "",
     termo: formData.termo || "",
     folha: formData.folha || "",
     livro: formData.livro || "",
     matricula: formData.matricula || "",
     turno: formData.turno || "",
-    tipo_sanguineo: formData.tipo_sanguineo || "",
+    tipoSanguineo: formData.tipoSanguineo || "",
     raca: formData.raca || "",
   };
 
@@ -63,8 +63,8 @@ function StepAluno({ onNext, formData = {}, onChange }) {
             type="date"
             className="form-control"
             id="inputBirthDate"
-            name="data_nascimento"
-            value={safeFormData.data_nascimento}
+            name="dataNascimento"
+            value={safeFormData.dataNascimento}
             onChange={onChange}
           />
         </div>
@@ -133,8 +133,8 @@ function StepAluno({ onNext, formData = {}, onChange }) {
             type="text"
             className="form-control"
             id="inputCPFAluno"
-            name="cpf_aluno"
-            value={safeFormData.cpf_aluno}
+            name="cpf"
+            value={safeFormData.cpf}
             onChange={onChange}
             placeholder="000.000.000-00"
           />
@@ -149,8 +149,8 @@ function StepAluno({ onNext, formData = {}, onChange }) {
             type="text"
             className="form-control"
             id="inputRGAluno"
-            name="rg_aluno"
-            value={safeFormData.rg_aluno}
+            name="rg"
+            value={safeFormData.rg}
             onChange={onChange}
             placeholder="00.000.000-0"
           />
@@ -165,8 +165,8 @@ function StepAluno({ onNext, formData = {}, onChange }) {
             type="text"
             className="form-control"
             id="inputYear"
-            name="ano_letivo"
-            value={safeFormData.ano_letivo}
+            name="anoLetivo"
+            value={safeFormData.anoLetivo}
             onChange={onChange}
             placeholder="2025"
           />
@@ -270,8 +270,8 @@ function StepAluno({ onNext, formData = {}, onChange }) {
           <select
             id="inputBlood"
             className="form-select"
-            name="tipo_sanguineo"
-            value={safeFormData.tipo_sanguineo}
+            name="tipoSanguineo"
+            value={safeFormData.tipoSanguineo}
             onChange={onChange}
           >
             <option disabled hidden value="">
