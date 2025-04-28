@@ -1,10 +1,23 @@
-function StepMae({ onNext, onBack, formData, onChange }) {
+function StepMae({ onNext, onBack, formData = {}, onChange }) {
+  const safeFormData = {
+    nome_mae: formData.nome_mae || "",
+    nascimento_mae: formData.nascimento_mae || "",
+    endereco_mae: formData.endereco_mae || "",
+    cep_mae: formData.cep_mae || "",
+    cpf_mae: formData.cpf_mae || "",
+    rg_mae: formData.rg_mae || "",
+    fone_mae: formData.fone_mae || "",
+    email_mae: formData.email_mae || "",
+    profissao_mae: formData.profissao_mae || "",
+    trabalho_mae: formData.trabalho_mae || "",
+    fone_trabalho_mae: formData.fone_trabalho_mae || "",
+  };
+
   return (
     <div className="step" id="mae">
       <div className="row g-3">
         <h3 className="mt-4">Dados dos Familiares</h3>
         <h5>Dados da Mãe</h5>
-
         {/* Nome da Mãe */}
         <div className="col-md-4">
           <label htmlFor="inputMotherName" className="form-label">
@@ -14,8 +27,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputMotherName"
-            name="nomeMae"
-            value={formData.mae.nomeMae || ""}
+            name="nome_mae"
+            value={safeFormData.nome_mae}
             onChange={onChange}
             placeholder="Maria da Silva"
           />
@@ -30,8 +43,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="date"
             className="form-control"
             id="inputMotherBirthDate"
-            name="nascimentoMae"
-            value={formData.mae.nascimentoMae || ""}
+            name="nascimento_mae"
+            value={safeFormData.nascimento_mae}
             onChange={onChange}
           />
         </div>
@@ -45,8 +58,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputMotherAddress"
-            name="enderecoMae"
-            value={formData.mae.enderecoMae || ""}
+            name="endereco_mae"
+            value={safeFormData.endereco_mae}
             onChange={onChange}
             placeholder="Rua Manoel Gomes, 000"
           />
@@ -61,8 +74,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputMotherCEP"
-            name="cepMae"
-            value={formData.mae.cepMae || ""}
+            name="cep_mae"
+            value={safeFormData.cep_mae}
             onChange={onChange}
             placeholder="00000-000"
           />
@@ -77,8 +90,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputMotherCPF"
-            name="cpfMae"
-            value={formData.mae.cpfMae || ""}
+            name="cpf_mae"
+            value={safeFormData.cpf_mae}
             onChange={onChange}
             placeholder="000.000.000-00"
           />
@@ -93,8 +106,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputMotherRG"
-            name="rgMae"
-            value={formData.mae.rgMae || ""}
+            name="rg_mae"
+            value={safeFormData.rg_mae}
             onChange={onChange}
             placeholder="00.000.000-0"
           />
@@ -109,8 +122,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="tel"
             className="form-control"
             id="inputMotherFone"
-            name="foneMae"
-            value={formData.mae.foneMae || ""}
+            name="fone_mae"
+            value={safeFormData.fone_mae}
             onChange={onChange}
             placeholder="(00) 00000-0000"
           />
@@ -125,8 +138,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="email"
             className="form-control"
             id="inputMotherEmail"
-            name="emailMae"
-            value={formData.mae.emailMae || ""}
+            name="email_mae"
+            value={safeFormData.email_mae}
             onChange={onChange}
             placeholder="nome@example.com"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -143,8 +156,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputMotherProfession"
-            name="profissaoMae"
-            value={formData.mae.profissaoMae || ""}
+            name="profissao_mae"
+            value={safeFormData.profissao_mae}
             onChange={onChange}
           />
         </div>
@@ -158,8 +171,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputMotherWorkplace"
-            name="trabalhoMae"
-            value={formData.mae.trabalhoMae || ""}
+            name="trabalho_mae"
+            value={safeFormData.trabalho_mae}
             onChange={onChange}
           />
         </div>
@@ -173,8 +186,8 @@ function StepMae({ onNext, onBack, formData, onChange }) {
             type="tel"
             className="form-control"
             id="inputMotherWorkFone"
-            name="fone_trabalhoMae"
-            value={formData.mae.fone_trabalhoMae || ""}
+            name="fone_trabalho_mae"
+            value={safeFormData.fone_trabalho_mae}
             onChange={onChange}
             placeholder="(00) 00000-0000"
           />

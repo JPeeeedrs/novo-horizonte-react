@@ -1,4 +1,9 @@
-function StepRespFinan({ onNext, onBack, formData, onChange }) {
+function StepRespFinan({ onNext, onBack, formData = {}, onChange }) {
+  const safeFormData = {
+    resp_nome: formData.resp_nome || "",
+    resp_fone: formData.resp_fone || "",
+  };
+
   return (
     <div className="step" id="resp-financeiro">
       <div className="row g-3">
@@ -12,7 +17,7 @@ function StepRespFinan({ onNext, onBack, formData, onChange }) {
             className="form-control"
             id="inputRespName"
             name="resp_nome"
-            value={formData.respFinan.resp_nome || ""}
+            value={safeFormData.resp_nome}
             onChange={onChange}
             placeholder="João da Silva"
           />
@@ -26,7 +31,7 @@ function StepRespFinan({ onNext, onBack, formData, onChange }) {
             className="form-control"
             id="inputRespFone"
             name="resp_fone"
-            value={formData.respFinan.resp_fone || ""}
+            value={safeFormData.resp_fone}
             onChange={onChange}
             placeholder="(00) 00000-0000"
           />

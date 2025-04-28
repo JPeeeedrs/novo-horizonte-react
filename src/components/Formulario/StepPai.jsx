@@ -1,9 +1,23 @@
-function StepPai({ onNext, onBack, formData, onChange }) {
+function StepPai({ onNext, onBack, formData = {}, onChange }) {
+  const safeFormData = {
+    nome_pai: formData.nome_pai || "",
+    nascimento_pai: formData.nascimento_pai || "",
+    endereco_pai: formData.endereco_pai || "",
+    cep_pai: formData.cep_pai || "",
+    cpf_pai: formData.cpf_pai || "",
+    rg_pai: formData.rg_pai || "",
+    fone_pai: formData.fone_pai || "",
+    email_pai: formData.email_pai || "",
+    profissao_pai: formData.profissao_pai || "",
+    trabalho_pai: formData.trabalho_pai || "",
+    fone_trabalho_pai: formData.fone_trabalho_pai || "",
+  };
+
   return (
     <div className="step" id="pai">
       <div className="row g-3">
         <h3 className="mt-4">Dados dos Familiares</h3>
-        <h5>Dados do Pai</h5> {/* Corrigido para "do Pai" */}
+        <h5>Dados do Pai</h5>
         {/* Nome do Pai */}
         <div className="col-md-4">
           <label htmlFor="inputFatherName" className="form-label">
@@ -13,8 +27,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputFatherName"
-            name="nomePai"
-            value={formData.pai.nomePai || ""}
+            name="nome_pai"
+            value={safeFormData.nome_pai}
             onChange={onChange}
             placeholder="Julio da Silva"
           />
@@ -28,8 +42,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="date"
             className="form-control"
             id="inputFatherBirthDate"
-            name="nascimentoPai"
-            value={formData.pai.nascimentoPai || ""}
+            name="nascimento_pai"
+            value={safeFormData.nascimento_pai}
             onChange={onChange}
           />
         </div>
@@ -42,8 +56,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputFatherAddress"
-            name="enderecoPai"
-            value={formData.pai.enderecoPai || ""}
+            name="endereco_pai"
+            value={safeFormData.endereco_pai}
             onChange={onChange}
             placeholder="Rua Manoel Gomes, 000"
           />
@@ -57,8 +71,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputFatherCEP"
-            name="cepPai"
-            value={formData.pai.cepPai || ""}
+            name="cep_pai"
+            value={safeFormData.cep_pai}
             onChange={onChange}
             placeholder="00000-000"
           />
@@ -72,8 +86,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputFatherCPF"
-            name="cpfPai"
-            value={formData.pai.cpfPai || ""}
+            name="cpf_pai"
+            value={safeFormData.cpf_pai}
             onChange={onChange}
             placeholder="000.000.000-00"
           />
@@ -87,8 +101,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputFatherRG"
-            name="rgPai"
-            value={formData.pai.rgPai || ""}
+            name="rg_pai"
+            value={safeFormData.rg_pai}
             onChange={onChange}
             placeholder="00.000.000-0"
           />
@@ -102,8 +116,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="tel"
             className="form-control"
             id="inputFatherFone"
-            name="fonePai"
-            value={formData.pai.fonePai || ""}
+            name="fone_pai"
+            value={safeFormData.fone_pai}
             onChange={onChange}
             placeholder="(00) 00000-0000"
           />
@@ -117,8 +131,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="email"
             className="form-control"
             id="inputFatherEmail"
-            name="emailPai"
-            value={formData.pai.emailPai || ""}
+            name="email_pai"
+            value={safeFormData.email_pai}
             onChange={onChange}
             placeholder="nome@example.com"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -134,8 +148,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputFatherProfession"
-            name="profissaoPai"
-            value={formData.pai.profissaoPai || ""}
+            name="profissao_pai"
+            value={safeFormData.profissao_pai}
             onChange={onChange}
           />
         </div>
@@ -148,8 +162,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="text"
             className="form-control"
             id="inputFatherWorkplace"
-            name="trabalhoPai"
-            value={formData.pai.trabalhoPai || ""}
+            name="trabalho_pai"
+            value={safeFormData.trabalho_pai}
             onChange={onChange}
           />
         </div>
@@ -162,8 +176,8 @@ function StepPai({ onNext, onBack, formData, onChange }) {
             type="tel"
             className="form-control"
             id="inputFatherWorkFone"
-            name="fone_trabalhoPai"
-            value={formData.pai.fone_trabalhoPai || ""}
+            name="fone_trabalho_pai"
+            value={safeFormData.fone_trabalho_pai}
             onChange={onChange}
             placeholder="(00) 00000-0000"
           />

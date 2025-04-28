@@ -1,23 +1,11 @@
+import { exportarParaPdf } from "../../utils/exportPdf";
+import { exportarParaCsv } from "../../utils/exportCsv";
 import termos from "../../assets/images/termos.pdf";
 
-// expotação para CSV e PDF
-import { exportarParaCsv } from "../../utils/exportCsv";
-import { exportarParaPdf } from "../../utils/exportPdf";
-
-function StepObservacoes({ onBack, formData, onChange, handleSubmit }) {
-  const handleExportPdf = () => {
-    const formElement = document.querySelector("form");
-    if (formElement) {
-      exportarParaPdf();
-    } else {
-      console.error("Formulário não encontrado.");
-    }
-  };
-
+function StepObservacoes({ onBack, formData, onChange, loading }) {
   const handleCheckboxChange = (e) => {
-    const { name, value, checked } = e.target;
-    const currentDocs = formData.observacoes.documentos || [];
-
+    const { value, checked } = e.target;
+    const currentDocs = formData.documentos || [];
     const updatedDocs = checked
       ? [...currentDocs, value]
       : currentDocs.filter((doc) => doc !== value);
@@ -44,17 +32,17 @@ function StepObservacoes({ onBack, formData, onChange, handleSubmit }) {
             className="form-control"
             id="inputObservations"
             name="pessoas_autorizadas"
-            value={formData.observacoes.pessoas_autorizadas || ""}
+            value={formData.pessoas_autorizadas || ""}
             onChange={onChange}
-            rows="1"
-            placeholder="Nomes"
-          ></textarea>
+            rows={3}
+            placeholder="Nomes completos separados por vírgula"
+          />
         </div>
 
         {/* Documentos Apresentados */}
         <div className="col-12 mt-3">
           <h5>Documentos Apresentados</h5>
-          <div className="row" id="doc">
+          <div className="row">
             {[
               "Certidão de Nascimento",
               "Carteira de Vacinação",
@@ -65,16 +53,13 @@ function StepObservacoes({ onBack, formData, onChange, handleSubmit }) {
               "RG/CPF Pai",
               "Histórico Escolar",
             ].map((doc, i) => (
-              <div className="col-4 mb-2 form-check" key={i}>
+              <div className="col-4 mb-2 form-check" key={`doc-${i}`}>
                 <input
                   className="form-check-input"
                   type="checkbox"
                   id={`doc-${i}`}
-                  name="documentos"
                   value={doc}
-                  checked={
-                    formData.observacoes.documentos?.includes(doc) || false
-                  }
+                  checked={formData.documentos?.includes(doc) || false}
                   onChange={handleCheckboxChange}
                 />
                 <label className="form-check-label" htmlFor={`doc-${i}`}>
@@ -88,15 +73,16 @@ function StepObservacoes({ onBack, formData, onChange, handleSubmit }) {
         {/* Valor do Contrato */}
         <div className="col-md-6">
           <label htmlFor="inputValor" className="form-label">
-            Valor do Contrato
+            Valor do Contrato (R$)
           </label>
           <input
             type="text"
             className="form-control"
             id="inputValor"
             name="valor_contrato"
-            value={formData.observacoes.valor_contrato || ""}
+            value={formData.valor_contrato || ""}
             onChange={onChange}
+            placeholder="0,00"
           />
         </div>
 
@@ -110,26 +96,39 @@ function StepObservacoes({ onBack, formData, onChange, handleSubmit }) {
             className="form-control"
             id="inputVencimento"
             name="vencimento"
-            value={formData.observacoes.vencimento || ""}
+            value={formData.vencimento || ""}
             onChange={onChange}
           />
         </div>
 
         {/* Botões */}
         <div className="col-12 mt-3 d-flex flex-wrap gap-2">
-          <button type="button" className="btn btn-nav" onClick={onBack}>
+          <button
+            type="button"
+            className="btn btn-nav"
+            onClick={onBack}
+            disabled={loading}
+          >
             Anterior
           </button>
 
-          <button
-            type="submit"
-            className="btn btn-submit"
-            onClick={handleSubmit}
-          >
-            Cadastrar
+          <button type="submit" className="btn btn-submit" disabled={loading}>
+            {loading ? (
+              <>
+                <span className="spinner-border spinner-border-sm me-2"></span>
+                Cadastrando...
+              </>
+            ) : (
+              "Cadastrar"
+            )}
           </button>
 
-          <a href={termos} download className="btn btn-termo">
+          <a
+            href={termos}
+            download
+            className="btn btn-termo"
+            disabled={loading}
+          >
             Baixar Termos
           </a>
 
@@ -137,6 +136,7 @@ function StepObservacoes({ onBack, formData, onChange, handleSubmit }) {
             type="button"
             className="btn btn-csv"
             onClick={() => exportarParaCsv(formData)}
+            disabled={loading}
           >
             Exportar CSV
           </button>
@@ -144,7 +144,8 @@ function StepObservacoes({ onBack, formData, onChange, handleSubmit }) {
           <button
             type="button"
             className="btn btn-pdf"
-            onClick={() => handleExportPdf(formData)}
+            onClick={() => exportarParaPdf(formData)}
+            disabled={loading}
           >
             Exportar PDF
           </button>
