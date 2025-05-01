@@ -9,15 +9,15 @@ import Alunos from "./pages/Alunos";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/formulario" element={<Formulario />} />
-        <Route path="/alunos" element={<Alunos />} />
-      </Routes>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/formulario' element={<Formulario />} />
+				<Route path='/alunos' element={<Alunos />} />
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;

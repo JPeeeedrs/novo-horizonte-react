@@ -1,196 +1,201 @@
 function StepPai({ onNext, onBack, formData = {}, onChange }) {
-  const safeFormData = {
-    nome_pai: formData.nome_pai || "",
-    nascimento_pai: formData.nascimento_pai || "",
-    endereco_pai: formData.endereco_pai || "",
-    cep_pai: formData.cep_pai || "",
-    cpf_pai: formData.cpf_pai || "",
-    rg_pai: formData.rg_pai || "",
-    fone_pai: formData.fone_pai || "",
-    email_pai: formData.email_pai || "",
-    profissao_pai: formData.profissao_pai || "",
-    trabalho_pai: formData.trabalho_pai || "",
-    fone_trabalho_pai: formData.fone_trabalho_pai || "",
-  };
+	const safeFormData = {
+		nomePai: formData.nomePai || "",
+		nascimentoPai: formData.nascimentoPai || "",
+		enderecoPai: formData.enderecoPai || "",
+		cepPai: formData.cepPai || "",
+		cpfPai: formData.cpfPai || "",
+		rgPai: formData.rgPai || "",
+		fonePai: formData.fonePai || "",
+		emailPai: formData.emailPai || "",
+		profissaoPai: formData.profissaoPai || "",
+		trabalhoPai: formData.trabalhoPai || "",
+		foneTrabalhoPai: formData.foneTrabalhoPai || "",
+	};
 
-  return (
-    <div className="step" id="pai">
-      <div className="row g-3">
-        <h3 className="mt-4">Dados dos Familiares</h3>
-        <h5>Dados do Pai</h5>
-        {/* Nome do Pai */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherName" className="form-label">
-            Nome do Pai
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputFatherName"
-            name="nome_pai"
-            value={safeFormData.nome_pai}
-            onChange={onChange}
-            placeholder="Julio da Silva"
-          />
-        </div>
-        {/* Data de Nascimento */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherBirthDate" className="form-label">
-            Data de Nascimento
-          </label>
-          <input
-            type="date"
-            className="form-control"
-            id="inputFatherBirthDate"
-            name="nascimento_pai"
-            value={safeFormData.nascimento_pai}
-            onChange={onChange}
-          />
-        </div>
-        {/* Endereço */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherAddress" className="form-label">
-            Endereço
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputFatherAddress"
-            name="endereco_pai"
-            value={safeFormData.endereco_pai}
-            onChange={onChange}
-            placeholder="Rua Manoel Gomes, 000"
-          />
-        </div>
-        {/* CEP */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherCEP" className="form-label">
-            CEP
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputFatherCEP"
-            name="cep_pai"
-            value={safeFormData.cep_pai}
-            onChange={onChange}
-            placeholder="00000-000"
-          />
-        </div>
-        {/* CPF */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherCPF" className="form-label">
-            CPF
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputFatherCPF"
-            name="cpf_pai"
-            value={safeFormData.cpf_pai}
-            onChange={onChange}
-            placeholder="000.000.000-00"
-          />
-        </div>
-        {/* RG */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherRG" className="form-label">
-            RG
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputFatherRG"
-            name="rg_pai"
-            value={safeFormData.rg_pai}
-            onChange={onChange}
-            placeholder="00.000.000-0"
-          />
-        </div>
-        {/* Telefone */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherFone" className="form-label">
-            Telefone
-          </label>
-          <input
-            type="tel"
-            className="form-control"
-            id="inputFatherFone"
-            name="fone_pai"
-            value={safeFormData.fone_pai}
-            onChange={onChange}
-            placeholder="(00) 00000-0000"
-          />
-        </div>
-        {/* Email */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherEmail" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="inputFatherEmail"
-            name="email_pai"
-            value={safeFormData.email_pai}
-            onChange={onChange}
-            placeholder="nome@example.com"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            title="Digite um email válido (exemplo: usuario@provedor.com)"
-          />
-        </div>
-        {/* Profissão */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherProfession" className="form-label">
-            Profissão
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputFatherProfession"
-            name="profissao_pai"
-            value={safeFormData.profissao_pai}
-            onChange={onChange}
-          />
-        </div>
-        {/* Local de Trabalho */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherWorkplace" className="form-label">
-            Local de Trabalho
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputFatherWorkplace"
-            name="trabalho_pai"
-            value={safeFormData.trabalho_pai}
-            onChange={onChange}
-          />
-        </div>
-        {/* Telefone do Trabalho */}
-        <div className="col-md-4">
-          <label htmlFor="inputFatherWorkFone" className="form-label">
-            Telefone do Trabalho
-          </label>
-          <input
-            type="tel"
-            className="form-control"
-            id="inputFatherWorkFone"
-            name="fone_trabalho_pai"
-            value={safeFormData.fone_trabalho_pai}
-            onChange={onChange}
-            placeholder="(00) 00000-0000"
-          />
-        </div>
-      </div>
-      <button type="button" className="btn btn-nav" onClick={onBack}>
-        Anterior
-      </button>
-      <button type="button" className="btn btn-nav" onClick={onNext}>
-        Próximo
-      </button>
-    </div>
-  );
+	return (
+		<div className='step' id='pai'>
+			<div className='row g-3'>
+				<h3 className='mt-4'>Dados dos Familiares</h3>
+				<h5>Dados do Pai</h5>
+				{/* Nome do Pai */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherName' className='form-label'>
+						Nome do Pai
+					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='inputFatherName'
+						name='nomePai'
+						value={safeFormData.nomePai}
+						onChange={onChange}
+						placeholder='Lima Mei'
+					/>
+				</div>
+				{/* Data de Nascimento */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherBirthDate' className='form-label'>
+						Data de Nascimento
+					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='inputFatherBirthDate'
+						name='nascimentoPai'
+						value={safeFormData.nascimentoPai}
+						onChange={onChange}
+						placeholder='00/00/0000'
+					/>
+				</div>
+				{/* Endereço */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherAddress' className='form-label'>
+						Endereço
+					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='inputFatherAddress'
+						name='enderecoPai'
+						value={safeFormData.enderecoPai}
+						onChange={onChange}
+						placeholder='Rua Manoel Gomes, 000'
+					/>
+				</div>
+				{/* CEP */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherCEP' className='form-label'>
+						CEP
+					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='inputFatherCEP'
+						name='cepPai'
+						value={safeFormData.cepPai}
+						onChange={onChange}
+						placeholder='00000-000'
+					/>
+				</div>
+				{/* CPF */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherCPF' className='form-label'>
+						CPF
+					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='inputFatherCPF'
+						name='cpfPai'
+						value={safeFormData.cpfPai}
+						onChange={onChange}
+						placeholder='000.000.000-00'
+					/>
+				</div>
+				{/* RG */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherRG' className='form-label'>
+						RG
+					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='inputFatherRG'
+						name='rgPai'
+						value={safeFormData.rgPai}
+						onChange={onChange}
+						placeholder='00.000.000-0'
+					/>
+				</div>
+				{/* Telefone */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherFone' className='form-label'>
+						Telefone
+					</label>
+					<input
+						type='tel'
+						className='form-control'
+						id='inputFatherFone'
+						name='fonePai'
+						value={safeFormData.fonePai}
+						onChange={onChange}
+						placeholder='(00) 00000-0000'
+					/>
+				</div>
+				{/* Email */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherEmail' className='form-label'>
+						Email
+					</label>
+					<input
+						type='email'
+						className='form-control'
+						id='inputFatherEmail'
+						name='emailPai'
+						value={safeFormData.emailPai}
+						onChange={onChange}
+						placeholder='nome@example.com'
+						pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
+						title='Digite um email válido (exemplo: usuario@provedor.com)'
+					/>
+				</div>
+				{/* Profissão */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherProfession' className='form-label'>
+						Profissão
+					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='inputFatherProfession'
+						name='profissaoPai'
+						value={safeFormData.profissaoPai}
+						onChange={onChange}
+						placeholder='Programador'
+					/>
+				</div>
+				{/* Local de Trabalho */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherWorkplace' className='form-label'>
+						Local de Trabalho
+					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='inputFatherWorkplace'
+						name='trabalhoPai'
+						value={safeFormData.trabalhoPai}
+						onChange={onChange}
+						placeholder='Alterdata'
+					/>
+				</div>
+				{/* Telefone do Trabalho */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherWorkFone' className='form-label'>
+						Telefone do Trabalho
+					</label>
+					<input
+						type='tel'
+						className='form-control'
+						id='inputFatherWorkFone'
+						name='foneTrabalhoPai'
+						value={safeFormData.foneTrabalhoPai}
+						onChange={onChange}
+						placeholder='(00) 00000-0000'
+					/>
+				</div>
+			</div>
+			<div className='step-buttons'>
+				<button type='button' className='btn btn-nav' onClick={onBack}>
+					Anterior
+				</button>
+				<button type='button' className='btn btn-nav' onClick={onNext}>
+					Próximo
+				</button>
+			</div>
+		</div>
+	);
 }
 
 export default StepPai;

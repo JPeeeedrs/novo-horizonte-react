@@ -1,129 +1,138 @@
 /* === ESTILO DO FORMULÁRIO PRINCIPAL === */
 #form {
-  margin: 0 15vw; /* Espaçamento lateral responsivo */
-  background-color: #c5c5c5; /* Fundo cinza claro */
-  padding: 30px; /* Espaçamento interno */
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); /* Sombra suave */
-  min-height: 100%; /* Altura mínima para preencher a tela */
-  display: flex; /* Alinhamento com Flexbox */
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
+	margin: 0 15vw; /* Espaçamento lateral responsivo */
+	background-color: #c5c5c5; /* Fundo cinza claro */
+	padding: 30px; /* Espaçamento interno */
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); /* Sombra suave */
+	min-height: 100%; /* Altura mínima para preencher a tela */
+	display: flex; /* Alinhamento com Flexbox */
+	justify-content: center; /* Centraliza horizontalmente */
+	align-items: center; /* Centraliza verticalmente */
 }
 
 /* === LABELS DO FORMULÁRIO === */
 .form-label {
-  text-align: center; /* Centraliza o texto das labels */
+	text-align: center; /* Centraliza o texto das labels */
 }
 
 /* === CONTAINER DOS CAMPOS DE DOCUMENTOS === */
 #doc {
-  margin-top: 20px;
-  margin-left: 10px;
-  display: flex;
-  flex-wrap: wrap; /* Permite quebrar linha se necessário */
-  gap: 15px; /* Espaço entre elementos */
-  justify-content: space-between; /* Distribuição horizontal */
+	margin-top: 20px;
+	margin-left: 10px;
+	display: flex;
+	flex-wrap: wrap; /* Permite quebrar linha se necessário */
+	gap: 15px; /* Espaço entre elementos */
+	justify-content: space-between; /* Distribuição horizontal */
 }
 
 /* === ESTILIZAÇÃO DOS BOTÕES GERAIS === */
 .btn {
-  color: #212529; /* Cor do texto */
-  font-weight: 500;
-  border: none;
-  padding: 7.5px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin: 10px 5px;
-  width: 140px; /* Largura padrão dos botões */
+	color: #fff; /* Cor do texto */
+	font-weight: 500;
+	border: none;
+	padding: 7.5px 20px;
+	font-size: 1rem;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	margin: 10px 5px;
+	width: 150px; /* Largura padrão dos botões */
+	font-weight: bolder;
 }
 
 /* === HOVER E FOCUS GERAL DOS BOTÕES === */
 .btn:hover {
-  transform: scale(1.05); /* Efeito de zoom leve */
-  color: #dedbd7;
+	transform: scale(1.05); /* Efeito de zoom leve */
+	color: #dedbd7;
 }
 .btn:focus {
-  outline: none; /* Remove contorno ao focar */
+	outline: none; /* Remove contorno ao focar */
 }
 
 /* === BOTÃO DE NAVEGAÇÃO === */
 .btn-nav {
-  background-color: #902121;
+	background-color: #902121;
 }
 .btn-nav:hover {
-  background-color: #502121;
+	background-color: #502121;
 }
 .btn-nav:focus {
-  box-shadow: 0 0 0 3px rgba(144, 33, 33, 0.5);
+	box-shadow: 0 0 0 3px rgba(144, 33, 33, 0.5);
+}
+
+/* Contêiner fixo para botões de navegação */
+.step-buttons {
+	bottom: 0;
+	padding: 15px;
+	display: flex;
+	gap: 10px;
 }
 
 /* === BOTÃO DE SUBMISSÃO (AZUL) === */
 .btn-submit {
-  background-color: #0000ff;
+	background-color: #0000ff;
 }
 .btn-submit:hover {
-  background-color: #0000cc;
+	background-color: #0000cc;
 }
 .btn-submit:focus {
-  box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.5);
+	box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.5);
 }
 
 /* === BOTÃO DE TERMO (LARANJA) === */
 .btn-termo {
-  background-color: #ffaa00;
+	background-color: #ffaa00;
 }
 .btn-termo:hover {
-  background-color: #ff9900;
+	background-color: #ff9900;
 }
 .btn-termo:focus {
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
 /* === BOTÃO PARA EXPORTAR CSV (VERDE) === */
 .btn-csv {
-  background-color: #007700;
+	background-color: #007700;
 }
 .btn-csv:hover {
-  background-color: #004400;
+	background-color: #004400;
 }
 .btn-csv:focus {
-  box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.5);
+	box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.5);
 }
 
 /* === BOTÃO PARA EXPORTAR PDF (VERMELHO) === */
 .btn-pdf {
-  background-color: #dd0000;
+	background-color: #dd0000;
 }
 .btn-pdf:hover {
-  background-color: #aa0000;
+	background-color: #aa0000;
 }
 .btn-pdf:focus {
-  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.5);
+	box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.5);
 }
 
 /* === RESPONSIVIDADE: TELAS MENORES QUE 1000PX === */
 @media (max-width: 1000px) {
-  #inputdoc label {
-    text-align: center;
-  }
+	#inputdoc label {
+		text-align: center;
+	}
 }
 
 /* === RESPONSIVIDADE: TELAS MENORES QUE 600PX === */
 @media (max-width: 600px) {
-  #doc {
-    margin-left: -10px;
-    flex-wrap: wrap; /* Garante quebra de linha */
-  }
-  #inputdoc {
-    width: 100%; /* Ocupa toda a largura */
-  }
+	#doc {
+		margin-left: -10px;
+		flex-wrap: wrap; /* Garante quebra de linha */
+	}
+	#inputdoc {
+		width: 100%; /* Ocupa toda a largura */
+	}
 }
 
 /* === RESPONSIVIDADE: TELAS MENORES QUE 530PX === */
 @media (max-width: 530px) {
-  .btn {
-    width: 100%; /* Botões ocupam toda a linha */
-  }
+	.btn {
+		width: 100%; /* Botões ocupam toda a linha */
+	}
 }

@@ -3,43 +3,43 @@ import { exportarParaCsv } from "../../utils/exportCsv";
 import termos from "../../assets/images/termos.pdf";
 
 function StepObservacoes({ onBack, formData, onChange, loading }) {
-  const handleCheckboxChange = (e) => {
-    const { value, checked } = e.target;
-    const currentDocs = formData.documentos || [];
-    const updatedDocs = checked
-      ? [...currentDocs, value]
-      : currentDocs.filter((doc) => doc !== value);
+	const handleCheckboxChange = (e) => {
+		const { value, checked } = e.target;
+		const currentDocs = formData.documentos || [];
+		const updatedDocs = checked
+			? [...currentDocs, value]
+			: currentDocs.filter((doc) => doc !== value);
 
-    onChange({
-      target: {
-        name: "documentos",
-        value: updatedDocs,
-      },
-    });
-  };
+		onChange({
+			target: {
+				name: "documentos",
+				value: updatedDocs,
+			},
+		});
+	};
 
-  return (
-    <div className="step" id="observacoes">
-      <div className="row g-3">
-        <h3 className="mt-4">Observações</h3>
+	return (
+		<div className='step' id='observacoes'>
+			<div className='row g-3'>
+				<h3 className='mt-4'>Observações</h3>
 
-        {/* Pessoas Autorizadas */}
-        <div className="col-md-12">
-          <label htmlFor="inputObservations" className="form-label">
-            Pessoas Autorizadas a Buscar na Escola
-          </label>
-          <textarea
-            className="form-control"
-            id="inputObservations"
-            name="pessoas_autorizadas"
-            value={formData.pessoas_autorizadas || ""}
-            onChange={onChange}
-            rows={3}
-            placeholder="Nomes completos separados por vírgula"
-          />
-        </div>
+				{/* Pessoas Autorizadas */}
+				<div className='col-md-12'>
+					<label htmlFor='inputObservations' className='form-label'>
+						Pessoas Autorizadas a Buscar na Escola
+					</label>
+					<textarea
+						className='form-control'
+						id='inputObservations'
+						name='pessoasAutorizadas'
+						value={formData.pessoasAutorizadas || ""}
+						onChange={onChange}
+						rows={3}
+						placeholder='Nomes completos separados por vírgula'
+					/>
+				</div>
 
-        {/* Documentos Apresentados */}
+				{/* Documentos Apresentados
         <div className="col-12 mt-3">
           <h5>Documentos Apresentados</h5>
           <div className="row">
@@ -70,7 +70,7 @@ function StepObservacoes({ onBack, formData, onChange, loading }) {
           </div>
         </div>
 
-        {/* Valor do Contrato */}
+        {/* Valor do Contrato 
         <div className="col-md-6">
           <label htmlFor="inputValor" className="form-label">
             Valor do Contrato (R$)
@@ -79,14 +79,14 @@ function StepObservacoes({ onBack, formData, onChange, loading }) {
             type="text"
             className="form-control"
             id="inputValor"
-            name="valor_contrato"
-            value={formData.valor_contrato || ""}
+            name="valorContrato"
+            value={formData.valorContrato || ""}
             onChange={onChange}
             placeholder="0,00"
           />
         </div>
 
-        {/* Vencimento */}
+        {/* Vencimento 
         <div className="col-md-6">
           <label htmlFor="inputVencimento" className="form-label">
             Vencimento
@@ -99,60 +99,56 @@ function StepObservacoes({ onBack, formData, onChange, loading }) {
             value={formData.vencimento || ""}
             onChange={onChange}
           />
-        </div>
+        </div> */}
 
-        {/* Botões */}
-        <div className="col-12 mt-3 d-flex flex-wrap gap-2">
-          <button
-            type="button"
-            className="btn btn-nav"
-            onClick={onBack}
-            disabled={loading}
-          >
-            Anterior
-          </button>
-
-          <button type="submit" className="btn btn-submit" disabled={loading}>
-            {loading ? (
-              <>
-                <span className="spinner-border spinner-border-sm me-2"></span>
-                Cadastrando...
-              </>
-            ) : (
-              "Cadastrar"
-            )}
-          </button>
-
-          <a
-            href={termos}
-            download
-            className="btn btn-termo"
-            disabled={loading}
-          >
-            Baixar Termos
-          </a>
-
-          <button
-            type="button"
-            className="btn btn-csv"
-            onClick={() => exportarParaCsv(formData)}
-            disabled={loading}
-          >
-            Exportar CSV
-          </button>
-
-          <button
-            type="button"
-            className="btn btn-pdf"
-            onClick={() => exportarParaPdf(formData)}
-            disabled={loading}
-          >
-            Exportar PDF
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+				{/* Botões */}
+				<div className='step-buttons'>
+					<button
+						type='button'
+						className='btn btn-nav'
+						onClick={onBack}
+						disabled={loading}
+					>
+						Anterior
+					</button>
+					<button type='submit' className='btn btn-submit' disabled={loading}>
+						{loading ? (
+							<>
+								<span className='spinner-border spinner-border-sm me-2'></span>
+								Cadastrando...
+							</>
+						) : (
+							"Cadastrar"
+						)}
+					</button>
+					<a
+						href={termos}
+						download
+						className='btn btn-termo'
+						disabled={loading}
+					>
+						Baixar Termos
+					</a>
+					<button
+						type='button'
+						className='btn btn-csv'
+						onClick={() => exportarParaCsv(formData)}
+						disabled={loading}
+					>
+						Exportar CSV
+					</button>
+					<button
+						type='button'
+						className='btn btn-pdf'
+						onClick={() => exportarParaPdf(formData)}
+						disabled={loading}
+					>
+						Exportar PDF
+					</button>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default StepObservacoes;
