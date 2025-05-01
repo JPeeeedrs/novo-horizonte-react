@@ -29,7 +29,7 @@ function Forms() {
 	const [formData, setFormData] = useState({
 		aluno: {
 			nome: "",
-			idade: "",
+
 			dataNascimento: "",
 			naturalidade: "",
 			nacionalidade: "",
@@ -97,8 +97,13 @@ function Forms() {
 			maskedValue = maskRG(value);
 		if (
 			name === "dataNascimento" ||
+<<<<<<< HEAD
 			name === "dataNascimentoMae" ||
 			name === "dataNascimentoPai"
+=======
+			name === "nascimentoMae" ||
+			name === "nascimentoPai"
+>>>>>>> 74ba24f801ee47d6698ff31779ab1b75dad24696
 		)
 			maskedValue = maskDate(value); // Aplica a máscara de texto para data com validação de dia e mês
 		if (
@@ -127,10 +132,13 @@ function Forms() {
 		try {
 			// Enviar os dados de cada seção separadamente
 			const alunoResponse = await api.post("/alunos", formData.aluno);
+<<<<<<< HEAD
 			// const anamneseResponse = await api.post(
 			// 	"/alunos/${alunoResponse.data.id}/anamnese",
 			// 	formData.anamnese
 			// );
+=======
+>>>>>>> 74ba24f801ee47d6698ff31779ab1b75dad24696
 			const maeResponse = await api.post("/maes", formData.mae);
 			// const paiResponse = await api.post(
 			// 	`/alunos/${alunoResponse.data.id}/pai`,
@@ -150,7 +158,16 @@ function Forms() {
 			// observacoesResponse.status === 201
 			// anamneseResponse.status === 201 &&
 
+<<<<<<< HEAD
 			if (alunoResponse.status === 201 && maeResponse.status === 201) {
+=======
+			if (
+				isSuccess(alunoResponse) &&
+				isSuccess(maeResponse) &&
+				isSuccess(paiResponse) &&
+				isSuccess(observacoesResponse)
+			) {
+>>>>>>> 74ba24f801ee47d6698ff31779ab1b75dad24696
 				alert(
 					`Aluno ${alunoResponse.data.nome} e informações relacionadas cadastrados com sucesso!`
 				);
@@ -171,7 +188,6 @@ function Forms() {
 		setFormData({
 			aluno: {
 				nome: "",
-				idade: "",
 				dataNascimento: "",
 				naturalidade: "",
 				nacionalidade: "",
