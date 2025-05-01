@@ -96,7 +96,7 @@ function Forms() {
 		if (name === "rg" || name === "rgMae" || name === "rgPai")
 			maskedValue = maskRG(value);
 		if (
-			name === "nascimento" ||
+			name === "dataNascimento" ||
 			name === "nascimentoMae" ||
 			name === "nascimentoPai"
 		)
@@ -127,7 +127,6 @@ function Forms() {
 		try {
 			// Enviar os dados de cada seção separadamente
 			const alunoResponse = await api.post("/alunos", formData.aluno);
-
 			const maeResponse = await api.post("/maes", formData.mae);
 			const paiResponse = await api.post("/pais", formData.pai);
 			const observacoesResponse = await api.post(
@@ -138,10 +137,10 @@ function Forms() {
 			const isSuccess = (res) => res.status === 200 || res.status === 201;
 
 			if (
-				isSuccess(alunoResponse.status) &&
-				isSuccess(maeResponse.status) &&
-				isSuccess(paiResponse.status) &&
-				isSuccess(observacoesResponse.status)
+				isSuccess(alunoResponse) &&
+				isSuccess(maeResponse) &&
+				isSuccess(paiResponse) &&
+				isSuccess(observacoesResponse)
 			) {
 				alert(
 					`Aluno ${alunoResponse.data.nome} e informações relacionadas cadastrados com sucesso!`
