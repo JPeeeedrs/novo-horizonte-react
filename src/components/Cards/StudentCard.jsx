@@ -7,10 +7,37 @@ function StudentCard() {
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		const fetchAlunos = async () => {
+		const fetchData = async () => {
 			try {
-				const response = await axios.get("http://localhost:8080/alunos");
-				setAlunos(response.data);
+				const [
+					alunosResponse,
+					maesResponse,
+					paisResponse,
+					observacoesResponse,
+				] = await Promise.all([
+					axios.get("http://localhost:8080/alunos"),
+					axios.get("http://localhost:8080/maes"),
+					axios.get("http://localhost:8080/pais"),
+					axios.get("http://localhost:8080/observacoes"),
+				]);
+
+				const alunosData = alunosResponse.data.map((aluno) => {
+					const mae =
+						maesResponse.data.find((m) => m.alunoId === aluno.id) || {};
+					const pai =
+						paisResponse.data.find((p) => p.alunoId === aluno.id) || {};
+					const observacao =
+						observacoesResponse.data.find((o) => o.alunoId === aluno.id) || {};
+
+					return {
+						...aluno,
+						...mae,
+						...pai,
+						...observacao,
+					};
+				});
+
+				setAlunos(alunosData);
 			} catch (err) {
 				setError("Erro ao carregar os dados dos alunos.");
 			} finally {
@@ -18,7 +45,7 @@ function StudentCard() {
 			}
 		};
 
-		fetchAlunos();
+		fetchData();
 	}, []);
 
 	if (loading) return <p>Carregando...</p>;

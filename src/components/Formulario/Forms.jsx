@@ -29,7 +29,7 @@ function Forms() {
 	const [formData, setFormData] = useState({
 		aluno: {
 			nome: "",
-			idade: "",
+
 			dataNascimento: "",
 			naturalidade: "",
 			nacionalidade: "",
@@ -162,7 +162,6 @@ function Forms() {
 		setFormData({
 			aluno: {
 				nome: "",
-				idade: "",
 				dataNascimento: "",
 				naturalidade: "",
 				nacionalidade: "",

@@ -1,7 +1,6 @@
 function StepAluno({ onNext, formData = {}, onChange }) {
 	const safeFormData = {
 		nome: formData.nome || "",
-		idade: formData.idade || "",
 		dataNascimento: formData.dataNascimento || "",
 		naturalidade: formData.naturalidade || "",
 		nacionalidade: formData.nacionalidade || "",
