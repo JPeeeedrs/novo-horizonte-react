@@ -27,13 +27,13 @@ function Header() {
 			</nav>
 			<nav className='navbar' id='nav-elementos'>
 				<Link to='/' className='text-white text-decoration-none'>
-					Início
+					INÍCIO
 				</Link>
 				<Link to='/formulario' className='text-white text-decoration-none'>
-					Formulário
+					FORMULÁRIO
 				</Link>
 				<Link to='/alunos' className='text-white text-decoration-none'>
-					Alunos
+					ALUNOS
 				</Link>
 			</nav>
 		</header>

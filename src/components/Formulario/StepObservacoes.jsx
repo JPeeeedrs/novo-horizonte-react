@@ -8,7 +8,6 @@ function StepObservacoes({ onBack, formData, onChange, loading }) {
 		escola: formData.escola || "",
 		temIrmaos: formData.temIrmaos || "",
 		irmaosNome: formData.irmaosNome || "",
-		irmaosTurma: formData.irmaosTurma || "",
 		temEspecialista: formData.temEspecialista || "",
 		especialista: formData.especialista || "",
 		temAlergias: formData.temAlergias || "",
@@ -17,7 +16,7 @@ function StepObservacoes({ onBack, formData, onChange, loading }) {
 		medicamento: formData.medicamento || "",
 		reside: formData.reside || "",
 		respNome: formData.respNome || "",
-		respFone: formData.respFone || "",
+		respTelefone: formData.respTelefone || "",
 		pessoasAutorizadas: formData.pessoasAutorizadas || "",
 	};
 
@@ -239,15 +238,15 @@ function StepObservacoes({ onBack, formData, onChange, loading }) {
 
 				{/* Telefone Responsável Financeiro */}
 				<div className='col-md-6'>
-					<label htmlFor='inputRespFone' className='form-label'>
+					<label htmlFor='inputRespTelefone' className='form-label'>
 						Telefone do Responsável Financeiro
 					</label>
 					<input
 						type='tel'
 						className='form-control'
-						id='inputRespFone'
-						name='respFone'
-						value={safeFormData.respFone}
+						id='inputRespTelefone'
+						name='respTelefone'
+						value={safeFormData.respTelefone}
 						onChange={onChange}
 						placeholder='(00) 00000-0000'
 					/>
@@ -269,67 +268,13 @@ function StepObservacoes({ onBack, formData, onChange, loading }) {
 					/>
 				</div>
 
-				{/* Documentos Apresentados
-        <div className="col-12 mt-3">
-          <h5>Documentos Apresentados</h5>
-          <div className="row">
-            {[
-              "Certidão de Nascimento",
-              "Carteira de Vacinação",
-              "Declaração Escolar",
-              "Comprovante de Residência",
-              "Fotos",
-              "RG/CPF Mãe",
-              "RG/CPF Pai",
-              "Histórico Escolar",
-            ].map((doc, i) => (
-              <div className="col-4 mb-2 form-check" key={`doc-${i}`}>
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id={`doc-${i}`}
-                  value={doc}
-                  checked={formData.documentos?.includes(doc) || false}
-                  onChange={handleCheckboxChange}
-                />
-                <label className="form-check-label" htmlFor={`doc-${i}`}>
-                  {doc}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Valor do Contrato 
-        <div className="col-md-6">
-          <label htmlFor="inputValor" className="form-label">
-            Valor do Contrato (R$)
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputValor"
-            name="valorContrato"
-            value={formData.valorContrato || ""}
-            onChange={onChange}
-            placeholder="0,00"
-          />
-        </div>
-
-        {/* Vencimento 
-        <div className="col-md-6">
-          <label htmlFor="inputVencimento" className="form-label">
-            Vencimento
-          </label>
-          <input
-            type="date"
-            className="form-control"
-            id="inputVencimento"
-            name="vencimento"
-            value={formData.vencimento || ""}
-            onChange={onChange}
-          />
-        </div> */}
+				{/* Documetos para email */}
+				<a
+					href='mailto:diretora@escola.com.br?subject=Envio de Documentos&body=Segue em anexo os documentos necessários.'
+					className='btn-email col-md-4 text-center'
+				>
+					Enviar Documentos para o Email da Escola
+				</a>
 
 				{/* Botões */}
 				<div className='step-buttons'>
@@ -382,3 +327,4 @@ function StepObservacoes({ onBack, formData, onChange, loading }) {
 }
 
 export default StepObservacoes;
+// vanessalimapsicopedagoga@bol.com.br

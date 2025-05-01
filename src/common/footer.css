@@ -1,85 +1,101 @@
 footer {
-  background-color: #902121;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 0;
+	background-color: #902121;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	bottom: 0;
+	font-family: "Arial", bold;
 }
 
 footer span {
-  margin: 0 5vw;
-  color: #fff;
+	margin: 0 5vw;
+	color: #fff;
 }
 
 .footer-custom {
-  background-color: #902121;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  color: white;
-  flex-wrap: wrap;
+	background-color: #902121;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 40px;
+	color: white;
+	flex-wrap: wrap;
 }
 
 /* Logo e nome da escola */
 .footer-left {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .footer-img {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
+	width: 100px;
+	height: 100px;
+	margin-right: 10px;
+	border-radius: 50%;
 }
 
 .footer-nome-escola {
-  font-size: 1rem;
-  font-weight: bold;
+	font-size: 2rem;
+	font-weight: bold;
 }
 
 /* Contatos alinhado à direita */
 .footer-contact {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	text-align: right;
 }
 
 .footer-contact strong {
-  font-size: 1rem;
-  margin-bottom: 3px;
+	font-size: 1.5rem;
+	margin-bottom: 3px;
 }
 
 .footer-phone {
-  font-size: 0.85rem;
-  margin-bottom: 5px;
+	font-size: 1rem;
+	margin-bottom: 5px;
 }
 
 .footer-icons {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .footer-icons a {
-  color: white;
-  margin-left: 10px;
-  transition: color 0.3s ease;
+	color: white;
+	margin-left: 10px;
+	transition: color 0.3s ease;
 }
 
 .footer-icons a:hover {
-  color: #ccc;
+	color: #ccc;
+}
+
+.footer-icons i {
+	font-size: 3rem;
 }
 
 @media (max-width: 768px) {
-  .footer-custom {
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .footer-contact {
-    align-items: center;
-    text-align: center;
-  }
+	.footer-custom {
+		flex-wrap: wrap;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.footer-img {
+		width: 75px;
+		height: 75px;
+	}
+
+	.footer-nome-escola {
+		font-size: 1.25rem;
+	}
+
+	.footer-contact {
+		align-items: center;
+		text-align: center;
+	}
 }

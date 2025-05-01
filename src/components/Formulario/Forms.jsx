@@ -103,10 +103,10 @@ function Forms() {
 			maskedValue = maskDate(value); // Aplica a máscara de texto para data com validação de dia e mês
 		if (
 			name === "telefoneMae" ||
-			name === "telefonfonePai" ||
-			name === "resptelefonFone" ||
+			name === "telefonePai" ||
+			name === "respTelefone" ||
 			name === "telefoneTrabalhoMae" ||
-			name === "telefonfoneTrabalhoPai"
+			name === "telefoneTrabalhoPai"
 		)
 			maskedValue = maskPhone(value);
 		if (name === "cepMae" || name === "cepPai") maskedValue = maskCEP(value);

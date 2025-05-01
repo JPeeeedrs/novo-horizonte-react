@@ -15,14 +15,31 @@
 	text-align: center; /* Centraliza o texto das labels */
 }
 
-/* === CONTAINER DOS CAMPOS DE DOCUMENTOS === */
-#doc {
-	margin-top: 20px;
-	margin-left: 10px;
-	display: flex;
-	flex-wrap: wrap; /* Permite quebrar linha se necessário */
-	gap: 15px; /* Espaço entre elementos */
-	justify-content: space-between; /* Distribuição horizontal */
+/* botão para enviar documentos por email */
+.btn-email {
+	background-color: #902121; /* Cor de fundo verde */
+	color: #fff; /* Cor do texto branco */
+	font-weight: 500;
+	text-decoration: none;
+	border: none;
+	padding: 7.5px 20px;
+	font-size: 1rem;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	font-weight: bolder;
+	margin: 20px auto; /* Margem automática para centralizar */
+}
+
+/* === HOVER E FOCUS DO BOTÃO DE EMAIL === */
+.btn-email:hover {
+	background-color: #502121; /* Cor de fundo verde escuro */
+	transform: scale(1.01); /* Efeito de zoom leve */
+	color: #dedbd7; /* Cor do texto ao passar o mouse */
+}
+
+.btn-email:focus {
+	outline: none; /* Remove contorno ao focar */
 }
 
 /* === ESTILIZAÇÃO DOS BOTÕES GERAIS === */
@@ -84,7 +101,7 @@
 	background-color: #b00b69;
 }
 .btn-termo:hover {
-	background-color: #ff9900;
+	background-color: #ff4174;
 }
 .btn-termo:focus {
 	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5);

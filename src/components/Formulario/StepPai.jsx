@@ -6,22 +6,22 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 		cepPai: formData.cepPai || "",
 		cpfPai: formData.cpfPai || "",
 		rgPai: formData.rgPai || "",
-		fonePai: formData.fonePai || "",
+		telefonePai: formData.telefonePai || "",
 		emailPai: formData.emailPai || "",
 		profissaoPai: formData.profissaoPai || "",
 		trabalhoPai: formData.trabalhoPai || "",
-		foneTrabalhoPai: formData.foneTrabalhoPai || "",
+		telefoneTrabalhoPai: formData.telefoneTrabalhoPai || "",
 	};
 
 	return (
 		<div className='step' id='pai'>
 			<div className='row g-3'>
 				<h3 className='mt-4'>Dados dos Familiares</h3>
-				<h5>Dados do Pai</h5>
+				<h5>Dados do Responsável Paterno</h5>
 				{/* Nome do Pai */}
 				<div className='col-md-4'>
 					<label htmlFor='inputFatherName' className='form-label'>
-						Nome do Pai
+						Nome do Responsável Paterno
 					</label>
 					<input
 						type='text'
@@ -117,8 +117,8 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 						type='tel'
 						className='form-control'
 						id='inputFatherFone'
-						name='fonePai'
-						value={safeFormData.fonePai}
+						name='telefonePai'
+						value={safeFormData.telefonePai}
 						onChange={onChange}
 						placeholder='(00) 00000-0000'
 					/>
@@ -179,8 +179,8 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 						type='tel'
 						className='form-control'
 						id='inputFatherWorkFone'
-						name='foneTrabalhoPai'
-						value={safeFormData.foneTrabalhoPai}
+						name='telefoneTrabalhoPai'
+						value={safeFormData.telefoneTrabalhoPai}
 						onChange={onChange}
 						placeholder='(00) 00000-0000'
 					/>
