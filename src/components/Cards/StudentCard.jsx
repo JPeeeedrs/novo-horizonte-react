@@ -9,6 +9,7 @@ function StudentCard() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
+				// Realizar chamadas para os endpoints de alunos, mães, pais e observações
 				const [
 					alunosResponse,
 					maesResponse,
@@ -21,6 +22,7 @@ function StudentCard() {
 					axios.get("http://localhost:8080/observacoes"),
 				]);
 
+				// Combinar os dados de mãe, pai e observações com os alunos
 				const alunosData = alunosResponse.data.map((aluno) => {
 					const mae =
 						maesResponse.data.find((m) => m.alunoId === aluno.id) || {};
@@ -59,7 +61,7 @@ function StudentCard() {
 			}}
 		>
 			<div className='row'>
-				{alunos.map((aluno, index) => (
+				{alunos.map((aluno, mae, pai, observacoes, index) => (
 					<div className='col-12 col-md-6 col-lg-4 mb-3' key={index}>
 						<div className='card h-100' style={{ backgroundColor: "#acacac" }}>
 							<div className='card-body d-flex flex-column align-items-center'>
@@ -72,7 +74,7 @@ function StudentCard() {
 								<p className='card-text'>
 									Tipo Sanguíneo: {aluno.tipoSanguineo}
 								</p>
-								<p className='card-text'>Nome da Mãe: {aluno.nomeMae}</p>
+								<p className='card-text'>Nome da Mãe: {mae.nomeMae}</p>
 								<p className='card-text'>
 									Endereço da Mãe: {aluno.enderecoMae}
 								</p>
@@ -85,7 +87,7 @@ function StudentCard() {
 								<p className='card-text'>
 									Telefone do Trabalho da Mãe: {aluno.telefoneTrabalhoMae}
 								</p>
-								<p className='card-text'>Nome do Pai: {aluno.nomePai}</p>
+								<p className='card-text'>Nome do Pai: {pai.nomePai}</p>
 								<p className='card-text'>
 									Endereço do Pai: {aluno.enderecoPai}
 								</p>
@@ -100,7 +102,7 @@ function StudentCard() {
 								</p>
 								{aluno.temEspecialista === "sim" && (
 									<p className='card-text'>
-										Especialista: {aluno.especialista}
+										Especialista: {observacoes.especialista}
 									</p>
 								)}
 								{aluno.temAlergias === "sim" && (
