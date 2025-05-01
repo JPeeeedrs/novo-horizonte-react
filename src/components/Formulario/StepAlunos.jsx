@@ -23,7 +23,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 			<div className='row g-3'>
 				<h3 className='mt-4'>Dados do Aluno</h3>
 				{/* Nome */}
-				<div className='col-md-4'>
+				<div className='col-md-8'>
 					<label htmlFor='inputName' className='form-label'>
 						Nome
 					</label>
@@ -35,22 +35,6 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						value={safeFormData.nome}
 						onChange={onChange}
 						placeholder='João da Silva'
-					/>
-				</div>
-
-				{/* Idade */}
-				<div className='col-md-4'>
-					<label htmlFor='inputAge' className='form-label'>
-						Idade
-					</label>
-					<input
-						type='text'
-						className='form-control'
-						id='inputAge'
-						name='idade'
-						value={safeFormData.idade}
-						onChange={onChange}
-						placeholder='00'
 					/>
 				</div>
 

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import StepAluno from "./StepAlunos";
-import StepAnamnese from "./StepAnamnese";
+
 import StepMae from "./StepMae";
 import StepPai from "./StepPai";
-import StepRespFinan from "./StepRespFinan";
+
 import StepObservacoes from "./StepObservacoes";
 import "../../styles/forms.css";
 import {
@@ -47,16 +47,16 @@ function Forms() {
 		},
 		mae: {
 			nomeMae: "",
-			nascimentoMae: "",
+			dataNascimentoMae: "",
 			enderecoMae: "",
 			cepMae: "",
 			cpfMae: "",
 			rgMae: "",
-			foneMae: "",
+			telefoneMae: "",
 			emailMae: "",
-			profissaoMae: "",
+			localProfissaoMae: "",
 			trabalhoMae: "",
-			foneTrabalhoMae: "",
+			telefoneTrabalhoMae: "",
 		},
 		pai: {
 			nomePai: "",
@@ -65,21 +65,18 @@ function Forms() {
 			cepPai: "",
 			cpfPai: "",
 			rgPai: "",
-			fonePai: "",
+			telefonfonePai: "",
 			emailPai: "",
 			profissaoPai: "",
 			trabalhoPai: "",
-			foneTrabalhoPai: "",
+			telefoneTrabalhoPai: "",
 		},
 		respFinan: {
 			respNome: "",
-			respFone: "",
+			respTelefone: "",
 		},
 		observacoes: {
 			pessoasAutorizadas: "",
-			documentos: [],
-			valorContrato: "",
-			vencimento: "",
 		},
 	});
 
@@ -96,19 +93,20 @@ function Forms() {
 
 		if (name === "cpf" || name === "cpfMae" || name === "cpfPai")
 			maskedValue = maskCPF(value);
-		if (name === "rg") maskedValue = maskRG(value);
+		if (name === "rg" || name === "rgMae" || name === "rgPai")
+			maskedValue = maskRG(value);
 		if (
 			name === "dataNascimento" ||
-			name === "nascimentoMae" ||
-			name === "nascimentoPai"
+			name === "dataNascimentoMae" ||
+			name === "dataNascimentoPai"
 		)
 			maskedValue = maskDate(value); // Aplica a máscara de texto para data com validação de dia e mês
 		if (
-			name === "foneMae" ||
-			name === "fonePai" ||
-			name === "respFone" ||
-			name === "foneTrabalhoMae" ||
-			name === "foneTrabalhoPai"
+			name === "telefoneMae" ||
+			name === "telefonfonePai" ||
+			name === "resptelefonFone" ||
+			name === "telefoneTrabalhoMae" ||
+			name === "telefonfoneTrabalhoPai"
 		)
 			maskedValue = maskPhone(value);
 		if (name === "cepMae" || name === "cepPai") maskedValue = maskCEP(value);
@@ -129,35 +127,30 @@ function Forms() {
 		try {
 			// Enviar os dados de cada seção separadamente
 			const alunoResponse = await api.post("/alunos", formData.aluno);
-			const anamneseResponse = await api.post(
-				"/alunos/${alunoResponse.data.id}/anamnese",
-				formData.anamnese
-			);
-			const maeResponse = await api.post(
-				`/alunos/${alunoResponse.data.id}/mae`,
-				formData.mae
-			);
-			const paiResponse = await api.post(
-				`/alunos/${alunoResponse.data.id}/pai`,
-				formData.pai
-			);
-			const respFinanResponse = await api.post(
-				`/alunos/${alunoResponse.data.id}/respFinan`,
-				formData.respFinan
-			);
-			const observacoesResponse = await api.post(
-				`/alunos/${alunoResponse.data.id}/observacoes`,
-				formData.observacoes
-			);
+			// const anamneseResponse = await api.post(
+			// 	"/alunos/${alunoResponse.data.id}/anamnese",
+			// 	formData.anamnese
+			// );
+			const maeResponse = await api.post("/maes", formData.mae);
+			// const paiResponse = await api.post(
+			// 	`/alunos/${alunoResponse.data.id}/pai`,
+			// 	formData.pai
+			// );
+			// const respFinanResponse = await api.post(
+			// 	`/alunos/${alunoResponse.data.id}/respFinan`,
+			// 	formData.respFinan
+			// );
+			// const observacoesResponse = await api.post(
+			// 	`/alunos/${alunoResponse.data.id}/observacoes`,
+			// 	formData.observacoes
+			// );
 
-			if (
-				alunoResponse.status === 201 &&
-				anamneseResponse.status === 201 &&
-				maeResponse.status === 201 &&
-				paiResponse.status === 201 &&
-				respFinanResponse.status === 201 &&
-				observacoesResponse.status === 201
-			) {
+			// paiResponse.status === 201 &&
+			// respFinanResponse.status === 201 &&
+			// observacoesResponse.status === 201
+			// anamneseResponse.status === 201 &&
+
+			if (alunoResponse.status === 201 && maeResponse.status === 201) {
 				alert(
 					`Aluno ${alunoResponse.data.nome} e informações relacionadas cadastrados com sucesso!`
 				);
@@ -196,16 +189,16 @@ function Forms() {
 			},
 			mae: {
 				nomeMae: "",
-				nascimentoMae: "",
+				dataNascimentoMae: "",
 				enderecoMae: "",
 				cepMae: "",
 				cpfMae: "",
 				rgMae: "",
-				foneMae: "",
+				telefoneMae: "",
 				emailMae: "",
 				profissaoMae: "",
-				trabalhoMae: "",
-				foneTrabalhoMae: "",
+				localTrabalhoMae: "",
+				telefoneTrabalhoMae: "",
 			},
 			pai: {
 				nomePai: "",
@@ -214,15 +207,15 @@ function Forms() {
 				cepPai: "",
 				cpfPai: "",
 				rgPai: "",
-				fonePai: "",
+				telefonfonePai: "",
 				emailPai: "",
 				profissaoPai: "",
 				trabalhoPai: "",
-				foneTrabalhoPai: "",
+				telefonfoneTrabalhoPai: "",
 			},
 			respFinan: {
 				respNome: "",
-				respFone: "",
+				resptelefonFone: "",
 			},
 			observacoes: {
 				pessoasAutorizadas: "",
@@ -247,14 +240,6 @@ function Forms() {
 				/>
 			)}
 			{step === 2 && (
-				<StepAnamnese
-					onNext={nextStep}
-					onBack={prevStep}
-					formData={formData.anamnese}
-					onChange={(e) => handleChange("anamnese", e)}
-				/>
-			)}
-			{step === 3 && (
 				<StepMae
 					onNext={nextStep}
 					onBack={prevStep}
@@ -262,7 +247,7 @@ function Forms() {
 					onChange={(e) => handleChange("mae", e)}
 				/>
 			)}
-			{step === 4 && (
+			{step === 3 && (
 				<StepPai
 					onNext={nextStep}
 					onBack={prevStep}
@@ -270,15 +255,7 @@ function Forms() {
 					onChange={(e) => handleChange("pai", e)}
 				/>
 			)}
-			{step === 5 && (
-				<StepRespFinan
-					onNext={nextStep}
-					onBack={prevStep}
-					formData={formData.respFinan}
-					onChange={(e) => handleChange("respFinan", e)}
-				/>
-			)}
-			{step === 6 && (
+			{step === 4 && (
 				<StepObservacoes
 					onBack={prevStep}
 					formData={formData.observacoes}
