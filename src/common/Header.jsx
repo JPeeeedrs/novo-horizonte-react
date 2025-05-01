@@ -11,7 +11,7 @@ function Header() {
 				id='nav-logo'
 			>
 				<div className='container-fluid'>
-					<Link className='navbar-brand' href='/index.html'>
+					<Link className='navbar-brand' to='/'>
 						<img
 							src={logo}
 							alt='Logo'
@@ -21,7 +21,7 @@ function Header() {
 						/>
 					</Link>
 					<span className='position-absolute start-50 translate-middle-x'>
-						Centro Educacional Novo Horizonte
+						CENTRO EDUCACIONAL NOVO HORIZONTE
 					</span>
 				</div>
 			</nav>

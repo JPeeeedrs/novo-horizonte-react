@@ -94,7 +94,8 @@ function Forms() {
 		const { name, value } = e.target;
 		let maskedValue = value;
 
-		if (name === "cpf") maskedValue = maskCPF(value);
+		if (name === "cpf" || name === "cpfMae" || name === "cpfPai")
+			maskedValue = maskCPF(value);
 		if (name === "rg") maskedValue = maskRG(value);
 		if (
 			name === "dataNascimento" ||
@@ -102,7 +103,13 @@ function Forms() {
 			name === "nascimentoPai"
 		)
 			maskedValue = maskDate(value); // Aplica a máscara de texto para data com validação de dia e mês
-		if (name === "foneMae" || name === "fonePai" || name === "respFone")
+		if (
+			name === "foneMae" ||
+			name === "fonePai" ||
+			name === "respFone" ||
+			name === "foneTrabalhoMae" ||
+			name === "foneTrabalhoPai"
+		)
 			maskedValue = maskPhone(value);
 		if (name === "cepMae" || name === "cepPai") maskedValue = maskCEP(value);
 		if (name === "emailMae" || name === "emailPai")
@@ -120,23 +127,48 @@ function Forms() {
 		setError(null);
 
 		try {
-			const payload = {
-				...formData.aluno,
-				...formData.mae,
-				...formData.pai,
-				...formData.respFinan,
-				...formData.observacoes,
-			};
+			// Enviar os dados de cada seção separadamente
+			const alunoResponse = await api.post("/alunos", formData.aluno);
+			const anamneseResponse = await api.post(
+				"/alunos/${alunoResponse.data.id}/anamnese",
+				formData.anamnese
+			);
+			const maeResponse = await api.post(
+				`/alunos/${alunoResponse.data.id}/mae`,
+				formData.mae
+			);
+			const paiResponse = await api.post(
+				`/alunos/${alunoResponse.data.id}/pai`,
+				formData.pai
+			);
+			const respFinanResponse = await api.post(
+				`/alunos/${alunoResponse.data.id}/respFinan`,
+				formData.respFinan
+			);
+			const observacoesResponse = await api.post(
+				`/alunos/${alunoResponse.data.id}/observacoes`,
+				formData.observacoes
+			);
 
-			const response = await api.post("/alunos", payload);
-
-			if (response.status === 201) {
-				alert(`Aluno ${response.data.nome} cadastrado com sucesso!`);
+			if (
+				alunoResponse.status === 201 &&
+				anamneseResponse.status === 201 &&
+				maeResponse.status === 201 &&
+				paiResponse.status === 201 &&
+				respFinanResponse.status === 201 &&
+				observacoesResponse.status === 201
+			) {
+				alert(
+					`Aluno ${alunoResponse.data.nome} e informações relacionadas cadastrados com sucesso!`
+				);
 				resetForm();
 			}
 		} catch (error) {
 			console.error("Erro:", error);
-			setError(error.response?.data?.message || "Erro ao cadastrar aluno");
+			setError(
+				error.response?.data?.message ||
+					"Erro ao cadastrar aluno e informações relacionadas"
+			);
 		} finally {
 			setLoading(false);
 		}

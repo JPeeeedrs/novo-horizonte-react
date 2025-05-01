@@ -70,10 +70,10 @@
 
 /* === BOTÃO DE SUBMISSÃO (AZUL) === */
 .btn-submit {
-	background-color: #0000ff;
+	background-color: #0000aa;
 }
 .btn-submit:hover {
-	background-color: #0000cc;
+	background-color: #000088;
 }
 .btn-submit:focus {
 	box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.5);
@@ -81,7 +81,7 @@
 
 /* === BOTÃO DE TERMO (LARANJA) === */
 .btn-termo {
-	background-color: #ffaa00;
+	background-color: #b00b69;
 }
 .btn-termo:hover {
 	background-color: #ff9900;
