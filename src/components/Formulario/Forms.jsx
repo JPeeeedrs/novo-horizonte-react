@@ -96,9 +96,9 @@ function Forms() {
 		if (name === "rg" || name === "rgMae" || name === "rgPai")
 			maskedValue = maskRG(value);
 		if (
-			name === "nascimento" ||
-			name === "nascimentoMae" ||
-			name === "nascimentoPai"
+			name === "dataNascimento" ||
+			name === "dataNascimentoMae" ||
+			name === "dataNascimentoPai"
 		)
 			maskedValue = maskDate(value); // Aplica a máscara de texto para data com validação de dia e mês
 		if (
@@ -127,22 +127,30 @@ function Forms() {
 		try {
 			// Enviar os dados de cada seção separadamente
 			const alunoResponse = await api.post("/alunos", formData.aluno);
-
+			// const anamneseResponse = await api.post(
+			// 	"/alunos/${alunoResponse.data.id}/anamnese",
+			// 	formData.anamnese
+			// );
 			const maeResponse = await api.post("/maes", formData.mae);
-			const paiResponse = await api.post("/pais", formData.pai);
-			const observacoesResponse = await api.post(
-				"/observacoes",
-				formData.observacoes
-			);
+			// const paiResponse = await api.post(
+			// 	`/alunos/${alunoResponse.data.id}/pai`,
+			// 	formData.pai
+			// );
+			// const respFinanResponse = await api.post(
+			// 	`/alunos/${alunoResponse.data.id}/respFinan`,
+			// 	formData.respFinan
+			// );
+			// const observacoesResponse = await api.post(
+			// 	`/alunos/${alunoResponse.data.id}/observacoes`,
+			// 	formData.observacoes
+			// );
 
-			const isSuccess = (res) => res.status === 200 || res.status === 201;
+			// paiResponse.status === 201 &&
+			// respFinanResponse.status === 201 &&
+			// observacoesResponse.status === 201
+			// anamneseResponse.status === 201 &&
 
-			if (
-				isSuccess(alunoResponse.status) &&
-				isSuccess(maeResponse.status) &&
-				isSuccess(paiResponse.status) &&
-				isSuccess(observacoesResponse.status)
-			) {
+			if (alunoResponse.status === 201 && maeResponse.status === 201) {
 				alert(
 					`Aluno ${alunoResponse.data.nome} e informações relacionadas cadastrados com sucesso!`
 				);
@@ -181,7 +189,7 @@ function Forms() {
 			},
 			mae: {
 				nomeMae: "",
-				nascimentoMae: "",
+				dataNascimentoMae: "",
 				enderecoMae: "",
 				cepMae: "",
 				cpfMae: "",
@@ -221,8 +229,6 @@ function Forms() {
 
 	return (
 		<form id='form' onSubmit={handleSubmit}>
-			{error && <div className='alert alert-danger mb-3'>{error}</div>}
-
 			{step === 1 && (
 				<StepAluno
 					onNext={nextStep}
@@ -253,6 +259,7 @@ function Forms() {
 					formData={formData.observacoes}
 					onChange={(e) => handleChange("observacoes", e)}
 					loading={loading}
+					error={error} // Passa o erro como prop
 				/>
 			)}
 		</form>

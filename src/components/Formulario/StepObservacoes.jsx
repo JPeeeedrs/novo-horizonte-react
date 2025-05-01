@@ -2,7 +2,7 @@ import { exportarParaPdf } from "../../utils/exportPdf";
 import { exportarParaCsv } from "../../utils/exportCsv";
 import termos from "../../assets/images/termos.pdf";
 
-function StepObservacoes({ onBack, formData, onChange, loading }) {
+function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 	const safeFormData = {
 		matriculaTipo: formData.matriculaTipo || "",
 		escola: formData.escola || "",
@@ -276,6 +276,13 @@ function StepObservacoes({ onBack, formData, onChange, loading }) {
 					Enviar Documentos para o Email da Escola
 				</a>
 
+				{/* Alerta de erro */}
+				{error && (
+					<div className="alert alert-danger mt-3">
+						{error}
+					</div>
+				)}
+
 				{/* Botões */}
 				<div className='step-buttons'>
 					<button
@@ -327,4 +334,3 @@ function StepObservacoes({ onBack, formData, onChange, loading }) {
 }
 
 export default StepObservacoes;
-// vanessalimapsicopedagoga@bol.com.br

@@ -127,29 +127,5 @@
 }
 .btn-pdf:focus {
 	box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.5);
-}
-
-/* === RESPONSIVIDADE: TELAS MENORES QUE 1000PX === */
-@media (max-width: 1000px) {
-	#inputdoc label {
-		text-align: center;
-	}
-}
-
-/* === RESPONSIVIDADE: TELAS MENORES QUE 600PX === */
-@media (max-width: 600px) {
-	#doc {
-		margin-left: -10px;
-		flex-wrap: wrap; /* Garante quebra de linha */
-	}
-	#inputdoc {
-		width: 100%; /* Ocupa toda a largura */
-	}
-}
-
-/* === RESPONSIVIDADE: TELAS MENORES QUE 530PX === */
-@media (max-width: 530px) {
-	.btn {
-		width: 100%; /* Botões ocupam toda a linha */
-	}
+	/* Adicione isso ao seu arquivo de CSS */
 }
