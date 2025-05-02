@@ -17,9 +17,9 @@ function StudentCard() {
 					observacoesResponse,
 				] = await Promise.all([
 					axios.get("http://localhost:8080/alunos/1/dto"),
-					axios.get("http://localhost:8080/maes/dto"),
-					axios.get("http://localhost:8080/pais/dto"),
-					axios.get("http://localhost:8080/observacoes/dto"),
+					axios.get("http://localhost:8080/maes/1/dto"),
+					axios.get("http://localhost:8080/pais/1/dto"),
+					axios.get("http://localhost:8080/observacoes/1/dto"),
 				]);
 
 				// Combinar os dados de mãe, pai e observações com os alunos

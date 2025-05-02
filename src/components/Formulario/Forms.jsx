@@ -134,6 +134,10 @@ function Forms() {
 				formData.observacoes
 			);
 
+			const isSuccess = (response) => {
+				return response.status === 200 || response.status === 201;
+			};
+
 			if (
 				isSuccess(alunoResponse) &&
 				isSuccess(maeResponse) &&
