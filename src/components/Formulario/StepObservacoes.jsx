@@ -278,7 +278,7 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 
 				{/* Alerta de erro */}
 				{error && (
-					<div className="alert alert-danger mt-3">
+					<div className="alert alert-danger mt-3 text-center">
 						{error}
 					</div>
 				)}
