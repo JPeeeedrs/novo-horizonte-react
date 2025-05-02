@@ -10,17 +10,17 @@ import Header from "../common/Header";
 import Forms from "../components/Formulario/Forms";
 
 function Formulario() {
-  return (
-    <div className="Formulario d-flex flex-column min-vh-100">
-      <Header />
+	return (
+		<div className='Formulario d-flex flex-column min-vh-100'>
+			<Header />
 
-      <main>
-        <Forms />
-      </main>
+			<main>
+				<Forms />
+			</main>
 
-      <Footer />
-    </div>
-  );
+			<Footer />
+		</div>
+	);
 }
 
 export default Formulario;

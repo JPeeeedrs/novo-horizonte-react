@@ -268,19 +268,37 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 					/>
 				</div>
 
-				{/* Documetos para email */}
-				<a
-					href='mailto:diretora@escola.com.br?subject=Envio de Documentos&body=Segue em anexo os documentos necessários.'
-					className='btn-email col-md-4 text-center'
+				{/* Botão de Enviar */}
+				<button
+					type='submit'
+					className='btn-submit col-md-3'
+					disabled={loading}
 				>
-					Enviar Documentos para o Email da Escola
-				</a>
+					{loading ? (
+						<>
+							<span className='spinner-border spinner-border-sm me-2'></span>
+							Cadastrando...
+						</>
+					) : (
+						"Cadastrar"
+					)}
+				</button>
+
+				<p className='obs'>
+					OBS: Só clique no botão "Envio de Documentos" se você for enviar os
+					documentos por e-mail.
+				</p>
+				<p className='obs'>
+					❌ Se você for entregar pessoalmente ou já entregou, não precisa
+					clicar!
+				</p>
+				<p className='obs'>
+					✅ Clique apenas se for enviar por e-mail, caso a escola solicite!
+				</p>
 
 				{/* Alerta de erro */}
 				{error && (
-					<div className="alert alert-danger mt-3 text-center">
-						{error}
-					</div>
+					<div className='alert alert-danger mt-3 text-center'>{error}</div>
 				)}
 
 				{/* Botões */}
@@ -293,20 +311,17 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 					>
 						Anterior
 					</button>
-					<button type='submit' className='btn btn-submit' disabled={loading}>
-						{loading ? (
-							<>
-								<span className='spinner-border spinner-border-sm me-2'></span>
-								Cadastrando...
-							</>
-						) : (
-							"Cadastrar"
-						)}
-					</button>
+					{/* Documentos para email */}
+					<a
+						href='mailto:diretora@escola.com.br?subject=Envio de Documentos&body=Segue em anexo os documentos necessários.'
+						className='btn btn-email text-center'
+					>
+						Enviar Documentos
+					</a>
 					<a
 						href={termos}
 						download
-						className='btn btn-termo'
+						className='btn btn-termo text-center'
 						disabled={loading}
 					>
 						Baixar Termos

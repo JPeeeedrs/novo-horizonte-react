@@ -17,18 +17,8 @@
 
 /* botão para enviar documentos por email */
 .btn-email {
-	background-color: #902121; /* Cor de fundo verde */
-	color: #fff; /* Cor do texto branco */
-	font-weight: 500;
+	background-color: #902121;
 	text-decoration: none;
-	border: none;
-	padding: 7.5px 20px;
-	font-size: 1rem;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s ease, transform 0.2s ease;
-	font-weight: bolder;
-	margin: 20px auto; /* Margem automática para centralizar */
 }
 
 /* === HOVER E FOCUS DO BOTÃO DE EMAIL === */
@@ -52,9 +42,12 @@
 	border-radius: 5px;
 	cursor: pointer;
 	transition: background-color 0.3s ease, transform 0.2s ease;
-	margin: 10px 5px;
-	width: 150px; /* Largura padrão dos botões */
+	margin: 10px auto;
+	width: auto; /* Largura padrão dos botões */
 	font-weight: bolder;
+	text-align: center; /* Centraliza o texto */
+	align-items: center;
+	display: flex; /* Alinha os itens com Flexbox */
 }
 
 /* === HOVER E FOCUS GERAL DOS BOTÕES === */
@@ -69,6 +62,7 @@
 /* === BOTÃO DE NAVEGAÇÃO === */
 .btn-nav {
 	background-color: #902121;
+	margin: 10px auto;
 }
 .btn-nav:hover {
 	background-color: #502121;
@@ -88,6 +82,19 @@
 /* === BOTÃO DE SUBMISSÃO (AZUL) === */
 .btn-submit {
 	background-color: #0000aa;
+	font-weight: 500;
+	text-decoration: none;
+	border: none;
+	padding: 7.5px 20px;
+	font-size: 1rem;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	font-weight: bolder;
+	margin: 20px auto; /* Margem automática para centralizar */
+	color: #fff;
+
+	text-align: center;
 }
 .btn-submit:hover {
 	background-color: #000088;
@@ -128,4 +135,10 @@
 .btn-pdf:focus {
 	box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.5);
 	/* Adicione isso ao seu arquivo de CSS */
+}
+
+.obs {
+	margin: 0.5px;
+	padding: 0.5px;
+	color: #ff0000;
 }

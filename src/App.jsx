@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Formulario from "./pages/Formulario";
 import Alunos from "./pages/Alunos";
 
+import "./global.css";
+
 // importar icons
 import "@fortawesome/fontawesome-free/css/all.min.css";
 

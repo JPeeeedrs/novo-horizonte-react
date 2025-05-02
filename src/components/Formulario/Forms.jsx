@@ -29,7 +29,6 @@ function Forms() {
 	const [formData, setFormData] = useState({
 		aluno: {
 			nome: "",
-
 			dataNascimento: "",
 			naturalidade: "",
 			nacionalidade: "",
@@ -47,14 +46,14 @@ function Forms() {
 		},
 		mae: {
 			nomeMae: "",
-			dataNascimentoMae: "",
+			nascimentoMae: "",
 			enderecoMae: "",
 			cepMae: "",
 			cpfMae: "",
 			rgMae: "",
 			telefoneMae: "",
 			emailMae: "",
-			localProfissaoMae: "",
+			profissaoMae: "",
 			trabalhoMae: "",
 			telefoneTrabalhoMae: "",
 		},
@@ -65,17 +64,26 @@ function Forms() {
 			cepPai: "",
 			cpfPai: "",
 			rgPai: "",
-			telefonfonePai: "",
+			telefonePai: "",
 			emailPai: "",
 			profissaoPai: "",
 			trabalhoPai: "",
 			telefoneTrabalhoPai: "",
 		},
-		respFinan: {
+		observacoes: {
+			matriculaTipo: "",
+			escola: "",
+			temIrmaos: "",
+			irmaosNome: "",
+			temEspecialista: "",
+			especialista: "",
+			temAlergias: "",
+			alergia: "",
+			temMedicamento: "",
+			medicamento: "",
+			reside: "",
 			respNome: "",
 			respTelefone: "",
-		},
-		observacoes: {
 			pessoasAutorizadas: "",
 		},
 	});
