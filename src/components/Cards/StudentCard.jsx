@@ -9,17 +9,17 @@ function StudentCard() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				// Realizar chamadas para os endpoints de alunos, mães, pais e observações
+				// Realizar chamadas para os endpoints de alunos, mães, pais e observações com DTO
 				const [
 					alunosResponse,
 					maesResponse,
 					paisResponse,
 					observacoesResponse,
 				] = await Promise.all([
-					axios.get("http://localhost:8080/alunos"),
-					axios.get("http://localhost:8080/maes"),
-					axios.get("http://localhost:8080/pais"),
-					axios.get("http://localhost:8080/observacoes"),
+					axios.get("http://localhost:8080/alunos/1/dto"),
+					axios.get("http://localhost:8080/maes/dto"),
+					axios.get("http://localhost:8080/pais/dto"),
+					axios.get("http://localhost:8080/observacoes/dto"),
 				]);
 
 				// Combinar os dados de mãe, pai e observações com os alunos
@@ -33,9 +33,24 @@ function StudentCard() {
 
 					return {
 						...aluno,
-						...mae,
-						...pai,
-						...observacao,
+						nomeMae: mae.nome,
+						enderecoMae: mae.endereco,
+						telefoneMae: mae.telefone,
+						trabalhoMae: mae.trabalho,
+						telefoneTrabalhoMae: mae.telefoneTrabalho,
+
+						nomePai: pai.nome,
+						enderecoPai: pai.endereco,
+						telefonePai: pai.telefone,
+						trabalhoPai: pai.trabalho,
+						telefoneTrabalhoPai: pai.telefoneTrabalho,
+
+						alergia: observacao.alergia,
+						temAlergias: observacao.temAlergias,
+						medicamento: observacao.medicamento,
+						temMedicamento: observacao.temMedicamento,
+						especialista: observacao.especialista,
+						temEspecialista: observacao.temEspecialista,
 					};
 				});
 
@@ -61,8 +76,8 @@ function StudentCard() {
 			}}
 		>
 			<div className='row'>
-				{alunos.map((aluno, mae, pai, observacoes, index) => (
-					<div className='col-12 col-md-6 col-lg-4 mb-3' key={index}>
+				{alunos.map((aluno) => (
+					<div className='col-12 col-md-6 col-lg-4 mb-3' key={aluno.id}>
 						<div className='card h-100' style={{ backgroundColor: "#acacac" }}>
 							<div className='card-body d-flex flex-column align-items-center'>
 								<h5 className='card-title'>{aluno.nome}</h5>
@@ -74,7 +89,7 @@ function StudentCard() {
 								<p className='card-text'>
 									Tipo Sanguíneo: {aluno.tipoSanguineo}
 								</p>
-								<p className='card-text'>Nome da Mãe: {mae.nomeMae}</p>
+								<p className='card-text'>Nome da Mãe: {aluno.nomeMae}</p>
 								<p className='card-text'>
 									Endereço da Mãe: {aluno.enderecoMae}
 								</p>
@@ -87,7 +102,7 @@ function StudentCard() {
 								<p className='card-text'>
 									Telefone do Trabalho da Mãe: {aluno.telefoneTrabalhoMae}
 								</p>
-								<p className='card-text'>Nome do Pai: {pai.nomePai}</p>
+								<p className='card-text'>Nome do Pai: {aluno.nomePai}</p>
 								<p className='card-text'>
 									Endereço do Pai: {aluno.enderecoPai}
 								</p>
@@ -102,7 +117,7 @@ function StudentCard() {
 								</p>
 								{aluno.temEspecialista === "sim" && (
 									<p className='card-text'>
-										Especialista: {observacoes.especialista}
+										Especialista: {aluno.especialista}
 									</p>
 								)}
 								{aluno.temAlergias === "sim" && (
