@@ -14,7 +14,7 @@ import {
 	maskCEP,
 	maskEmail,
 	maskDate,
-} from "../../utils/macaras";
+} from "../../utils/mascaras";
 
 // Configuração global do Axios
 const api = axios.create({

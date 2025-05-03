@@ -1,0 +1,242 @@
+/* StudentCard.css - CSS Unificado */
+
+/* Container principal */
+.student-container {
+	background: #f8f9fa;
+	min-height: 100vh;
+	padding: 2rem 0;
+}
+
+/* Input de busca */
+.search-input {
+	max-width: 600px;
+	margin: 0 auto 2rem;
+	position: relative;
+}
+
+.search-input input {
+	width: 100%;
+	padding: 1rem 1.5rem;
+	border: none;
+	border-radius: 30px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	font-size: 1.1rem;
+	transition: all 0.3s ease;
+}
+
+.search-input input:focus {
+	outline: none;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	transform: translateY(-2px);
+}
+
+.search-input::after {
+	content: "🔍";
+	position: absolute;
+	right: 1.5rem;
+	top: 50%;
+	transform: translateY(-50%);
+	opacity: 0.3;
+}
+
+/* Grid de cartões */
+.student-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 0 1rem;
+	max-width: 1750px;
+	margin: 0 auto;
+}
+
+/* Cartão de estudante */
+.student-card {
+	flex: 1 1 400px;
+	max-width: 400px;
+	background: white;
+	border-radius: 15px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	overflow: hidden;
+	border: 1px solid #ddd;
+}
+
+.student-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Cartão expandido */
+.student-card.expanded {
+	flex: 1 1 400px;
+	max-width: 400px;
+}
+
+@media (min-width: 768px) {
+	.student-card.expanded {
+		flex: 1 1 350px;
+		max-width: 350px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.student-card.expanded {
+		flex: 1 1 400px;
+		max-width: 400px;
+	}
+}
+
+/* Cabeçalho do cartão */
+.card-header {
+	background: #902121;
+	color: white;
+	padding: 1.5rem;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card-header::after {
+	content: "";
+	position: absolute;
+	bottom: -20px;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	background: linear-gradient(to bottom, #aa2121, transparent);
+	z-index: 1;
+}
+
+.card-title {
+	margin: 0;
+	font-size: 1.5rem;
+	font-weight: 600;
+	z-index: 2;
+}
+
+/* Botão dropdown */
+.dropdown-toggle {
+	background-color: #ffffff;
+	color: #902121;
+	border: none;
+	padding: 8px 15px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.3s;
+	font-weight: bold;
+	z-index: 2;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-toggle:hover {
+	background-color: #f0f0f0;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Corpo do cartão */
+.card-body {
+	padding: 1.5rem;
+	background: #ffffff;
+	position: relative;
+	z-index: 0;
+}
+
+/* Seções */
+.section {
+	margin-bottom: 15px;
+	padding-top: 10px;
+}
+
+.section-title {
+	color: #902121;
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin: 1.5rem 0 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid #f0f0f0;
+}
+
+h3.section-title {
+	font-size: 1.5rem;
+}
+
+.sub-title {
+	font-size: 1rem;
+	margin-bottom: 1rem;
+	margin-top: 10px;
+}
+
+/* Itens de informação */
+.info-item {
+	margin-bottom: 0.8rem;
+	font-size: 0.95rem;
+	color: #444;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.info-item strong {
+	color: #666;
+	font-weight: 500;
+	margin-bottom: 0.2rem;
+}
+
+/* Carregamento e erro */
+.loading-text {
+	text-align: center;
+	font-size: 1.2rem;
+	color: #666;
+	padding: 2rem;
+}
+
+.error-message {
+	background: #ff4757;
+	color: white;
+	padding: 1rem;
+	border-radius: 8px;
+	margin: 2rem auto;
+	max-width: 600px;
+	text-align: center;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.spinner {
+	width: 40px;
+	height: 40px;
+	border: 4px solid rgba(0, 0, 0, 0.1);
+	border-left-color: #4a90e2;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	margin: 1rem auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+	.student-grid {
+		flex-direction: column;
+		align-items: center;
+		padding: 0 1rem;
+	}
+
+	.search-input {
+		margin-bottom: 1.5rem;
+		padding: 0 1rem;
+	}
+
+	.student-card,
+	.student-card.expanded {
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+}

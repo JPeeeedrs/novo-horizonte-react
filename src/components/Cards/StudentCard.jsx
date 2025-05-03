@@ -1,13 +1,25 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "../../styles/alunos.css";
 
-function StudentCard() {
+const StudentCard = () => {
 	const [alunos, setAlunos] = useState([]);
+	const [searchTerm, setSearchTerm] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const [allData, setAllData] = useState([]);
+	const [openDropdowns, setOpenDropdowns] = useState({});
 
+	const toggleDropdown = (id) => {
+		setOpenDropdowns((prev) => ({
+			...prev,
+			[id]: !prev[id],
+		}));
+	};
+
+	// Carrega dados iniciais
 	useEffect(() => {
-		async function fetchData() {
+		const fetchInitialData = async () => {
 			try {
 				const [alunosRes, maesRes, paisRes, observacoesRes] = await Promise.all(
 					[
@@ -19,7 +31,6 @@ function StudentCard() {
 				);
 
 				const alunosData = alunosRes.data.map((aluno) => {
-					// usa o nome de campo exato que o JSON devolve:
 					const mae = maesRes.data.find((m) => m.idMae === aluno.id) || {};
 					const pai = paisRes.data.find((p) => p.idPai === aluno.id) || {};
 					const obs =
@@ -32,89 +43,285 @@ function StudentCard() {
 						telefoneMae: mae.telefoneMae,
 						trabalhoMae: mae.trabalhoMae,
 						telefoneTrabalhoMae: mae.telefoneTrabalhoMae,
-
 						nomePai: pai.nomePai,
 						enderecoPai: pai.enderecoPai,
 						telefonePai: pai.telefonePai,
 						trabalhoPai: pai.trabalhoPai,
 						telefoneTrabalhoPai: pai.telefoneTrabalhoPai,
-
-						temEspecialista: obs.temEspecialista,
-						especialista: obs.especialista,
-						temAlergias: obs.temAlergias,
-						alergia: obs.alergia,
-						temMedicamento: obs.temMedicamento,
-						medicamento: obs.medicamento,
-						reside: obs.reside,
-						respNome: obs.respNome,
-						respTelefone: obs.respTelefone,
-						pessoasAutorizadas: obs.pessoasAutorizadas,
+						...obs,
 					};
 				});
 
+				setAllData(alunosData);
 				setAlunos(alunosData);
 			} catch (err) {
+				setError("Erro ao carregar dados iniciais");
 				console.error(err);
-				setError("Erro ao carregar os dados dos alunos.");
 			} finally {
 				setLoading(false);
 			}
-		}
+		};
 
-		fetchData();
+		fetchInitialData();
 	}, []);
 
+	// Busca dinâmica
+	useEffect(() => {
+		const controller = new AbortController();
+
+		const fetchData = async () => {
+			try {
+				if (!searchTerm.trim()) {
+					setAlunos(allData);
+					return;
+				}
+
+				// Faz todas as requisições em paralelo
+				const [alunosPorNome, maesPorNome, paisPorNome, alunosPorCpf] =
+					await Promise.all([
+						axios.get(
+							`http://localhost:8080/alunos/buscarPorNome?nome=${searchTerm}`,
+							{
+								signal: controller.signal,
+							}
+						),
+						axios.get(
+							`http://localhost:8080/maes/buscarPorNome?nomeMae=${searchTerm}`,
+							{
+								signal: controller.signal,
+							}
+						),
+						axios.get(
+							`http://localhost:8080/pais/buscarPorNome?nomePai=${searchTerm}`,
+							{
+								signal: controller.signal,
+							}
+						),
+						axios.get(
+							`http://localhost:8080/alunos/buscarPorCpf?cpf=${searchTerm}`,
+							{
+								signal: controller.signal,
+							}
+						),
+					]);
+
+				// Coleta todos os IDs relevantes
+				const alunoIds = new Set();
+
+				// 1. Alunos por nome
+				alunosPorNome.data.forEach((aluno) => alunoIds.add(aluno.id));
+
+				// 2. Mães encontradas -> busca alunos relacionados
+				maesPorNome.data.forEach((mae) => {
+					const alunosDaMae = allData.filter((aluno) => aluno.id === mae.idMae);
+					alunosDaMae.forEach((aluno) => alunoIds.add(aluno.id));
+				});
+
+				// 3. Pais encontrados -> busca alunos relacionados
+				paisPorNome.data.forEach((pai) => {
+					const alunosDoPai = allData.filter((aluno) => aluno.id === pai.idPai);
+					alunosDoPai.forEach((aluno) => alunoIds.add(aluno.id));
+				});
+
+				// 4. Alunos por CPF
+				alunosPorCpf.data.forEach((aluno) => alunoIds.add(aluno.id));
+
+				// Filtra alunos com base nos IDs coletados
+				const resultados = Array.from(alunoIds)
+					.map((id) => allData.find((aluno) => aluno.id === id))
+					.filter(Boolean);
+
+				setAlunos(resultados);
+			} catch (error) {
+				if (!axios.isCancel(error)) {
+					console.error("Erro na busca:", error);
+					setError("Erro ao realizar busca");
+				}
+			}
+		};
+
+		const debounceTimer = setTimeout(fetchData, 300);
+		return () => {
+			controller.abort();
+			clearTimeout(debounceTimer);
+		};
+	}, [searchTerm, allData]);
+
 	if (loading) return <p>Carregando...</p>;
-	if (error) return <p>{error}</p>;
+	if (error) return <p className='text-danger'>{error}</p>;
+
+	// Adicionar CSS condicional para os cartões
+	const getCardClass = (isOpen) => {
+		return `student-card ${isOpen ? "expanded" : ""}`;
+	};
 
 	return (
-		<div className='container' style={{ backgroundColor: "#902121" }}>
-			<div className='row'>
-				{alunos.map((aluno) => (
-					<div className='col-12 col-md-6 col-lg-4 mb-3' key={aluno.id}>
-						<div className='card h-100' style={{ backgroundColor: "#acacac" }}>
-							<div className='card-body'>
-								<h5 className='card-title'>{aluno.nome}</h5>
-								{/* ...demais campos do aluno */}
-
-								<hr />
-								<h6>Mãe</h6>
-								<p>Nome: {aluno.nomeMae}</p>
-								<p>Endereço: {aluno.enderecoMae}</p>
-								<p>Telefone: {aluno.telefoneMae}</p>
-								<p>Trabalho: {aluno.trabalhoMae}</p>
-								<p>Tel. Trabalho: {aluno.telefoneTrabalhoMae}</p>
-
-								<hr />
-								<h6>Pai</h6>
-								<p>Nome: {aluno.nomePai}</p>
-								<p>Endereço: {aluno.enderecoPai}</p>
-								<p>Telefone: {aluno.telefonePai}</p>
-								<p>Trabalho: {aluno.trabalhoPai}</p>
-								<p>Tel. Trabalho: {aluno.telefoneTrabalhoPai}</p>
-
-								<hr />
-								<h6>Observações</h6>
-								{aluno.temEspecialista === "sim" && (
-									<p>Especialista: {aluno.especialista}</p>
-								)}
-								{aluno.temAlergias === "sim" && <p>Alergia: {aluno.alergia}</p>}
-								{aluno.temMedicamento === "sim" && (
-									<p>Medicamento: {aluno.medicamento}</p>
-								)}
-
-								<hr />
-								<p>Reside com: {aluno.reside}</p>
-								<p>Responsável Financeiro: {aluno.respNome}</p>
-								<p>Tel. Responsável: {aluno.respTelefone}</p>
-								<p>Pessoas Autorizadas: {aluno.pessoasAutorizadas}</p>
-							</div>
-						</div>
-					</div>
-				))}
+		<div className='student-container'>
+			<div className='search-input'>
+				<input
+					type='text'
+					placeholder='Buscar por CPF, nome, pai ou mãe...'
+					value={searchTerm}
+					onChange={(e) => setSearchTerm(e.target.value)}
+				/>
 			</div>
+
+			{loading ? (
+				<div className='loading-text'>
+					<p>Carregando dados dos alunos...</p>
+					<div className='spinner'></div>
+				</div>
+			) : error ? (
+				<div className='error-message'>{error}</div>
+			) : (
+				<div className='student-grid'>
+					{alunos.map((aluno) => (
+						<div
+							className={getCardClass(openDropdowns[aluno?.id])}
+							key={aluno?.id}
+						>
+							<div className='card-header'>
+								<h2 className='card-title'>
+									{aluno?.nome || "Nome não cadastrado"}
+								</h2>
+								<button
+									className='dropdown-toggle'
+									onClick={() => toggleDropdown(aluno?.id)}
+								>
+									{openDropdowns[aluno?.id] ? "Fechar" : "Detalhes"}
+								</button>
+							</div>
+
+							{openDropdowns[aluno?.id] && (
+								<div className='card-body'>
+									<div className='info-item'>
+										<strong>Sexo: </strong>
+										{aluno?.sexo || "Não informado"}
+									</div>
+									<div className='info-item'>
+										<strong>CPF: </strong>
+										{aluno?.cpf || "Não informado"}
+									</div>
+									<div className='info-item'>
+										<strong>RG: </strong>
+										{aluno?.rg || "Não informado"}
+									</div>
+									<div className='info-item'>
+										<strong>Ano Letivo: </strong>
+										{aluno?.anoLetivo || "Não informado"}
+									</div>
+									<div className='info-item'>
+										<strong>Turno: </strong>
+										{aluno?.turno || "Não informado"}
+									</div>
+									<div className='info-item'>
+										<strong>Tipo Sanguíneo: </strong>
+										{aluno?.tipoSanguineo || "Não informado"}
+									</div>
+
+									<div className='section'>
+										<h3 className='section-title'>Mãe</h3>
+										<div className='info-item'>
+											<strong>Nome: </strong>
+											{aluno?.nomeMae || "Não informado"}
+										</div>
+										<div className='info-item'>
+											<strong>Endereço: </strong>
+											{aluno?.enderecoMae || "Não informado"}
+										</div>
+										<div className='info-item'>
+											<strong>Telefone: </strong>
+											{aluno?.telefoneMae || "Não informado"}
+										</div>
+										<div className='info-item'>
+											<strong>Trabalho: </strong>
+											{aluno?.trabalhoMae || "Não informado"}
+										</div>
+										<div className='info-item'>
+											<strong>Telefone do Trabalho: </strong>
+											{aluno?.telefoneTrabalhoMae || "Não informado"}
+										</div>
+									</div>
+
+									<div className='section'>
+										<h3 className='section-title'>Pai</h3>
+										<div className='info-item'>
+											<strong>Nome: </strong>
+											{aluno?.nomePai || "Não informado"}
+										</div>
+										<div className='info-item'>
+											<strong>Endereço: </strong>
+											{aluno?.enderecoPai || "Não informado"}
+										</div>
+										<div className='info-item'>
+											<strong>Telefone: </strong>
+											{aluno?.telefonePai || "Não informado"}
+										</div>
+										<div className='info-item'>
+											<strong>Trabalho: </strong>
+											{aluno?.trabalhoPai || "Não informado"}
+										</div>
+										<div className='info-item'>
+											<strong>Telefone do Trabalho: </strong>
+											{aluno?.telefoneTrabalhoPai || "Não informado"}
+										</div>
+									</div>
+
+									<div className='section'>
+										<h3 className='section-title'>Observações</h3>
+										<div className='section'>
+											<h5 className='section-title sub-title'>
+												Informações Médicas
+											</h5>
+
+											<div className='info-item'>
+												<strong>Especialista: </strong>
+												{aluno?.especialista || "Não informado"}
+											</div>
+
+											<div className='info-item'>
+												<strong>Alergia: </strong>
+												{aluno?.alergia || "Não informado"}
+											</div>
+
+											<div className='info-item'>
+												<strong>Medicamento: </strong>
+												{aluno?.medicamento || "Não informado"}
+											</div>
+										</div>
+
+										<div className='section'>
+											<h5 className='section-title sub-title'>Responsável</h5>
+
+											<div className='info-item'>
+												<strong>Nome: </strong>
+												{aluno?.respNome || "Não informado"}
+											</div>
+											<div className='info-item'>
+												<strong>Telefone: </strong>
+												{aluno?.respTelefone || "Não informado"}
+											</div>
+										</div>
+
+										<div className='section'>
+											<h5 className='section-title sub-title'>
+												Pessoas Autorizadas
+											</h5>
+											<div className='info-item'>
+												<strong>Pessoas: </strong>
+												{aluno?.pessoasAutorizadas ||
+													"Nenhuma pessoa autorizada"}
+											</div>
+										</div>
+									</div>
+								</div>
+							)}
+						</div>
+					))}
+				</div>
+			)}
 		</div>
 	);
-}
+};
 
 export default StudentCard;

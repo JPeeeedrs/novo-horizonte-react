@@ -289,8 +289,8 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						</option>
 						<option value='Parda'>Parda</option>
 						<option value='Branca'>Branca</option>
-						<option value='Pretos'>Pretos</option>
-						<option value='Indígenas'>Indígenas</option>
+						<option value='Pretos'>Preto</option>
+						<option value='Indígenas'>Indígena</option>
 						<option value='Amarela'>Amarela</option>
 					</select>
 				</div>
