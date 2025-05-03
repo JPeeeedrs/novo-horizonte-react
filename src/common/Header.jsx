@@ -32,7 +32,7 @@ function Header() {
 				<Link to='/formulario' className='text-white text-decoration-none'>
 					FORMULÁRIO
 				</Link>
-				<Link to='/alunos' className='text-white text-decoration-none'>
+				<Link to='/Login' className='text-white text-decoration-none'>
 					ALUNOS
 				</Link>
 			</nav>

@@ -1,13 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// importar Paginas
+// Páginas
 import Home from "./pages/Home";
 import Formulario from "./pages/Formulario";
 import Alunos from "./pages/Alunos";
+import Login from "./pages/Login";
+
+// Rota privada
+import PrivateRoute from "./components/PrivateRoutes";
 
 import "./global.css";
-
-// importar icons
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
@@ -16,7 +18,15 @@ function App() {
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/formulario' element={<Formulario />} />
-				<Route path='/alunos' element={<Alunos />} />
+				<Route path='/login' element={<Login />} />
+				<Route
+					path='/alunos'
+					element={
+						<PrivateRoute>
+							<Alunos />
+						</PrivateRoute>
+					}
+				/>
 			</Routes>
 		</BrowserRouter>
 	);
