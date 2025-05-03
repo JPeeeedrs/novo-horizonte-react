@@ -1,12 +1,17 @@
-import { useState } from "react";
+// Importando imagens e sons
+import golfre from "../../assets/images/golfre.jpg";
+import sound from "../../assets/images/sound.mp3";
+// import useRef useState axios
+import { useState, useRef } from "react";
 import axios from "axios";
+// componentes steps
 import StepAluno from "./StepAlunos";
-
 import StepMae from "./StepMae";
 import StepPai from "./StepPai";
-
 import StepObservacoes from "./StepObservacoes";
+// css
 import "../../styles/forms.css";
+// mascaras
 import {
 	maskCPF,
 	maskPhone,
@@ -87,6 +92,8 @@ function Forms() {
 			pessoasAutorizadas: "",
 		},
 	});
+	const [jumpscare, setJumpscare] = useState(false);
+	const audioRef = useRef(null);
 
 	const [step, setStep] = useState(1);
 	const [loading, setLoading] = useState(false);
@@ -98,7 +105,7 @@ function Forms() {
 	const handleChange = (stepName, e) => {
 		const { name, value } = e.target;
 		let maskedValue = value;
-
+		// Aplica a máscara de texto para CPF, RG, telefone e data de nascimento
 		if (name === "cpf" || name === "cpfMae" || name === "cpfPai")
 			maskedValue = maskCPF(value);
 		if (name === "rg" || name === "rgMae" || name === "rgPai")
@@ -108,7 +115,7 @@ function Forms() {
 			name === "nascimentoMae" ||
 			name === "nascimentoPai"
 		)
-			maskedValue = maskDate(value); // Aplica a máscara de texto para data com validação de dia e mês
+			maskedValue = maskDate(value);
 		if (
 			name === "telefoneMae" ||
 			name === "telefonePai" ||
@@ -133,7 +140,17 @@ function Forms() {
 		setError(null);
 
 		try {
-			// Enviar os dados de cada seção separadamente
+			if (formData.aluno.nome.trim().toLowerCase() === "golden freddy") {
+				setJumpscare(true);
+				if (audioRef.current) audioRef.current.play();
+				setTimeout(() => {
+					setJumpscare(false);
+				}, 4000);
+				setLoading(false);
+				return;
+			}
+
+			// Enviar os dados de cada seção separadamente endpoints
 			const alunoResponse = await api.post("/alunos", formData.aluno);
 			const maeResponse = await api.post("/maes", formData.mae);
 			const paiResponse = await api.post("/pais", formData.pai);
@@ -228,41 +245,54 @@ function Forms() {
 	};
 
 	return (
-		<form id='form' onSubmit={handleSubmit}>
-			{step === 1 && (
-				<StepAluno
-					onNext={nextStep}
-					formData={formData.aluno}
-					onChange={(e) => handleChange("aluno", e)}
-					loading={loading}
-				/>
+		<div>
+			<form id='form' onSubmit={handleSubmit}>
+				{step === 1 && (
+					<StepAluno
+						onNext={nextStep}
+						formData={formData.aluno}
+						onChange={(e) => handleChange("aluno", e)}
+						loading={loading}
+					/>
+				)}
+				{step === 2 && (
+					<StepMae
+						onNext={nextStep}
+						onBack={prevStep}
+						formData={formData.mae}
+						onChange={(e) => handleChange("mae", e)}
+					/>
+				)}
+				{step === 3 && (
+					<StepPai
+						onNext={nextStep}
+						onBack={prevStep}
+						formData={formData.pai}
+						onChange={(e) => handleChange("pai", e)}
+					/>
+				)}
+				{step === 4 && (
+					<StepObservacoes
+						onBack={prevStep}
+						formData={formData.observacoes}
+						onChange={(e) => handleChange("observacoes", e)}
+						loading={loading}
+						error={error} // Passa o erro como prop
+					/>
+				)}
+			</form>
+			{jumpscare && (
+				<div className='fixed inset-0 bg-black z-50 flex justify-center items-center'>
+					<img
+						src={golfre}
+						alt='Golden Freddy'
+						className='w-full h-full object-contain animate-pulse'
+					/>
+				</div>
 			)}
-			{step === 2 && (
-				<StepMae
-					onNext={nextStep}
-					onBack={prevStep}
-					formData={formData.mae}
-					onChange={(e) => handleChange("mae", e)}
-				/>
-			)}
-			{step === 3 && (
-				<StepPai
-					onNext={nextStep}
-					onBack={prevStep}
-					formData={formData.pai}
-					onChange={(e) => handleChange("pai", e)}
-				/>
-			)}
-			{step === 4 && (
-				<StepObservacoes
-					onBack={prevStep}
-					formData={formData.observacoes}
-					onChange={(e) => handleChange("observacoes", e)}
-					loading={loading}
-					error={error} // Passa o erro como prop
-				/>
-			)}
-		</form>
+
+			<audio ref={audioRef} src={sound} preload='auto' />
+		</div>
 	);
 }
 
