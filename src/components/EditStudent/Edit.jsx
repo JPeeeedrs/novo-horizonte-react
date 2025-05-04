@@ -1,14 +1,18 @@
 // Importando imagens e sons
 import golfre from "../../assets/images/golfre.jpg";
 import sound from "../../assets/images/sound.mp3";
-// import useRef useState axios
-import { useState, useRef } from "react";
+// import useRef useState axios useEffect
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+// header e footer
+import Header from "../../common/Header";
+import Footer from "../../common/Footer";
 // componentes steps
-import StepAluno from "./StepAlunos";
-import StepMae from "./StepMae";
-import StepPai from "./StepPai";
-import StepObservacoes from "./StepObservacoes";
+import EditStudent from "./EditStudent";
+import EditMae from "./EditMae";
+import EditPai from "./EditPai";
+import EditObservacoes from "./EditObservacoes";
 // css
 import "../../styles/forms.css";
 // mascaras
@@ -20,10 +24,6 @@ import {
 	maskEmail,
 	maskDate,
 } from "../../utils/mascaras";
-// exportar para CSV
-import { exportarParaCsv } from "../../utils/exportCsv";
-// exportar para PDF
-import { exportarParaPdf } from "../../utils/exportPdf";
 
 // Configuração global do Axios
 const api = axios.create({
@@ -34,7 +34,9 @@ const api = axios.create({
 	},
 });
 
-function Forms() {
+function Edit() {
+	const { id: alunoId } = useParams(); // Obtém o ID do aluno da URL
+	const navigate = useNavigate(); // Hook para redirecionamento
 	const [formData, setFormData] = useState({
 		aluno: {
 			nome: "",
@@ -103,6 +105,35 @@ function Forms() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
+	// Carregar informações do aluno
+	useEffect(() => {
+		const fetchStudentData = async () => {
+			try {
+				setLoading(true);
+				const [alunoRes, maeRes, paiRes, observacoesRes] = await Promise.all([
+					api.get(`/alunos/${alunoId}`),
+					api.get(`/maes/${alunoId}`),
+					api.get(`/pais/${alunoId}`),
+					api.get(`/observacoes/${alunoId}`),
+				]);
+
+				setFormData({
+					aluno: alunoRes.data,
+					mae: maeRes.data,
+					pai: paiRes.data,
+					observacoes: observacoesRes.data,
+				});
+			} catch (err) {
+				console.error("Erro ao carregar dados do aluno:", err);
+				setError("Erro ao carregar dados do aluno");
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		if (alunoId) fetchStudentData();
+	}, [alunoId]);
+
 	const nextStep = () => setStep((prev) => prev + 1);
 	const prevStep = () => setStep((prev) => prev - 1);
 
@@ -154,12 +185,12 @@ function Forms() {
 				return;
 			}
 
-			// Enviar os dados de cada seção separadamente endpoints
-			const alunoResponse = await api.post("/alunos", formData.aluno);
-			const maeResponse = await api.post("/maes", formData.mae);
-			const paiResponse = await api.post("/pais", formData.pai);
-			const observacoesResponse = await api.post(
-				"/observacoes",
+			// Atualizar os dados de cada seção separadamente
+			const alunoResponse = await api.put(`/alunos/${alunoId}`, formData.aluno);
+			const maeResponse = await api.put(`/maes/${alunoId}`, formData.mae);
+			const paiResponse = await api.put(`/pais/${alunoId}`, formData.pai);
+			const observacoesResponse = await api.put(
+				`/observacoes/${alunoId}`,
 				formData.observacoes
 			);
 
@@ -174,37 +205,19 @@ function Forms() {
 				isSuccess(observacoesResponse)
 			) {
 				alert(
-					`Aluno ${alunoResponse.data.nome} e informações relacionadas cadastrados com sucesso!`
+					`Aluno ${alunoResponse.data.nome} e informações relacionadas atualizados com sucesso!`
 				);
-				resetForm();
+				navigate("/alunos"); // Redireciona para a página de alunos
 			}
 		} catch (error) {
 			console.error("Erro:", error);
 			setError(
 				error.response?.data?.message ||
-					"Erro ao cadastrar aluno e informações relacionadas"
+					"Erro ao atualizar aluno e informações relacionadas"
 			);
 		} finally {
 			setLoading(false);
 		}
-	};
-
-	const handleExportCsv = () => {
-		exportarParaCsv({
-			...formData.aluno,
-			...formData.mae,
-			...formData.pai,
-			...formData.observacoes,
-		});
-	};
-
-	const handleExportPdf = () => {
-		exportarParaPdf({
-			...formData.aluno,
-			...formData.mae,
-			...formData.pai,
-			...formData.observacoes,
-		});
 	};
 
 	const resetForm = () => {
@@ -268,56 +281,57 @@ function Forms() {
 
 	return (
 		<div>
-			<form id='form' onSubmit={handleSubmit}>
-				{step === 1 && (
-					<StepAluno
-						onNext={nextStep}
-						formData={formData.aluno}
-						onChange={(e) => handleChange("aluno", e)}
-						loading={loading}
-					/>
+			<Header />
+			<div>
+				<form id='form' onSubmit={handleSubmit}>
+					{step === 1 && (
+						<EditStudent
+							onNext={nextStep}
+							formData={formData.aluno}
+							onChange={(e) => handleChange("aluno", e)}
+							loading={loading}
+						/>
+					)}
+					{step === 2 && (
+						<EditMae
+							onNext={nextStep}
+							onBack={prevStep}
+							formData={formData.mae}
+							onChange={(e) => handleChange("mae", e)}
+						/>
+					)}
+					{step === 3 && (
+						<EditPai
+							onNext={nextStep}
+							onBack={prevStep}
+							formData={formData.pai}
+							onChange={(e) => handleChange("pai", e)}
+						/>
+					)}
+					{step === 4 && (
+						<EditObservacoes
+							onBack={prevStep}
+							formData={formData.observacoes}
+							onChange={(e) => handleChange("observacoes", e)}
+							loading={loading}
+							error={error} // Passa o erro como prop
+						/>
+					)}
+				</form>
+				{jumpscare && (
+					<div className='fixed inset-0 bg-black z-50 flex justify-center items-center'>
+						<img
+							src={golfre}
+							alt='Golden Freddy'
+							className='w-full h-full object-contain animate-pulse'
+						/>
+					</div>
 				)}
-				{step === 2 && (
-					<StepMae
-						onNext={nextStep}
-						onBack={prevStep}
-						formData={formData.mae}
-						onChange={(e) => handleChange("mae", e)}
-					/>
-				)}
-				{step === 3 && (
-					<StepPai
-						onNext={nextStep}
-						onBack={prevStep}
-						formData={formData.pai}
-						onChange={(e) => handleChange("pai", e)}
-					/>
-				)}
-				{step === 4 && (
-					<StepObservacoes
-						onBack={prevStep}
-						formData={formData.observacoes}
-						onChange={(e) => handleChange("observacoes", e)}
-						loading={loading}
-						error={error} // Passa o erro como prop
-						onExportCsv={handleExportCsv} // Passa a função para exportar CSV
-						onExportPdf={handleExportPdf} // Passa a função para exportar PDF
-					/>
-				)}
-			</form>
-			{jumpscare && (
-				<div className='fixed inset-0 bg-black z-50 flex justify-center items-center'>
-					<img
-						src={golfre}
-						alt='Golden Freddy'
-						className='w-full h-full object-contain animate-pulse'
-					/>
-				</div>
-			)}
-
-			<audio ref={audioRef} src={sound} preload='auto' />
+				<audio ref={audioRef} src={sound} preload='auto' />
+			</div>
+			<Footer />
 		</div>
 	);
 }
 
-export default Forms;
+export default Edit;

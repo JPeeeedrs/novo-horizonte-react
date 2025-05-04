@@ -1,16 +1,8 @@
 import { exportarParaPdf } from "../../utils/exportPdf";
-
+import { exportarParaCsv } from "../../utils/exportCsv";
 import termos from "../../assets/images/termos.pdf";
 
-function StepObservacoes({
-	onBack,
-	formData,
-	onChange,
-	loading,
-	error,
-	onExportCsv,
-	onExportPdf,
-}) {
+function EditObservacoes({ onBack, formData, onChange, loading, error }) {
 	const safeFormData = {
 		matriculaTipo: formData.matriculaTipo || "",
 		escola: formData.escola || "",
@@ -285,10 +277,10 @@ function StepObservacoes({
 					{loading ? (
 						<>
 							<span className='spinner-border spinner-border-sm me-2'></span>
-							Cadastrando...
+							Editando...
 						</>
 					) : (
-						"Cadastrar"
+						"Editar"
 					)}
 				</button>
 
@@ -319,41 +311,10 @@ function StepObservacoes({
 					>
 						Anterior
 					</button>
-					{/* Documentos para email */}
-					<a
-						href='mailto:diretora@escola.com.br?subject=Envio de Documentos&body=Segue em anexo os documentos necessários.'
-						className='btn btn-email text-center'
-					>
-						Enviar Documentos
-					</a>
-					<a
-						href={termos}
-						download
-						className='btn btn-termo text-center'
-						disabled={loading}
-					>
-						Baixar Termos
-					</a>
-					<button
-						type='button'
-						className='btn btn-csv'
-						onClick={onExportCsv} // Chama a função passada como prop
-						disabled={loading}
-					>
-						Exportar CSV
-					</button>
-					<button
-						type='button'
-						className='btn btn-pdf'
-						onClick={onExportPdf} // Chama a função passada como prop
-						disabled={loading}
-					>
-						Exportar PDF
-					</button>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-export default StepObservacoes;
+export default EditObservacoes;

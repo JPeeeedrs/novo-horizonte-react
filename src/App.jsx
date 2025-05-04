@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Formulario from "./pages/Formulario";
 import Alunos from "./pages/Alunos";
 import Login from "./pages/Login";
+import Edit from "./components/EditStudent/Edit";
 
 // Rota privada
 import PrivateRoute from "./components/PrivateRoutes";
@@ -27,6 +28,7 @@ function App() {
 						</PrivateRoute>
 					}
 				/>
+				<Route path='/editar/:id' element={<Edit />} />
 			</Routes>
 		</BrowserRouter>
 	);

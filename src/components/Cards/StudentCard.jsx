@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../../styles/alunos.css";
+
+import EditIcon from "../../common/icons/EditIcon";
+import TrashIcon from "../../common/icons/TrashIcon";
+import SetaCima from "../../common/icons/SetaCima";
+import SetaBaixo from "../../common/icons/SetaBaixo";
 
 const StudentCard = () => {
 	const [alunos, setAlunos] = useState([]);
@@ -9,12 +15,34 @@ const StudentCard = () => {
 	const [error, setError] = useState(null);
 	const [allData, setAllData] = useState([]);
 	const [openDropdowns, setOpenDropdowns] = useState({});
+	const navigate = useNavigate();
 
 	const toggleDropdown = (id) => {
 		setOpenDropdowns((prev) => ({
 			...prev,
 			[id]: !prev[id],
 		}));
+	};
+
+	const deleteStudent = async (id) => {
+		try {
+			const confirmDelete = window.confirm(
+				"Tem certeza que deseja deletar este aluno?"
+			);
+			if (!confirmDelete) return;
+
+			await axios.delete(`http://localhost:8080/alunos/${id}`);
+			axios.delete(`http://localhost:8080/maes/${id}`);
+			axios.delete(`http://localhost:8080/pais/${id}`);
+			axios.delete(`http://localhost:8080/observacoes/${id}`);
+			setAlunos((prevAlunos) => prevAlunos.filter((aluno) => aluno.id !== id));
+			setAllData((prevAllData) =>
+				prevAllData.filter((aluno) => aluno.id !== id)
+			);
+		} catch (err) {
+			console.error("Erro ao deletar aluno:", err);
+			setError("Erro ao deletar aluno");
+		}
 	};
 
 	// Carrega dados iniciais
@@ -181,15 +209,32 @@ const StudentCard = () => {
 							key={aluno?.id}
 						>
 							<div className='card-header'>
-								<h2 className='card-title'>
+								<h2
+									className='card-title'
+									title={aluno?.nome || "Nome não cadastrado"}
+								>
 									{aluno?.nome || "Nome não cadastrado"}
 								</h2>
-								<button
-									className='dropdown-toggle'
-									onClick={() => toggleDropdown(aluno?.id)}
-								>
-									{openDropdowns[aluno?.id] ? "Fechar" : "Detalhes"}
-								</button>
+								<div className='card-actions'>
+									<button
+										className='dropdown-alternar'
+										onClick={() => toggleDropdown(aluno?.id)}
+									>
+										{openDropdowns[aluno?.id] ? <SetaBaixo /> : <SetaCima />}
+									</button>
+									<button
+										className='edit-button'
+										onClick={() => navigate(`/editar/${aluno?.id}`)}
+									>
+										<EditIcon />
+									</button>
+									<button
+										className='delete-button'
+										onClick={() => deleteStudent(aluno?.id)}
+									>
+										<TrashIcon />
+									</button>
+								</div>
 							</div>
 
 							{openDropdowns[aluno?.id] && (
