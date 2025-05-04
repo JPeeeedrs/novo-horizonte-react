@@ -1,16 +1,6 @@
-import { exportarParaPdf } from "../../utils/exportPdf";
-
 import termos from "../../assets/images/termos.pdf";
 
-function StepObservacoes({
-	onBack,
-	formData,
-	onChange,
-	loading,
-	error,
-	onExportCsv,
-	onExportPdf,
-}) {
+function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 	const safeFormData = {
 		matriculaTipo: formData.matriculaTipo || "",
 		escola: formData.escola || "",
@@ -288,7 +278,7 @@ function StepObservacoes({
 							Cadastrando...
 						</>
 					) : (
-						"Cadastrar"
+						"Cadastrar Aluno"
 					)}
 				</button>
 
@@ -321,7 +311,8 @@ function StepObservacoes({
 					</button>
 					{/* Documentos para email */}
 					<a
-						href='mailto:diretora@escola.com.br?subject=Envio de Documentos&body=Segue em anexo os documentos necessários.'
+						href='mailto:vanessalimapsicopedagoga@bol.com.br?subject=Envio de Documentos&body=Segue em anexo os documentos necessários.'
+						target='_blank'
 						className='btn btn-email text-center'
 					>
 						Enviar Documentos
@@ -334,22 +325,6 @@ function StepObservacoes({
 					>
 						Baixar Termos
 					</a>
-					<button
-						type='button'
-						className='btn btn-csv'
-						onClick={onExportCsv} // Chama a função passada como prop
-						disabled={loading}
-					>
-						Exportar CSV
-					</button>
-					<button
-						type='button'
-						className='btn btn-pdf'
-						onClick={onExportPdf} // Chama a função passada como prop
-						disabled={loading}
-					>
-						Exportar PDF
-					</button>
 				</div>
 			</div>
 		</div>

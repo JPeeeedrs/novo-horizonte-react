@@ -13,6 +13,7 @@ import StepObservacoes from "./StepObservacoes";
 import "../../styles/forms.css";
 // mascaras
 import {
+	maskName,
 	maskCPF,
 	maskPhone,
 	maskRG,
@@ -20,10 +21,6 @@ import {
 	maskEmail,
 	maskDate,
 } from "../../utils/mascaras";
-// exportar para CSV
-import { exportarParaCsv } from "../../utils/exportCsv";
-// exportar para PDF
-import { exportarParaPdf } from "../../utils/exportPdf";
 
 // Configuração global do Axios
 const api = axios.create({
@@ -131,6 +128,24 @@ function Forms() {
 		if (name === "cepMae" || name === "cepPai") maskedValue = maskCEP(value);
 		if (name === "emailMae" || name === "emailPai")
 			maskedValue = maskEmail(value);
+
+		if (
+			name === "nomeMae" ||
+			name === "nomePai" ||
+			name === "respNome" ||
+			name === "nome" ||
+			name === "naturalidade" ||
+			name === "nacionalidade" ||
+			name === "profissaoMae" ||
+			name === "profissaoPai" ||
+			name === "escola" ||
+			name === "irmaoNome" ||
+			name === "especialista" ||
+			name === "reside" ||
+			name === "pessoasAutorizadas" ||
+			nome === "irmaosNome"
+		)
+			maskedValue = maskName(value);
 
 		setFormData((prev) => ({
 			...prev,
@@ -300,8 +315,6 @@ function Forms() {
 						onChange={(e) => handleChange("observacoes", e)}
 						loading={loading}
 						error={error} // Passa o erro como prop
-						onExportCsv={handleExportCsv} // Passa a função para exportar CSV
-						onExportPdf={handleExportPdf} // Passa a função para exportar PDF
 					/>
 				)}
 			</form>

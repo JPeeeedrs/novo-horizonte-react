@@ -7,6 +7,7 @@ import EditIcon from "../../common/icons/EditIcon";
 import TrashIcon from "../../common/icons/TrashIcon";
 import SetaCima from "../../common/icons/SetaCima";
 import SetaBaixo from "../../common/icons/SetaBaixo";
+import LupaIcon from "../../common/icons/LupaIcon";
 
 const StudentCard = () => {
 	const [alunos, setAlunos] = useState([]);
@@ -26,10 +27,14 @@ const StudentCard = () => {
 
 	const deleteStudent = async (id) => {
 		try {
-			const confirmDelete = window.confirm(
-				"Tem certeza que deseja deletar este aluno?"
+			const palavraChave = "GOLDEN FREDDY";
+			const resposta = window.prompt(
+				`Digite "${palavraChave}" para confirmar a exclusão do aluno:`
 			);
-			if (!confirmDelete) return;
+			if (resposta === null || resposta !== palavraChave) {
+				alert("Ação cancelada. Confirmação inválida.");
+				return;
+			}
 
 			await axios.delete(`http://localhost:8080/alunos/${id}`);
 			axios.delete(`http://localhost:8080/maes/${id}`);
@@ -192,6 +197,7 @@ const StudentCard = () => {
 					value={searchTerm}
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
+				<LupaIcon />
 			</div>
 
 			{loading ? (
@@ -208,7 +214,7 @@ const StudentCard = () => {
 							className={getCardClass(openDropdowns[aluno?.id])}
 							key={aluno?.id}
 						>
-							<div className='card-header'>
+							<div className='card-cabecalho'>
 								<h2
 									className='card-title'
 									title={aluno?.nome || "Nome não cadastrado"}
@@ -238,7 +244,7 @@ const StudentCard = () => {
 							</div>
 
 							{openDropdowns[aluno?.id] && (
-								<div className='card-body'>
+								<div className='card-corpo'>
 									<div className='info-item'>
 										<strong>Sexo: </strong>
 										{aluno?.sexo || "Não informado"}

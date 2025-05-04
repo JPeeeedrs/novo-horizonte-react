@@ -1,7 +1,3 @@
-import { exportarParaPdf } from "../../utils/exportPdf";
-import { exportarParaCsv } from "../../utils/exportCsv";
-import termos from "../../assets/images/termos.pdf";
-
 function EditObservacoes({ onBack, formData, onChange, loading, error }) {
 	const safeFormData = {
 		matriculaTipo: formData.matriculaTipo || "",

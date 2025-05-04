@@ -105,40 +105,30 @@
 
 /* === BOTÃO DE TERMO (LARANJA) === */
 .btn-termo {
-	background-color: #b00b69;
+	background-color: #902121;
 }
 .btn-termo:hover {
-	background-color: #ff4174;
+	background-color: #552121;
 }
 .btn-termo:focus {
 	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5);
-}
-
-/* === BOTÃO PARA EXPORTAR CSV (VERDE) === */
-.btn-csv {
-	background-color: #007700;
-}
-.btn-csv:hover {
-	background-color: #004400;
-}
-.btn-csv:focus {
-	box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.5);
-}
-
-/* === BOTÃO PARA EXPORTAR PDF (VERMELHO) === */
-.btn-pdf {
-	background-color: #dd0000;
-}
-.btn-pdf:hover {
-	background-color: #aa0000;
-}
-.btn-pdf:focus {
-	box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.5);
-	/* Adicione isso ao seu arquivo de CSS */
 }
 
 .obs {
 	margin: 0.5px;
 	padding: 0.5px;
 	color: #ff0000;
+}
+
+@media (max-width: 600px) {
+	#form {
+		max-width: 600px;
+	}
+}
+
+@media (max-width: 500px) {
+	#form {
+		max-width: 500px;
+		margin: 0;
+	}
 }
