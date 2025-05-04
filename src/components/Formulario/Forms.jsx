@@ -52,7 +52,7 @@ function Forms() {
 		},
 		mae: {
 			nomeMae: "",
-			nascimentoMae: "",
+			dataNascimentoMae: "",
 			enderecoMae: "",
 			cepMae: "",
 			cpfMae: "",
@@ -60,7 +60,7 @@ function Forms() {
 			telefoneMae: "",
 			emailMae: "",
 			profissaoMae: "",
-			trabalhoMae: "",
+			localTrabalhoMae: "",
 			telefoneTrabalhoMae: "",
 		},
 		pai: {
@@ -70,11 +70,11 @@ function Forms() {
 			cepPai: "",
 			cpfPai: "",
 			rgPai: "",
-			telefonePai: "",
+			telefonfonePai: "",
 			emailPai: "",
 			profissaoPai: "",
 			trabalhoPai: "",
-			telefoneTrabalhoPai: "",
+			telefonfoneTrabalhoPai: "",
 		},
 		observacoes: {
 			matriculaTipo: "",
@@ -143,7 +143,7 @@ function Forms() {
 			name === "especialista" ||
 			name === "reside" ||
 			name === "pessoasAutorizadas" ||
-			nome === "irmaosNome"
+			name === "irmaosNome"
 		)
 			maskedValue = maskName(value);
 
@@ -267,15 +267,21 @@ function Forms() {
 				trabalhoPai: "",
 				telefonfoneTrabalhoPai: "",
 			},
-			respFinan: {
-				respNome: "",
-				resptelefonFone: "",
-			},
 			observacoes: {
+				matriculaTipo: "",
+				escola: "",
+				temIrmaos: "",
+				irmaosNome: "",
+				temEspecialista: "",
+				especialista: "",
+				temAlergias: "",
+				alergia: "",
+				temMedicamento: "",
+				medicamento: "",
+				reside: "",
+				respNome: "",
+				respTelefone: "",
 				pessoasAutorizadas: "",
-				documentos: [],
-				valorContrato: "",
-				vencimento: "",
 			},
 		});
 		setStep(1);

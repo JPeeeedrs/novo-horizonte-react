@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/alunos.css";
-
+// importar icons
 import EditIcon from "../../common/icons/EditIcon";
 import TrashIcon from "../../common/icons/TrashIcon";
 import SetaCima from "../../common/icons/SetaCima";
 import SetaBaixo from "../../common/icons/SetaBaixo";
 import LupaIcon from "../../common/icons/LupaIcon";
+// importar csv e pdf
+import BotaoExportarCsv from "../../common/buttons/botaoExportarCsv";
+import BotaoExportarPdf from "../../common/buttons/botaoExportarPdf";
 
 const StudentCard = () => {
 	const [alunos, setAlunos] = useState([]);
@@ -72,13 +75,25 @@ const StudentCard = () => {
 					return {
 						...aluno,
 						nomeMae: mae.nomeMae,
+						nascimentoMae: mae.nascimentoMae,
 						enderecoMae: mae.enderecoMae,
+						cepMae: mae.cepMae,
+						cpfMae: mae.cpfMae,
+						rgMae: mae.rgMae,
 						telefoneMae: mae.telefoneMae,
+						emailMae: mae.emailMae,
+						profissaoMae: mae.profissaoMae,
 						trabalhoMae: mae.trabalhoMae,
 						telefoneTrabalhoMae: mae.telefoneTrabalhoMae,
 						nomePai: pai.nomePai,
+						nascimentoPai: pai.nascimentoPai,
 						enderecoPai: pai.enderecoPai,
+						cepPai: pai.cepPai,
+						cpfPai: pai.cpfPai,
+						rgPai: pai.rgPai,
 						telefonePai: pai.telefonePai,
+						emailPai: pai.emailPai,
+						profissaoPai: pai.profissaoPai,
 						trabalhoPai: pai.trabalhoPai,
 						telefoneTrabalhoPai: pai.telefoneTrabalhoPai,
 						...obs,
@@ -240,6 +255,8 @@ const StudentCard = () => {
 									>
 										<TrashIcon />
 									</button>
+									<BotaoExportarPdf student={aluno} />
+									<BotaoExportarCsv student={aluno} />
 								</div>
 							</div>
 
