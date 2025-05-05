@@ -66,23 +66,15 @@
 	flex: 1 1 400px;
 	max-width: 400px;
 	background: white;
-	/* border-radius: 15px; */
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	border: 1px solid #ddd;
-	border-radius: 20px !important;
+	border-radius: 20px;
 }
 
 .student-card:hover {
 	transform: translateY(-5px);
 	box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Cartão expandido */
-.student-card.expanded {
-	flex: 1 1 400px;
-	max-width: 400px;
-	border-radius: 20px !important;
 }
 
 .card-actions {
@@ -221,13 +213,6 @@ h3.section-title {
 
 /* Responsividade */
 
-@media (min-width: 1200px) {
-	.student-card.expanded {
-		flex: 1 1 400px;
-		max-width: 400px;
-	}
-}
-
 @media (max-width: 768px) {
 	.student-grid {
 		flex-direction: column;
@@ -266,5 +251,15 @@ h3.section-title {
 		text-overflow: ellipsis;
 		max-width: 250px;
 		min-width: 250px;
+	}
+}
+
+@media (max-width: 400px) {
+	.card-title {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 150px;
+		min-width: 150px;
 	}
 }

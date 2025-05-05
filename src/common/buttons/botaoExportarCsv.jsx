@@ -11,7 +11,7 @@ function BotaoExportarCsv({ student }) {
 
 	return (
 		<div>
-			<button className='btn btn-primary' onClick={handleExport}>
+			<button className='btn btn-success' onClick={handleExport}>
 				Exportar CSV
 			</button>
 		</div>

@@ -255,8 +255,6 @@ const StudentCard = () => {
 									>
 										<TrashIcon />
 									</button>
-									<BotaoExportarPdf student={aluno} />
-									<BotaoExportarCsv student={aluno} />
 								</div>
 							</div>
 
@@ -288,7 +286,7 @@ const StudentCard = () => {
 									</div>
 
 									<div className='section'>
-										<h3 className='section-title'>Mãe</h3>
+										<h3 className='section-title'>Responsável Materno</h3>
 										<div className='info-item'>
 											<strong>Nome: </strong>
 											{aluno?.nomeMae || "Não informado"}
@@ -312,7 +310,7 @@ const StudentCard = () => {
 									</div>
 
 									<div className='section'>
-										<h3 className='section-title'>Pai</h3>
+										<h3 className='section-title'>Responsável Paterno</h3>
 										<div className='info-item'>
 											<strong>Nome: </strong>
 											{aluno?.nomePai || "Não informado"}
@@ -359,7 +357,9 @@ const StudentCard = () => {
 										</div>
 
 										<div className='section'>
-											<h5 className='section-title sub-title'>Responsável</h5>
+											<h5 className='section-title sub-title'>
+												Responsável Financeiro
+											</h5>
 
 											<div className='info-item'>
 												<strong>Nome: </strong>
@@ -381,6 +381,10 @@ const StudentCard = () => {
 													"Nenhuma pessoa autorizada"}
 											</div>
 										</div>
+									</div>
+									<div className='d-flex justify-around'>
+										<BotaoExportarPdf student={aluno} />
+										<BotaoExportarCsv student={aluno} />
 									</div>
 								</div>
 							)}

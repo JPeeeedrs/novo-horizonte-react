@@ -6,6 +6,7 @@ import Formulario from "./pages/Formulario";
 import Alunos from "./pages/Alunos";
 import Login from "./pages/Login";
 import Edit from "./components/EditStudent/Edit";
+import SobreNos from "./pages/SobreNos";
 
 // Rota privada
 import PrivateRoute from "./components/PrivateRoutes";
@@ -29,6 +30,7 @@ function App() {
 					}
 				/>
 				<Route path='/editar/:id' element={<Edit />} />
+				<Route path='sobrenos' element={<SobreNos />} />
 			</Routes>
 		</BrowserRouter>
 	);

@@ -1,6 +1,9 @@
 import logo from "../assets/images/logo.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./footer.css";
+import { Link } from "react-router-dom";
+
+import SobreNos from "../pages/SobreNos";
 
 function Footer() {
 	return (
@@ -10,6 +13,10 @@ function Footer() {
 				<span className='footer-nome-escola'>
 					CENTRO EDUCACIONAL NOVO HORIZONTE
 				</span>
+			</div>
+
+			<div className='footer-sobre'>
+				<Link to='/SobreNos'>Sobre Nós</Link>
 			</div>
 
 			<div className='footer-contact'>
