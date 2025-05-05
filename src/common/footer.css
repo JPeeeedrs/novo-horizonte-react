@@ -8,7 +8,7 @@ footer {
 }
 
 footer span {
-	margin: 0 5vw;
+	margin: 0;
 	color: #fff;
 }
 
@@ -88,6 +88,15 @@ footer span {
 		align-items: center;
 		text-align: center;
 	}
+	
+	
+	.footer-left{
+		display: block;
+	}
+
+	.footer-left img{
+		margin: 0 auto 15px auto ;
+	}
 }
 
 @media (max-width: 768px) {
@@ -111,4 +120,6 @@ footer span {
 		align-items: center;
 		text-align: center;
 	}
+
+	
 }

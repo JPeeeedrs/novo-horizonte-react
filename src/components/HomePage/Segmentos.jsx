@@ -1,13 +1,13 @@
 import ensinoInfantil from "../../assets/images/ensinoInfantil.jpg";
 import fundamental from "../../assets/images/fundamental.jpg";
-import fundamental2 from "../../assets/images/fundamental2.jpg";
+import fundamental2 from "../../assets/images/fundamental-2.jpg";
 
 function Seguimentos() {
   return (
     <section className="container-fluid my-5 slider">
       <h2 className="text-center mb-5">Segmentos</h2>
       <div className="row justify-content-center">
-        <div className="col-md-4 mb-4">
+        <div className="col-xxl-4 mb-4">
           <div className="segmento-card text-center">
             <div className="segmento-image-container">
               <img src={ensinoInfantil} className="img-fluid" />
@@ -21,7 +21,7 @@ function Seguimentos() {
           </div>
         </div>
 
-        <div className="col-md-4 mb-4">
+        <div className="col-xxl-4 mb-4">
           <div className="segmento-card text-center">
             <div className="segmento-image-container">
               <img src={fundamental} />
@@ -36,10 +36,10 @@ function Seguimentos() {
           </div>
         </div>
 
-        <div className="col-md-4 mb-4">
+        <div className="col-xxl-4 mb-4">
           <div className="segmento-card text-center">
             <div className="segmento-image-container">
-              <img src={fundamental2} />
+              <img id="segmento-foto-3" src={fundamental2} />
             </div>
             <h3 className="segmento-title mt-3">Ensino Fundamental II</h3>
             <p className="segmento-description">

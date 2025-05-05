@@ -10,7 +10,7 @@ function Header() {
 				className='navbar bg-body-tertiary d-flex justify-content-center position-relative'
 				id='nav-logo'
 			>
-				<div className='container-fluid'>
+				<div className='container-fluid d-flex justify-content-around'>
 					<Link className='navbar-brand' to='/'>
 						<img
 							src={logo}
@@ -20,7 +20,7 @@ function Header() {
 							className='d-inline-block align-text-top'
 						/>
 					</Link>
-					<span className='position-absolute start-50 translate-middle-x'>
+					<span>
 						CENTRO EDUCACIONAL NOVO HORIZONTE
 					</span>
 				</div>

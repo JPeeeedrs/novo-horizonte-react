@@ -1,307 +1,422 @@
 /* Container principal do carrossel */
 .carousel-container {
-	width: 100%;
-	margin: 0 auto;
-	border-radius: 10px;
-	overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 /* Imagens dentro dos itens do carrossel */
 .carousel-item img {
-	height: 400px;
-	object-fit: cover;
-	width: 100%;
+  height: 400px;
+  object-fit: cover;
+  width: 100%;
 }
 
 /* Barra lateral (usada para layout com colunas) */
 .barra-lateral {
-	min-height: 100vh;
-	border-right: 1px solid #dee2e6;
+  min-height: 100vh;
+  border-right: 1px solid #dee2e6;
 }
 
 /* Define a borda esquerda na última coluna */
 .barra-lateral:last-child {
-	border-right: none;
-	border-left: 1px solid #dee2e6;
+  border-right: none;
+  border-left: 1px solid #dee2e6;
 }
 
 /* Container para o mapa */
 .map-container {
-	width: 100%;
-	height: 400px;
-	margin: 0 auto;
-	max-width: 900px;
+  width: 100%;
+  height: 400px;
+  margin: 0 auto;
+  max-width: 900px;
 }
 
 /* Estilização do iframe do mapa */
 .map-container iframe {
-	width: 100%;
-	height: 100%;
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilização do titulo do mapa */
 #map-title {
-	text-align: center;
-	font-size: 2.5rem;
-	color: #333;
-	margin-top: 20px;
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-top: 20px;
 }
 
 /* Estilização do endereço do mapa */
 #map-address {
-	text-align: center;
-	font-size: 1.25rem;
-	margin-top: 10px;
+  text-align: center;
+  font-size: 1.25rem;
+  margin-top: 10px;
 }
 
 /* Seção com a citação do diretor */
 .director-quote-section {
-	background-color: #902121;
-	border-radius: 25px;
-	padding: 20px;
-	color: white;
+  background-color: #902121;
+  border-radius: 25px;
+  padding: 20px;
+  color: white;
 }
 
 /* Texto da citação */
 .director-quote {
-	font-size: 2rem;
-	line-height: 1.8;
-	font-style: italic;
-	position: relative;
-	padding-left: 40px;
-	text-align: justify;
+  font-size: 2rem;
+  line-height: 1.8;
+  font-style: italic;
+  position: relative;
+  text-align: justify;
 }
 
 /* Container da imagem do diretor */
 .director-image-container {
-	width: 250px;
-	height: 250px;
-	border-radius: 50%;
-	overflow: hidden;
-	border: 4px solid white;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilização da imagem do diretor */
 .director-image {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Nome do diretor */
 .director-name {
-	color: white;
-	font-size: 2rem;
-	margin-bottom: 5px;
-	font-weight: bold;
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 /* Cargo do diretor */
 .director-title {
-	color: rgba(255, 255, 255, 0.9);
-	font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.5rem;
 }
 
 /* Cartão de segmento */
 .segmento-card {
-	padding: 20px;
-	transition: transform 0.3s ease;
+  padding: 20px;
+  transition: transform 0.3s ease;
 }
 
 /* Animação ao passar o mouse no cartão */
 .segmento-card:hover {
-	transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 /* Container da imagem do segmento */
 .segmento-image-container {
-	width: 330px;
-	height: 330px;
-	margin: 0 auto;
-	overflow: hidden;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	border: 4px solid #902121;
-	padding: 3px;
+  width: 330px;
+  height: 330px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 4px solid #902121;
+  padding: 3px;
 }
 
 /* Imagem dentro do container */
 .segmento-image-container img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
 }
 
 /* Título do segmento */
 .segmento-title {
-	color: #333;
-	font-size: 2rem;
-	margin: 15px 0;
+  color: #333;
+  font-size: 2rem;
+  margin: 15px 0;
 }
 
 /* Descrição do segmento */
 .segmento-description {
-	color: #666;
-	font-size: 1.25rem;
-	line-height: 1.6;
-	margin: 0;
-	padding: 0 10px;
+  color: #666;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0 10px;
 }
 
 /* Texto da missão */
 .mission-text {
-	font-size: 1.5rem;
-	line-height: 1.8;
-	color: #333;
-	text-align: justify;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: #333;
+  text-align: justify;
 }
 
 /* Container da imagem da missão */
 .mission-image-container {
-	padding: 3px;
-	border: 4px solid #902121;
-	border-radius: 10px;
-	overflow: hidden;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 3px;
+  border: 4px solid #902121;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Imagem da missão */
 .mission-image-container img {
-	width: 100%;
-	height: auto;
-	border-radius: 6px;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
 }
 
 /* Repetição da imagem do carrossel (idem acima) */
 .carousel-item img {
-	height: 400px;
-	object-fit: cover;
-	width: 100%;
+  height: 400px;
+  object-fit: cover;
+  width: 100%;
 }
 
 /* Container do carrossel dividido */
 .split-carousel-container {
-	width: 100%;
-	margin: 40px 0;
-	border-radius: 10px;
-	overflow: hidden;
+  width: 100%;
+  margin: 40px 0;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 /* Conteúdo do carrossel dividido com texto e imagem */
 .split-carousel-content {
-	display: flex;
-	align-items: center;
-	height: 400px;
+  display: flex;
+  align-items: center;
+  height: 400px;
 }
 
 /* Parte de texto do carrossel */
 .text-content {
-	flex: 1;
-	padding: 110px;
-	background-color: #e1e1e1;
+  flex: 1;
+  padding: 110px 50px 110px 110px;
+  background-color: #e1e1e1;
 }
 
 /* Título na parte de texto */
 .text-content h2 {
-	color: #902121;
-	margin-bottom: 20px;
-	font-size: 2.5rem;
+  color: #902121;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
 }
 
 /* Parágrafo na parte de texto */
 .text-content p {
-	font-size: 1.5rem;
-	line-height: 1.6;
-	color: #333;
-	text-align: justify;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #333;
+  text-align: justify;
 }
 
 /* Parte da imagem no carrossel dividido */
 .image-content {
-	flex: 1;
-	height: 400px;
+  flex: 1;
+  height: 400px;
 }
 
 /* Imagem dentro da parte de imagem */
 .image-content img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Botões de navegação do carrossel dividido */
 .split-carousel-container .carousel-control-prev,
 .split-carousel-container .carousel-control-next {
-	width: 5%;
-	background-color: rgba(0, 0, 0, 0.2);
+  width: 5%;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Indicadores do carrossel */
 .split-carousel-container .carousel-indicators {
-	bottom: 0;
+  bottom: 0;
+}
+
+@media (max-width: 1900px) {
+  .mission-text {
+    font-size: 1.25rem;
+  }
+
+  .director-quote {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .mission-text {
+    font-size: 1rem;
+  }
+
+  .director-quote {
+    font-size: 1.5rem;
+  }
+
+  .segmento-image-container {
+    width: 100%;
+  }
+
+  #segmento-foto-3 {
+    object-position: center center;
+  }
+}
+
+@media (max-width: 1250px) {
+  .text-content p {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .mission-text {
+    font-size: 1.25rem;
+  }
+
+  .mission-image-container {
+    height: 400px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .text-content {
+    padding-left: 50px;
+  }
+
+  .text-content p {
+    font-size: 1.07rem;
+  }
+
+  .director-quote {
+    padding: 0px;
+    font-size: 1.2rem;
+  }
 }
 
 /* Estilos responsivos para telas menores */
 @media (max-width: 768px) {
-	.director-quote {
-		font-size: 1.5rem;
-		padding-left: 30px;
-	}
+  #nav-elementos a {
+    font-size: 1rem;
+  }
 
-	.director-image-container {
-		width: 150px;
-		height: 150px;
-	}
+  .director-quote {
+    font-size: 1.5rem;
+  }
 
-	.director-name {
-		font-size: 2rem;
-	}
+  .director-image-container {
+    width: 150px;
+    height: 150px;
+  }
 
-	.segmento-image-container {
-		width: 200px;
-		height: 200px;
-		border-width: 3px;
-	}
+  .director-name {
+    font-size: 2rem;
+  }
 
-	.segmento-title {
-		font-size: 1.5rem;
-	}
+  .segmento-image-container {
+    width: 200px;
+    height: 200px;
+    border-width: 3px;
+  }
 
-	.segmento-description {
-		font-size: 1.25rem;
-	}
+  .segmento-title {
+    font-size: 1.5rem;
+  }
 
-	.mission-text {
-		font-size: 1.5rem;
-		line-height: 1.6;
-	}
+  .segmento-description {
+    font-size: 1.25rem;
+  }
 
-	.carousel-item img {
-		height: 300px;
-	}
+  .mission-text {
+    font-size: 1.5rem;
+    line-height: 1.6;
+  }
 
-	.split-carousel-content {
-		flex-direction: column;
-		height: auto;
-	}
+  .mission-image-container {
+    height: auto;
+  }
 
-	.text-content {
-		padding: 20px;
-	}
+  .carousel-item img {
+    height: 300px;
+  }
 
-	.text-content h2 {
-		font-size: 1.75rem;
-	}
+  .split-carousel-content {
+    flex-direction: column;
+    height: auto;
+  }
 
-	.text-content p {
-		font-size: 1.25rem;
-	}
+  .text-content {
+    padding-left: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 
-	.image-content {
-		height: 300px;
-	}
+  .text-content h2 {
+    font-size: 1.75rem;
+  }
+
+  .text-content p {
+    font-size: 1.25rem;
+  }
+
+  .image-content {
+    height: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  #nav-elementos a {
+    font-size: 0.7rem;
+  }
+
+  .director-quote {
+    font-size: 0.9rem;
+  }
+  .director-name {
+    font-size: 1.5rem;
+  }
+
+  .segmento-title {
+    font-size: 1rem;
+  }
+
+  .segmento-description {
+    font-size: 1rem;
+  }
+
+  .mission-text {
+    font-size: 1rem;
+  }
+
+  .text-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .text-content p {
+    font-size: 1rem;
+  }
+
+  #map-title {
+	font-size: 1.5rem;
+  }
+
+  .footer-nome-escola {
+	font-size: 1rem;
+  }
+
+  .footer-contact > strong{
+	font-size: 1rem;
+  }
+
+
 }

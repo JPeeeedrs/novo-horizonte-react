@@ -5,7 +5,7 @@ function Diretora() {
     <section className="container-fluid my-5">
       <div className="director-quote-section">
         <div className="row align-items-center">
-          <div className="col-md-7 p-5">
+          <div className="col-md-7 p-4">
             <blockquote className="director-quote">
               " A instituição planeja estrategicamente para o ano letivo,
               projetos inovadores e multidisciplinares a fim de estimular o
