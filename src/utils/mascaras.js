@@ -86,7 +86,9 @@ export const maskDate = (value) => {
 };
 
 export const maskName = (value) => {
-	return value
-		.trim() // Remove espaços extras no início e no final
-		.replace(/[^A-Za-zÀ-ÿ\s]/g, ""); // Remove caracteres inválidos
+	return (
+		value
+			// .trim() //comentado pq tava bugando // Remove espaços extras no início e no final
+			.replace(/[^A-Za-zÀ-ÿ\s]/g, "")
+	); // Remove caracteres inválidos
 };

@@ -133,7 +133,7 @@ function Forms() {
 			name === "nomeMae" ||
 			name === "nomePai" ||
 			name === "respNome" ||
-			name === "nome" ||
+			// name === "nome" ||
 			name === "naturalidade" ||
 			name === "nacionalidade" ||
 			name === "profissaoMae" ||
