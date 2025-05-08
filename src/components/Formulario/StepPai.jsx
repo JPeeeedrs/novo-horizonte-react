@@ -30,7 +30,7 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 						name='nomePai'
 						value={safeFormData.nomePai}
 						onChange={onChange}
-						placeholder='Lima Mei'
+						placeholder='Luiz Gonçalves'
 					/>
 				</div>
 				{/* Data de Nascimento */}

@@ -30,7 +30,7 @@ const StudentCard = () => {
 
 	const deleteStudent = async (id) => {
 		try {
-			const palavraChave = "GOLDEN FREDDY";
+			const palavraChave = "EXCLUIR";
 			const resposta = window.prompt(
 				`Digite "${palavraChave}" para confirmar a exclusão do aluno:`
 			);
