@@ -51,9 +51,11 @@ function Forms() {
 			raca: "",
 		},
 		mae: {
+			temMae: true,
 			nomeMae: "",
 			dataNascimentoMae: "",
 			enderecoMae: "",
+			numeroCasaMae: "",
 			cepMae: "",
 			cpfMae: "",
 			rgMae: "",
@@ -64,9 +66,11 @@ function Forms() {
 			telefoneTrabalhoMae: "",
 		},
 		pai: {
+			temPai: true,
 			nomePai: "",
 			nascimentoPai: "",
 			enderecoPai: "",
+			numeroCasaPai: "",
 			cepPai: "",
 			cpfPai: "",
 			rgPai: "",
@@ -103,20 +107,24 @@ function Forms() {
 	const nextStep = () => setStep((prev) => prev + 1);
 	const prevStep = () => setStep((prev) => prev - 1);
 
-	const handleChange = (stepName, e) => {
-		const { name, value } = e.target;
+	const handleChange = async (stepName, e) => {
+		const { name, value, type, checked } = e.target;
 		let maskedValue = value;
-		// Aplica a máscara de texto para CPF, RG, telefone e data de nascimento
+
+		// Aplica as máscaras
 		if (name === "cpf" || name === "cpfMae" || name === "cpfPai")
 			maskedValue = maskCPF(value);
+
 		if (name === "rg" || name === "rgMae" || name === "rgPai")
 			maskedValue = maskRG(value);
+
 		if (
 			name === "dataNascimento" ||
 			name === "nascimentoMae" ||
 			name === "nascimentoPai"
 		)
 			maskedValue = maskDate(value);
+
 		if (
 			name === "telefoneMae" ||
 			name === "telefonePai" ||
@@ -125,7 +133,9 @@ function Forms() {
 			name === "telefoneTrabalhoPai"
 		)
 			maskedValue = maskPhone(value);
+
 		if (name === "cepMae" || name === "cepPai") maskedValue = maskCEP(value);
+
 		if (name === "emailMae" || name === "emailPai")
 			maskedValue = maskEmail(value);
 
@@ -133,7 +143,7 @@ function Forms() {
 			name === "nomeMae" ||
 			name === "nomePai" ||
 			name === "respNome" ||
-			// name === "nome" ||
+			name === "nome" ||
 			name === "naturalidade" ||
 			name === "nacionalidade" ||
 			name === "profissaoMae" ||
@@ -147,10 +157,37 @@ function Forms() {
 		)
 			maskedValue = maskName(value);
 
+		// Atualiza o campo normalmente
 		setFormData((prev) => ({
 			...prev,
 			[stepName]: { ...prev[stepName], [name]: maskedValue },
 		}));
+
+		// Se for o CEP da mãe, busca o nome da rua automaticamente
+		if (name === "cepMae" || name === "cepPai") {
+			const cepNumeros = value.replace(/\D/g, "");
+			if (cepNumeros.length === 8) {
+				try {
+					const response = await fetch(
+						`https://viacep.com.br/ws/${cepNumeros}/json/`
+					);
+					const data = await response.json();
+
+					if (!data.erro && data.logradouro) {
+						setFormData((prev) => ({
+							...prev,
+							[stepName]: {
+								...prev[stepName],
+								enderecoMae: data.logradouro,
+								enderecoPai: data.logradouro,
+							},
+						}));
+					}
+				} catch (error) {
+					console.error("Erro ao buscar o CEP:", error);
+				}
+			}
+		}
 	};
 
 	const handleSubmit = async (e) => {
@@ -202,24 +239,6 @@ function Forms() {
 		} finally {
 			setLoading(false);
 		}
-	};
-
-	const handleExportCsv = () => {
-		exportarParaCsv({
-			...formData.aluno,
-			...formData.mae,
-			...formData.pai,
-			...formData.observacoes,
-		});
-	};
-
-	const handleExportPdf = () => {
-		exportarParaPdf({
-			...formData.aluno,
-			...formData.mae,
-			...formData.pai,
-			...formData.observacoes,
-		});
 	};
 
 	const resetForm = () => {

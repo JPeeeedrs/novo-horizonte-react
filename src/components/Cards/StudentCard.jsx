@@ -77,6 +77,7 @@ const StudentCard = () => {
 						nomeMae: mae.nomeMae,
 						nascimentoMae: mae.nascimentoMae,
 						enderecoMae: mae.enderecoMae,
+						numeroCasaMae: mae.numeroCasaMae,
 						cepMae: mae.cepMae,
 						cpfMae: mae.cpfMae,
 						rgMae: mae.rgMae,
@@ -87,6 +88,7 @@ const StudentCard = () => {
 						telefoneTrabalhoMae: mae.telefoneTrabalhoMae,
 						nomePai: pai.nomePai,
 						nascimentoPai: pai.nascimentoPai,
+						numeroCasaPai: pai.numeroCasaPai,
 						enderecoPai: pai.enderecoPai,
 						cepPai: pai.cepPai,
 						cpfPai: pai.cpfPai,
@@ -296,6 +298,10 @@ const StudentCard = () => {
 											{aluno?.enderecoMae || "Não informado"}
 										</div>
 										<div className='info-item'>
+											<strong>Número da Casa: </strong>
+											{aluno?.numeroCasaMae || "Não informado"}
+										</div>
+										<div className='info-item'>
 											<strong>Telefone: </strong>
 											{aluno?.telefoneMae || "Não informado"}
 										</div>
@@ -319,6 +325,12 @@ const StudentCard = () => {
 											<strong>Endereço: </strong>
 											{aluno?.enderecoPai || "Não informado"}
 										</div>
+
+										<div className='info-item'>
+											<strong>Número da Casa: </strong>
+											{aluno?.numeroCasaPai || "Não informado"}
+										</div>
+
 										<div className='info-item'>
 											<strong>Telefone: </strong>
 											{aluno?.telefonePai || "Não informado"}
