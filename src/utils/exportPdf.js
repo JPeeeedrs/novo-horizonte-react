@@ -87,6 +87,13 @@ const exportStudentPdf = (student) => {
 	doc.text(`Endereço: ${student.enderecoMae || "Não informado"}`, 10, y);
 	y += 10;
 	checkPageEnd();
+	doc.text(
+		`Número da Casa: ${student.numeroCasaMae || "Não informado"}`,
+		10,
+		y
+	);
+	y += 10;
+	checkPageEnd();
 	doc.text(`CEP: ${student.cepMae || "Não informado"}`, 10, y);
 	y += 10;
 	checkPageEnd();
@@ -134,6 +141,13 @@ const exportStudentPdf = (student) => {
 	y += 10;
 	checkPageEnd();
 	doc.text(`Endereço: ${student.enderecoPai || "Não informado"}`, 10, y);
+	y += 10;
+	checkPageEnd();
+	doc.text(
+		`Numero da Casa: ${student.numeroCasaPai || "Não informado"}`,
+		10,
+		y
+	);
 	y += 10;
 	checkPageEnd();
 	doc.text(`CEP: ${student.cepPai || "Não informado"}`, 10, y);

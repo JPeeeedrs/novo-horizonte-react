@@ -3,6 +3,7 @@ function EditPai({ onNext, onBack, formData = {}, onChange }) {
 		nomePai: formData.nomePai || "",
 		nascimentoPai: formData.nascimentoPai || "",
 		enderecoPai: formData.enderecoPai || "",
+		numeroCasaPai: formData.numeroCasaPai || "",
 		cepPai: formData.cepPai || "",
 		cpfPai: formData.cpfPai || "",
 		rgPai: formData.rgPai || "",
@@ -19,7 +20,7 @@ function EditPai({ onNext, onBack, formData = {}, onChange }) {
 				<h3 className='mt-4'>Dados dos Familiares</h3>
 				<h5>Dados do Responsável Paterno</h5>
 				{/* Nome do Pai */}
-				<div className='col-md-4'>
+				<div className='col-md-6'>
 					<label htmlFor='inputFatherName' className='form-label'>
 						Nome do Responsável Paterno
 					</label>
@@ -34,7 +35,7 @@ function EditPai({ onNext, onBack, formData = {}, onChange }) {
 					/>
 				</div>
 				{/* Data de Nascimento */}
-				<div className='col-md-4'>
+				<div className='col-md-6'>
 					<label htmlFor='inputFatherBirthDate' className='form-label'>
 						Data de Nascimento
 					</label>
@@ -63,6 +64,23 @@ function EditPai({ onNext, onBack, formData = {}, onChange }) {
 						placeholder='Rua Manoel Gomes, 000'
 					/>
 				</div>
+
+				{/* Número da Casa */}
+				<div className='col-md-4'>
+					<label htmlFor='inputFatherHouseNumber' className='form-label'>
+						Número da Casa
+					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='inputFatherHouseNumber'
+						name='numeroCasaPai'
+						value={safeFormData.numeroCasaPai}
+						onChange={onChange}
+						placeholder='000'
+					/>
+				</div>
+
 				{/* CEP */}
 				<div className='col-md-4'>
 					<label htmlFor='inputFatherCEP' className='form-label'>

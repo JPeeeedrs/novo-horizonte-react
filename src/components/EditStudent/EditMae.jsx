@@ -3,6 +3,7 @@ function EditMae({ onNext, onBack, formData = {}, onChange }) {
 		nomeMae: formData.nomeMae || "",
 		nascimentoMae: formData.nascimentoMae || "",
 		enderecoMae: formData.enderecoMae || "",
+		numeroCasaMae: formData.numeroCasaMae || "",
 		cepMae: formData.cepMae || "",
 		cpfMae: formData.cpfMae || "",
 		rgMae: formData.rgMae || "",
@@ -19,7 +20,7 @@ function EditMae({ onNext, onBack, formData = {}, onChange }) {
 				<h3 className='mt-4'>Dados dos Familiares</h3>
 				<h5>Dados do Responsável Materno</h5>
 				{/* Nome da Mãe */}
-				<div className='col-md-4'>
+				<div className='col-md-6'>
 					<label htmlFor='inputMotherName' className='form-label'>
 						Nome do Responsável Materno
 					</label>
@@ -35,7 +36,7 @@ function EditMae({ onNext, onBack, formData = {}, onChange }) {
 				</div>
 
 				{/* Data de Nascimento */}
-				<div className='col-md-4'>
+				<div className='col-md-6'>
 					<label htmlFor='inputMotherBirthDate' className='form-label'>
 						Data de Nascimento
 					</label>
@@ -63,6 +64,22 @@ function EditMae({ onNext, onBack, formData = {}, onChange }) {
 						value={safeFormData.enderecoMae}
 						onChange={onChange}
 						placeholder='Rua Manoel Gomes, 000'
+					/>
+				</div>
+
+				{/* Número da Casa */}
+				<div className='col-md-4'>
+					<label htmlFor='inputMotherHouseNumber' className='form-label'>
+						Número da Casa
+					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='inputMotherHouseNumber'
+						name='numeroCasaMae'
+						value={safeFormData.numeroCasaMae}
+						onChange={onChange}
+						placeholder='000'
 					/>
 				</div>
 

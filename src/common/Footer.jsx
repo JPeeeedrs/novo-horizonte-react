@@ -15,13 +15,12 @@ function Footer() {
 				</span>
 			</div>
 
-			<div className='footer-sobre'>
-				<Link to='/SobreNos'>Sobre Nós</Link>
-			</div>
-
 			<div className='footer-contact'>
 				<strong>Contatos</strong>
 				<div className='footer-phone'>Telefone: (21) 98506-7184</div>
+				<div className='footer-sobre'>
+					<Link to='/SobreNos'>Sobre Nós</Link>
+				</div>
 				<div className='footer-icons'>
 					<a href='https://www.facebook.com/novohorizontetere' target='_blank'>
 						<i className='fab fa-facebook fa-2x'></i>

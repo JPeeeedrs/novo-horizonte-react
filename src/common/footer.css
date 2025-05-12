@@ -58,6 +58,11 @@ footer span {
 	margin-bottom: 5px;
 }
 
+.footer-sobre {
+	text-decoration: none;
+	color: white;
+}
+
 .footer-icons {
 	display: flex;
 	justify-content: flex-end;
@@ -88,14 +93,13 @@ footer span {
 		align-items: center;
 		text-align: center;
 	}
-	
-	
-	.footer-left{
+
+	.footer-left {
 		display: block;
 	}
 
-	.footer-left img{
-		margin: 0 auto 15px auto ;
+	.footer-left img {
+		margin: 0 auto 15px auto;
 	}
 }
 
@@ -120,6 +124,4 @@ footer span {
 		align-items: center;
 		text-align: center;
 	}
-
-	
 }
