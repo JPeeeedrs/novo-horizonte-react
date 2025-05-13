@@ -1,6 +1,7 @@
 // Importando imagens e sons
 import golfre from "../../assets/images/golfre.jpg";
 import sound from "../../assets/images/sound.mp3";
+import milkshake from "../../assets/images/milkshake.mp3";
 // import useRef useState axios
 import { useState, useRef } from "react";
 import axios from "axios";
@@ -202,6 +203,13 @@ function Forms() {
 				setTimeout(() => {
 					setJumpscare(false);
 				}, 4000);
+				setLoading(false);
+				return;
+			}
+
+			if (formData.aluno.nome.trim().toLowerCase() === "milkshake de morango") {
+				const audio = new Audio(milkshake);
+				audio.play();
 				setLoading(false);
 				return;
 			}

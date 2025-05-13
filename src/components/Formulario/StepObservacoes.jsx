@@ -314,6 +314,7 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 						href='mailto:vanessalimapsicopedagoga@bol.com.br?subject=Envio de Documentos&body=Segue em anexo os documentos necessários.'
 						target='_blank'
 						className='btn btn-email text-center'
+						disabled={loading}
 					>
 						Enviar Documentos
 					</a>
