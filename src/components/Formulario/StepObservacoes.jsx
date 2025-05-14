@@ -303,7 +303,8 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 				<div className='step-buttons'>
 					<button
 						type='button'
-						className='btn btn-nav'
+						className='btn'
+						id="btn-nav-anterior"
 						onClick={onBack}
 						disabled={loading}
 					>
@@ -313,7 +314,7 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 					<a
 						href='mailto:vanessalimapsicopedagoga@bol.com.br?subject=Envio de Documentos&body=Segue em anexo os documentos necessários.'
 						target='_blank'
-						className='btn btn-email text-center'
+						className='btn btn-email'
 						disabled={loading}
 					>
 						Enviar Documentos
@@ -321,7 +322,7 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 					<a
 						href={termos}
 						download
-						className='btn btn-termo text-center'
+						className='btn btn-termo'
 						disabled={loading}
 					>
 						Baixar Termos

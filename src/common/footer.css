@@ -59,18 +59,27 @@ footer span {
 }
 
 .footer-sobre {
-	text-decoration: none;
+	margin-bottom: 12px ;
+}
+
+.footer-sobre a {
+	font-weight: bold;
 	color: white;
+	text-decoration: underline;
+}
+
+.footer-sobre a:hover {
+	color: #ccc;
 }
 
 .footer-icons {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	width: 110px;
 }
 
 .footer-icons a {
 	color: white;
-	margin-left: 10px;
 	transition: color 0.3s ease;
 }
 
