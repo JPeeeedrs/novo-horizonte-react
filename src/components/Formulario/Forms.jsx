@@ -153,8 +153,7 @@ function Forms() {
 			name === "irmaoNome" ||
 			name === "especialista" ||
 			name === "reside" ||
-			name === "pessoasAutorizadas" ||
-			name === "irmaosNome"
+			name === "pessoasAutorizadas"
 		)
 			maskedValue = maskName(value);
 
