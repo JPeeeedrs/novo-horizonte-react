@@ -34,6 +34,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						value={safeFormData.nome}
 						onChange={onChange}
 						placeholder='João da Silva'
+						required
 					/>
 				</div>
 
@@ -50,6 +51,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						value={safeFormData.dataNascimento}
 						onChange={onChange}
 						placeholder='00/00/0000'
+						required
 					/>
 				</div>
 
@@ -66,6 +68,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						value={safeFormData.naturalidade}
 						onChange={onChange}
 						placeholder='Teresopolitano'
+						required
 					/>
 				</div>
 
@@ -82,6 +85,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						value={safeFormData.nacionalidade}
 						onChange={onChange}
 						placeholder='Brasileira'
+						required
 					/>
 				</div>
 
@@ -96,6 +100,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						name='sexo'
 						value={safeFormData.sexo}
 						onChange={onChange}
+						required
 					>
 						<option disabled hidden value=''>
 							Selecione
@@ -121,6 +126,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						value={safeFormData.cpf}
 						onChange={onChange}
 						placeholder='000.000.000-00'
+						required
 					/>
 				</div>
 
@@ -137,6 +143,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						value={safeFormData.rg}
 						onChange={onChange}
 						placeholder='00.000.000-0'
+						required
 					/>
 				</div>
 
@@ -153,6 +160,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						value={safeFormData.anoLetivo}
 						onChange={onChange}
 						placeholder='2025'
+						required
 					/>
 				</div>
 
@@ -172,6 +180,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 								value={safeFormData.termo}
 								onChange={onChange}
 								placeholder='00000'
+								required
 							/>
 						</div>
 						<div className='col-md-4'>
@@ -186,6 +195,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 								value={safeFormData.folha}
 								onChange={onChange}
 								placeholder='000'
+								required
 							/>
 						</div>
 						<div className='col-md-4'>
@@ -200,6 +210,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 								value={safeFormData.livro}
 								onChange={onChange}
 								placeholder='000'
+								required
 							/>
 						</div>
 					</div>
@@ -220,6 +231,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 								value={safeFormData.matricula}
 								onChange={onChange}
 								placeholder='0000000'
+								required
 							/>
 						</div>
 					</div>
@@ -257,6 +269,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						name='tipoSanguineo'
 						value={safeFormData.tipoSanguineo}
 						onChange={onChange}
+						required
 					>
 						<option disabled hidden value=''>
 							Selecione
@@ -283,6 +296,7 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 						name='raca'
 						value={safeFormData.raca}
 						onChange={onChange}
+						required
 					>
 						<option disabled hidden value=''>
 							Selecione

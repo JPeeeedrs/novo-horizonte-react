@@ -231,6 +231,7 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 						value={safeFormData.respNome}
 						onChange={onChange}
 						placeholder='João da Silva'
+						required
 					/>
 				</div>
 
@@ -304,7 +305,7 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 					<button
 						type='button'
 						className='btn'
-						id="btn-nav-anterior"
+						id='btn-nav-anterior'
 						onClick={onBack}
 						disabled={loading}
 					>

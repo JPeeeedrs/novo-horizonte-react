@@ -20,9 +20,7 @@ function Header() {
 							className='d-inline-block align-text-top'
 						/>
 					</Link>
-					<span>
-						CENTRO EDUCACIONAL NOVO HORIZONTE
-					</span>
+					<span>CENTRO EDUCACIONAL NOVO HORIZONTE</span>
 				</div>
 			</nav>
 			<nav className='navbar' id='nav-elementos'>
@@ -32,7 +30,7 @@ function Header() {
 				<Link to='/formulario' className='text-white text-decoration-none'>
 					FORMULÁRIO
 				</Link>
-				<Link to='/Login' className='text-white text-decoration-none'>
+				<Link to='/alunos' className='text-white text-decoration-none'>
 					ALUNOS
 				</Link>
 			</nav>

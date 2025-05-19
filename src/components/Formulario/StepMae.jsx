@@ -52,8 +52,9 @@ function StepMae({ onNext, onBack, formData = {}, onChange }) {
 						name='nomeMae'
 						value={safeFormData.nomeMae}
 						onChange={onChange}
-						placeholder='Elma Maria'
+						placeholder='Vilmara Oliveira'
 						disabled={!temMae}
+						required={temMae}
 					/>
 				</div>
 
@@ -71,6 +72,7 @@ function StepMae({ onNext, onBack, formData = {}, onChange }) {
 						onChange={onChange}
 						placeholder='00/00/0000'
 						disabled={!temMae}
+						required={temMae}
 					/>
 				</div>
 
@@ -88,6 +90,7 @@ function StepMae({ onNext, onBack, formData = {}, onChange }) {
 						onChange={onChange}
 						placeholder='Rua Manoel Gomes, 000'
 						disabled={!temMae}
+						required={temMae}
 					/>
 				</div>
 
@@ -122,6 +125,7 @@ function StepMae({ onNext, onBack, formData = {}, onChange }) {
 						onChange={onChange}
 						placeholder='00000-000'
 						disabled={!temMae}
+						required={temMae}
 					/>
 				</div>
 
@@ -139,6 +143,7 @@ function StepMae({ onNext, onBack, formData = {}, onChange }) {
 						onChange={onChange}
 						placeholder='000.000.000-00'
 						disabled={!temMae}
+						required={temMae}
 					/>
 				</div>
 

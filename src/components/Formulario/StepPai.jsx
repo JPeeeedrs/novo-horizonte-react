@@ -54,6 +54,7 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 						onChange={onChange}
 						placeholder='Lima Mei'
 						disabled={!temPai}
+						required={temPai}
 					/>
 				</div>
 				{/* Data de Nascimento */}
@@ -70,6 +71,7 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 						onChange={onChange}
 						placeholder='00/00/0000'
 						disabled={!temPai}
+						required={temPai}
 					/>
 				</div>
 				{/* Endereço */}
@@ -86,6 +88,7 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 						onChange={onChange}
 						placeholder='Rua Manoel Gomes, 000'
 						disabled={!temPai}
+						required={temPai}
 					/>
 				</div>
 
@@ -120,6 +123,7 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 						onChange={onChange}
 						placeholder='00000-000'
 						disabled={!temPai}
+						required={temPai}
 					/>
 				</div>
 				{/* CPF */}
@@ -136,6 +140,7 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 						onChange={onChange}
 						placeholder='000.000.000-00'
 						disabled={!temPai}
+						required={temPai}
 					/>
 				</div>
 				{/* RG */}
