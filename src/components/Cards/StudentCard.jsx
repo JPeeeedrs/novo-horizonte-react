@@ -2,15 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/alunos.css";
-// importar icons
-import EditIcon from "../../common/icons/EditIcon";
-import TrashIcon from "../../common/icons/TrashIcon";
-import SetaCima from "../../common/icons/SetaCima";
-import SetaBaixo from "../../common/icons/SetaBaixo";
-import LupaIcon from "../../common/icons/LupaIcon";
-// importar csv e pdf
-import BotaoExportarCsv from "../../common/buttons/botaoExportarCsv";
-import BotaoExportarPdf from "../../common/buttons/botaoExportarPdf";
+import SearchBar from "./SearchBar";
+import StudentCardItem from "./CardItem";
 
 const StudentCard = () => {
 	const [alunos, setAlunos] = useState([]);
@@ -212,22 +205,13 @@ const StudentCard = () => {
 	if (loading) return <p>Carregando...</p>;
 	if (error) return <p className='text-danger'>{error}</p>;
 
-	// Adicionar CSS condicional para os cartões
-	const getCardClass = (isOpen) => {
-		return `student-card ${isOpen ? "expanded" : ""}`;
-	};
-
 	return (
 		<div className='student-container'>
-			<div className='search-input'>
-				<input
-					type='text'
-					placeholder='Buscar por CPF, nome, pai ou mãe...'
-					value={searchTerm}
-					onChange={(e) => setSearchTerm(e.target.value)}
-				/>
-				<LupaIcon />
-			</div>
+			<SearchBar
+				value={searchTerm}
+				onChange={(e) => setSearchTerm(e.target.value)}
+				placeholder='Buscar por CPF, nome, pai ou mãe...'
+			/>
 
 			{loading ? (
 				<div className='loading-text'>
@@ -239,180 +223,13 @@ const StudentCard = () => {
 			) : (
 				<div className='student-grid'>
 					{alunos.map((aluno) => (
-						<div
-							className={getCardClass(openDropdowns[aluno?.id])}
+						<StudentCardItem
 							key={aluno?.id}
-						>
-							<div className='card-cabecalho'>
-								<h2
-									className='card-title'
-									title={aluno?.nome || "Nome não cadastrado"}
-								>
-									{aluno?.nome || "Nome não cadastrado"}
-								</h2>
-								<div className='card-actions'>
-									<button
-										className='dropdown-alternar'
-										onClick={() => toggleDropdown(aluno?.id)}
-									>
-										{openDropdowns[aluno?.id] ? <SetaBaixo /> : <SetaCima />}
-									</button>
-									<button
-										className='edit-button'
-										onClick={() => navigate(`/editar/${aluno?.id}`)}
-									>
-										<EditIcon />
-									</button>
-									<button
-										className='delete-button'
-										onClick={() => deleteStudent(aluno?.id)}
-									>
-										<TrashIcon />
-									</button>
-								</div>
-							</div>
-
-							{openDropdowns[aluno?.id] && (
-								<div className='card-corpo'>
-									<div className='info-item'>
-										<strong>Sexo: </strong>
-										{aluno?.sexo || "Não informado"}
-									</div>
-									<div className='info-item'>
-										<strong>CPF: </strong>
-										{aluno?.cpf || "Não informado"}
-									</div>
-									<div className='info-item'>
-										<strong>RG: </strong>
-										{aluno?.rg || "Não informado"}
-									</div>
-									<div className='info-item'>
-										<strong>Ano Letivo: </strong>
-										{aluno?.anoLetivo || "Não informado"}
-									</div>
-									<div className='info-item'>
-										<strong>Turno: </strong>
-										{aluno?.turno || "Não informado"}
-									</div>
-									<div className='info-item'>
-										<strong>Tipo Sanguíneo: </strong>
-										{aluno?.tipoSanguineo || "Não informado"}
-									</div>
-
-									<div className='section'>
-										<h3 className='section-title'>Responsável Materno</h3>
-										<div className='info-item'>
-											<strong>Nome: </strong>
-											{aluno?.nomeMae || "Não informado"}
-										</div>
-										<div className='info-item'>
-											<strong>Endereço: </strong>
-											{aluno?.enderecoMae || "Não informado"}
-										</div>
-										<div className='info-item'>
-											<strong>Número da Casa: </strong>
-											{aluno?.numeroCasaMae || "Não informado"}
-										</div>
-										<div className='info-item'>
-											<strong>Telefone: </strong>
-											{aluno?.telefoneMae || "Não informado"}
-										</div>
-										<div className='info-item'>
-											<strong>Trabalho: </strong>
-											{aluno?.trabalhoMae || "Não informado"}
-										</div>
-										<div className='info-item'>
-											<strong>Telefone do Trabalho: </strong>
-											{aluno?.telefoneTrabalhoMae || "Não informado"}
-										</div>
-									</div>
-
-									<div className='section'>
-										<h3 className='section-title'>Responsável Paterno</h3>
-										<div className='info-item'>
-											<strong>Nome: </strong>
-											{aluno?.nomePai || "Não informado"}
-										</div>
-										<div className='info-item'>
-											<strong>Endereço: </strong>
-											{aluno?.enderecoPai || "Não informado"}
-										</div>
-
-										<div className='info-item'>
-											<strong>Número da Casa: </strong>
-											{aluno?.numeroCasaPai || "Não informado"}
-										</div>
-
-										<div className='info-item'>
-											<strong>Telefone: </strong>
-											{aluno?.telefonePai || "Não informado"}
-										</div>
-										<div className='info-item'>
-											<strong>Trabalho: </strong>
-											{aluno?.trabalhoPai || "Não informado"}
-										</div>
-										<div className='info-item'>
-											<strong>Telefone do Trabalho: </strong>
-											{aluno?.telefoneTrabalhoPai || "Não informado"}
-										</div>
-									</div>
-
-									<div className='section'>
-										<h3 className='section-title'>Observações</h3>
-										<div className='section'>
-											<h5 className='section-title sub-title'>
-												Informações Médicas
-											</h5>
-
-											<div className='info-item'>
-												<strong>Especialista: </strong>
-												{aluno?.especialista || "Não informado"}
-											</div>
-
-											<div className='info-item'>
-												<strong>Alergia: </strong>
-												{aluno?.alergia || "Não informado"}
-											</div>
-
-											<div className='info-item'>
-												<strong>Medicamento: </strong>
-												{aluno?.medicamento || "Não informado"}
-											</div>
-										</div>
-
-										<div className='section'>
-											<h5 className='section-title sub-title'>
-												Responsável Financeiro
-											</h5>
-
-											<div className='info-item'>
-												<strong>Nome: </strong>
-												{aluno?.respNome || "Não informado"}
-											</div>
-											<div className='info-item'>
-												<strong>Telefone: </strong>
-												{aluno?.respTelefone || "Não informado"}
-											</div>
-										</div>
-
-										<div className='section'>
-											<h5 className='section-title sub-title'>
-												Pessoas Autorizadas
-											</h5>
-											<div className='info-item'>
-												<strong>Pessoas: </strong>
-												{aluno?.pessoasAutorizadas ||
-													"Nenhuma pessoa autorizada"}
-											</div>
-										</div>
-									</div>
-									<div className='d-flex justify-around'>
-										<BotaoExportarPdf student={aluno} />
-										<BotaoExportarCsv student={aluno} />
-									</div>
-								</div>
-							)}
-						</div>
+							aluno={aluno}
+							isOpen={openDropdowns[aluno?.id]}
+							toggleDropdown={toggleDropdown}
+							deleteStudent={deleteStudent}
+						/>
 					))}
 				</div>
 			)}

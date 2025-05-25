@@ -10,7 +10,10 @@ function Header() {
 				className='navbar bg-body-tertiary d-flex justify-content-center position-relative'
 				id='nav-logo'
 			>
-				<div className='container-fluid d-flex justify-content-around'>
+				<div
+					className='container-fluid d-flex justify-content-around'
+					id='nav-container'
+				>
 					<Link className='navbar-brand' to='/'>
 						<img
 							src={logo}
