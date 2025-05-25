@@ -1,3 +1,6 @@
+import InputField from "../../common/inputs/InputField";
+import SelectField from "../../common/inputs/SelectField";
+
 function StepAluno({ onNext, formData = {}, onChange }) {
 	const safeFormData = {
 		nome: formData.nome || "",
@@ -22,292 +25,209 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 			<div className='row g-3'>
 				<h3 className='mt-4'>Dados do Aluno</h3>
 				{/* Nome */}
-				<div className='col-md-8'>
-					<label htmlFor='inputName' className='form-label'>
-						Nome
-					</label>
-					<input
-						type='text'
-						className='form-control'
-						id='inputName'
-						name='nome'
-						value={safeFormData.nome}
-						onChange={onChange}
-						placeholder='João da Silva'
-						required
-					/>
-				</div>
+				<InputField
+					className='col-md-8'
+					id='inputName'
+					label='Nome'
+					name='nome'
+					value={safeFormData.nome}
+					onChange={onChange}
+					placeholder='João da Silva'
+					required={true}
+				/>
 
 				{/* Data de Nascimento */}
-				<div className='col-md-4'>
-					<label htmlFor='inputBirthDate' className='form-label'>
-						Data de Nascimento
-					</label>
-					<input
-						type='text'
-						className='form-control'
-						id='inputBirthDate'
-						name='dataNascimento'
-						value={safeFormData.dataNascimento}
-						onChange={onChange}
-						placeholder='00/00/0000'
-						required
-					/>
-				</div>
+				<InputField
+					className='col-md-4'
+					id='inputBirthDate'
+					label='Data de Nascimento'
+					name='dataNascimento'
+					value={safeFormData.dataNascimento}
+					onChange={onChange}
+					placeholder='00/00/0000'
+					required={true}
+				/>
 
 				{/* Naturalidade */}
-				<div className='col-md-4'>
-					<label htmlFor='inputNaturalidade' className='form-label'>
-						Naturalidade
-					</label>
-					<input
-						type='text'
-						className='form-control'
-						id='inputNaturalidade'
-						name='naturalidade'
-						value={safeFormData.naturalidade}
-						onChange={onChange}
-						placeholder='Teresopolitano'
-						required
-					/>
-				</div>
+				<InputField
+					className='col-md-4'
+					id='inputNaturalidade'
+					label='Naturalidade'
+					name='naturalidade'
+					value={safeFormData.naturalidade}
+					onChange={onChange}
+					placeholder='Teresopolitano'
+					required={true}
+				/>
 
 				{/* Nacionalidade */}
-				<div className='col-md-4'>
-					<label htmlFor='inputNacionalidade' className='form-label'>
-						Nacionalidade
-					</label>
-					<input
-						type='text'
-						className='form-control'
-						id='inputNacionalidade'
-						name='nacionalidade'
-						value={safeFormData.nacionalidade}
-						onChange={onChange}
-						placeholder='Brasileira'
-						required
-					/>
-				</div>
+				<InputField
+					className='col-md-4'
+					id='inputNacionalidade'
+					label='Nacionalidade'
+					name='nacionalidade'
+					value={safeFormData.nacionalidade}
+					onChange={onChange}
+					placeholder='Brasileira'
+					required={true}
+				/>
 
 				{/* Sexo */}
-				<div className='col-md-4'>
-					<label htmlFor='inputSexo' className='form-label'>
-						Sexo
-					</label>
-					<select
-						id='inputSexo'
-						className='form-select'
-						name='sexo'
-						value={safeFormData.sexo}
-						onChange={onChange}
-						required
-					>
-						<option disabled hidden value=''>
-							Selecione
-						</option>
-						<option value='Feminino'>Feminino</option>
-						<option value='Masculino'>Masculino</option>
-						<option value='Não Binário'>Não Binário</option>
-						<option value='Outro'>Outro</option>
-						<option value='Prefiro não informar'>Prefiro não informar</option>
-					</select>
-				</div>
+				<SelectField
+					className='col-md-4'
+					id='inputSexo'
+					label='Sexo'
+					name='sexo'
+					value={safeFormData.sexo}
+					onChange={onChange}
+					options={[
+						{ value: "Feminino", label: "Feminino" },
+						{ value: "Masculino", label: "Masculino" },
+						{ value: "Não Binário", label: "Não Binário" },
+						{ value: "Outro", label: "Outro" },
+						{ value: "Prefiro não informar", label: "Prefiro não informar" },
+					]}
+					required={true}
+				/>
 
 				{/* CPF */}
-				<div className='col-md-4'>
-					<label htmlFor='inputCPFAluno' className='form-label'>
-						CPF
-					</label>
-					<input
-						type='text'
-						className='form-control'
-						id='inputCPFAluno'
-						name='cpf'
-						value={safeFormData.cpf}
-						onChange={onChange}
-						placeholder='000.000.000-00'
-						required
-					/>
-				</div>
+				<InputField
+					className='col-md-4'
+					id='inputCPFAluno'
+					label='CPF'
+					name='cpf'
+					value={safeFormData.cpf}
+					onChange={onChange}
+					placeholder='000.000.000-00'
+					required={true}
+				/>
 
 				{/* RG */}
-				<div className='col-md-4'>
-					<label htmlFor='inputRGAluno' className='form-label'>
-						RG
-					</label>
-					<input
-						type='text'
-						className='form-control'
-						id='inputRGAluno'
-						name='rg'
-						value={safeFormData.rg}
-						onChange={onChange}
-						placeholder='00.000.000-0'
-						required
-					/>
-				</div>
+				<InputField
+					className='col-md-4'
+					id='inputRGAluno'
+					label='RG'
+					name='rg'
+					value={safeFormData.rg}
+					onChange={onChange}
+					placeholder='00.000.000-0'
+					required={true}
+				/>
 
 				{/* Ano Letivo */}
-				<div className='col-md-4'>
-					<label htmlFor='inputYear' className='form-label'>
-						Ano Letivo
-					</label>
-					<input
-						type='text'
-						className='form-control'
-						id='inputYear'
-						name='anoLetivo'
-						value={safeFormData.anoLetivo}
-						onChange={onChange}
-						placeholder='2025'
-						required
-					/>
-				</div>
+				<InputField
+					className='col-md-4'
+					id='inputYear'
+					label='Ano Letivo'
+					name='anoLetivo'
+					value={safeFormData.anoLetivo}
+					onChange={onChange}
+					placeholder='2025'
+					required={true}
+				/>
 
 				{/* Certidão de Nascimento */}
 				<div className='col-12'>
 					<div className='row'>
 						<h6>Certidão de Nascimento</h6>
-						<div className='col-md-4'>
-							<label htmlFor='inputTermo' className='form-label'>
-								Termo
-							</label>
-							<input
-								type='text'
-								className='form-control'
-								id='inputTermo'
-								name='termo'
-								value={safeFormData.termo}
-								onChange={onChange}
-								placeholder='00000'
-								required
-							/>
-						</div>
-						<div className='col-md-4'>
-							<label htmlFor='inputFolha' className='form-label'>
-								Folha
-							</label>
-							<input
-								type='text'
-								className='form-control'
-								id='inputFolha'
-								name='folha'
-								value={safeFormData.folha}
-								onChange={onChange}
-								placeholder='000'
-								required
-							/>
-						</div>
-						<div className='col-md-4'>
-							<label htmlFor='inputLivro' className='form-label'>
-								Livro
-							</label>
-							<input
-								type='text'
-								className='form-control'
-								id='inputLivro'
-								name='livro'
-								value={safeFormData.livro}
-								onChange={onChange}
-								placeholder='000'
-								required
-							/>
-						</div>
+						<InputField
+							className='col-md-4'
+							id='inputTermo'
+							label='Termo'
+							name='termo'
+							value={safeFormData.termo}
+							onChange={onChange}
+							placeholder='00000'
+							required={true}
+						/>
+						<InputField
+							className='col-md-4'
+							id='inputFolha'
+							label='Folha'
+							name='folha'
+							value={safeFormData.folha}
+							onChange={onChange}
+							placeholder='000'
+							required={true}
+						/>
+						<InputField
+							className='col-md-4'
+							id='inputLivro'
+							label='Livro'
+							name='livro'
+							value={safeFormData.livro}
+							onChange={onChange}
+							placeholder='000'
+							required={true}
+						/>
 					</div>
 				</div>
 
 				{/* Matrícula */}
-				<div className='col-12'>
-					<div className='row'>
-						<div className='col-md-12'>
-							<label htmlFor='inputMatricula' className='form-label'>
-								Matrícula
-							</label>
-							<input
-								type='text'
-								className='form-control'
-								id='inputMatricula'
-								name='matricula'
-								value={safeFormData.matricula}
-								onChange={onChange}
-								placeholder='0000000'
-								required
-							/>
-						</div>
-					</div>
-				</div>
+				<InputField
+					className='col-md-12'
+					id='inputMatricula'
+					label='Matrícula'
+					name='matricula'
+					value={safeFormData.matricula}
+					onChange={onChange}
+					placeholder='0000000'
+					required={true}
+				/>
 
 				{/* Turno */}
-				<div className='col-md-4'>
-					<label htmlFor='inputShift' className='form-label'>
-						Turno
-					</label>
-					<select
-						id='inputShift'
-						className='form-select'
-						name='turno'
-						value={safeFormData.turno}
-						onChange={onChange}
-					>
-						<option disabled hidden value=''>
-							Selecione
-						</option>
-						<option value='Manhã'>Manhã</option>
-						<option value='Tarde'>Tarde</option>
-						<option value='Integral'>Integral</option>
-					</select>
-				</div>
+				<SelectField
+					className='col-md-4'
+					id='inputShift'
+					label='Turno'
+					name='turno'
+					value={safeFormData.turno}
+					onChange={onChange}
+					options={[
+						{ value: "Manhã", label: "Manhã" },
+						{ value: "Tarde", label: "Tarde" },
+						{ value: "Integral", label: "Integral" },
+					]}
+				/>
 
 				{/* Tipo Sanguíneo */}
-				<div className='col-md-4'>
-					<label htmlFor='inputBlood' className='form-label'>
-						Tipo Sanguíneo
-					</label>
-					<select
-						id='inputBlood'
-						className='form-select'
-						name='tipoSanguineo'
-						value={safeFormData.tipoSanguineo}
-						onChange={onChange}
-						required
-					>
-						<option disabled hidden value=''>
-							Selecione
-						</option>
-						<option value='O-'>O-</option>
-						<option value='O+'>O+</option>
-						<option value='A-'>A-</option>
-						<option value='A+'>A+</option>
-						<option value='B-'>B-</option>
-						<option value='B+'>B+</option>
-						<option value='AB-'>AB-</option>
-						<option value='AB+'>AB+</option>
-					</select>
-				</div>
+				<SelectField
+					className='col-md-4'
+					id='inputBlood'
+					label='Tipo Sanguíneo'
+					name='tipoSanguineo'
+					value={safeFormData.tipoSanguineo}
+					onChange={onChange}
+					options={[
+						{ value: "O-", label: "O-" },
+						{ value: "O+", label: "O+" },
+						{ value: "A-", label: "A-" },
+						{ value: "A+", label: "A+" },
+						{ value: "B-", label: "B-" },
+						{ value: "B+", label: "B+" },
+						{ value: "AB-", label: "AB-" },
+						{ value: "AB+", label: "AB+" },
+					]}
+					required={true}
+				/>
 
 				{/* Raça */}
-				<div className='col-md-4'>
-					<label htmlFor='inputRace' className='form-label'>
-						Raça
-					</label>
-					<select
-						id='inputRace'
-						className='form-select'
-						name='raca'
-						value={safeFormData.raca}
-						onChange={onChange}
-						required
-					>
-						<option disabled hidden value=''>
-							Selecione
-						</option>
-						<option value='Parda'>Parda</option>
-						<option value='Branca'>Branca</option>
-						<option value='Pretos'>Preto</option>
-						<option value='Indígenas'>Indígena</option>
-						<option value='Amarela'>Amarela</option>
-					</select>
-				</div>
+				<SelectField
+					className='col-md-4'
+					id='inputRace'
+					label='Raça'
+					name='raca'
+					value={safeFormData.raca}
+					onChange={onChange}
+					options={[
+						{ value: "Parda", label: "Parda" },
+						{ value: "Branca", label: "Branca" },
+						{ value: "Preto", label: "Preto" },
+						{ value: "Indígenas", label: "Indígena" },
+						{ value: "Amarela", label: "Amarela" },
+					]}
+					required={true}
+				/>
 
 				<button type='button' className='btn btn-nav' onClick={onNext}>
 					Próximo

@@ -21,6 +21,18 @@ const StudentCard = () => {
 	const [openDropdowns, setOpenDropdowns] = useState({});
 	const navigate = useNavigate();
 
+	function nameNull(value) {
+		if (
+			!value ||
+			value.trim() === "" ||
+			value === "00/00/0000" ||
+			value === "(00) 00000-0000"
+		) {
+			return "Não informado";
+		}
+		return value;
+	}
+
 	const toggleDropdown = (id) => {
 		setOpenDropdowns((prev) => ({
 			...prev,
@@ -30,7 +42,7 @@ const StudentCard = () => {
 
 	const deleteStudent = async (id) => {
 		try {
-			const palavraChave = "GOLDEN FREDDY";
+			const palavraChave = "DELETAR";
 			const resposta = window.prompt(
 				`Digite "${palavraChave}" para confirmar a exclusão do aluno:`
 			);
@@ -40,9 +52,9 @@ const StudentCard = () => {
 			}
 
 			await axios.delete(`http://localhost:8080/alunos/${id}`);
-			axios.delete(`http://localhost:8080/maes/${id}`);
-			axios.delete(`http://localhost:8080/pais/${id}`);
-			axios.delete(`http://localhost:8080/observacoes/${id}`);
+			await axios.delete(`http://localhost:8080/maes/${id}`);
+			await axios.delete(`http://localhost:8080/pais/${id}`);
+			await axios.delete(`http://localhost:8080/observacoes/${id}`);
 			setAlunos((prevAlunos) => prevAlunos.filter((aluno) => aluno.id !== id));
 			setAllData((prevAllData) =>
 				prevAllData.filter((aluno) => aluno.id !== id)
@@ -74,30 +86,30 @@ const StudentCard = () => {
 
 					return {
 						...aluno,
-						nomeMae: mae.nomeMae,
-						nascimentoMae: mae.nascimentoMae,
-						enderecoMae: mae.enderecoMae,
-						numeroCasaMae: mae.numeroCasaMae,
-						cepMae: mae.cepMae,
-						cpfMae: mae.cpfMae,
-						rgMae: mae.rgMae,
-						telefoneMae: mae.telefoneMae,
-						emailMae: mae.emailMae,
-						profissaoMae: mae.profissaoMae,
-						trabalhoMae: mae.trabalhoMae,
-						telefoneTrabalhoMae: mae.telefoneTrabalhoMae,
-						nomePai: pai.nomePai,
-						nascimentoPai: pai.nascimentoPai,
-						numeroCasaPai: pai.numeroCasaPai,
-						enderecoPai: pai.enderecoPai,
-						cepPai: pai.cepPai,
-						cpfPai: pai.cpfPai,
-						rgPai: pai.rgPai,
-						telefonePai: pai.telefonePai,
-						emailPai: pai.emailPai,
-						profissaoPai: pai.profissaoPai,
-						trabalhoPai: pai.trabalhoPai,
-						telefoneTrabalhoPai: pai.telefoneTrabalhoPai,
+						nomeMae: nameNull(mae.nomeMae),
+						nascimentoMae: nameNull(mae.nascimentoMae),
+						enderecoMae: nameNull(mae.enderecoMae),
+						numeroCasaMae: nameNull(mae.numeroCasaMae),
+						cepMae: nameNull(mae.cepMae),
+						cpfMae: nameNull(mae.cpfMae),
+						rgMae: nameNull(mae.rgMae),
+						telefoneMae: nameNull(mae.telefoneMae),
+						emailMae: nameNull(mae.emailMae),
+						profissaoMae: nameNull(mae.profissaoMae),
+						trabalhoMae: nameNull(mae.trabalhoMae),
+						telefoneTrabalhoMae: nameNull(mae.telefoneTrabalhoMae),
+						nomePai: nameNull(pai.nomePai),
+						nascimentoPai: nameNull(pai.nascimentoPai),
+						numeroCasaPai: nameNull(pai.numeroCasaPai),
+						enderecoPai: nameNull(pai.enderecoPai),
+						cepPai: nameNull(pai.cepPai),
+						cpfPai: nameNull(pai.cpfPai),
+						rgPai: nameNull(pai.rgPai),
+						telefonePai: nameNull(pai.telefonePai),
+						emailPai: nameNull(pai.emailPai),
+						profissaoPai: nameNull(pai.profissaoPai),
+						trabalhoPai: nameNull(pai.trabalhoPai),
+						telefoneTrabalhoPai: nameNull(pai.telefoneTrabalhoPai),
 						...obs,
 					};
 				});

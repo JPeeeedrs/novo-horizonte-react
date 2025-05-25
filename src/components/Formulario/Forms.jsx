@@ -5,7 +5,6 @@ import milkshake from "../../assets/images/milkshake.mp3";
 // import useRef useState axios
 import { useState, useRef } from "react";
 import axios from "axios";
-import * as yup from "yup";
 // componentes steps
 import StepAluno from "./StepAlunos";
 import StepMae from "./StepMae";
@@ -28,9 +27,7 @@ import {
 const api = axios.create({
 	baseURL: "http://localhost:8080",
 	timeout: 10000,
-	headers: {
-		"Content-Type": "application/json",
-	},
+	headers: { "Content-Type": "application/json" },
 });
 
 function Forms() {
@@ -101,32 +98,26 @@ function Forms() {
 	});
 	const [jumpscare, setJumpscare] = useState(false);
 	const audioRef = useRef(null);
-
 	const [step, setStep] = useState(1);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
-
 	const nextStep = () => setStep((prev) => prev + 1);
 	const prevStep = () => setStep((prev) => prev - 1);
 
 	const handleChange = async (stepName, e) => {
 		const { name, value, type, checked } = e.target;
 		let maskedValue = value;
-
 		// Aplica as máscaras
 		if (name === "cpf" || name === "cpfMae" || name === "cpfPai")
 			maskedValue = maskCPF(value);
-
 		if (name === "rg" || name === "rgMae" || name === "rgPai")
 			maskedValue = maskRG(value);
-
 		if (
 			name === "dataNascimento" ||
 			name === "nascimentoMae" ||
 			name === "nascimentoPai"
 		)
 			maskedValue = maskDate(value);
-
 		if (
 			name === "telefoneMae" ||
 			name === "telefonePai" ||
@@ -135,12 +126,9 @@ function Forms() {
 			name === "telefoneTrabalhoPai"
 		)
 			maskedValue = maskPhone(value);
-
 		if (name === "cepMae" || name === "cepPai") maskedValue = maskCEP(value);
-
 		if (name === "emailMae" || name === "emailPai")
 			maskedValue = maskEmail(value);
-
 		if (
 			name === "nomeMae" ||
 			name === "nomePai" ||
@@ -157,13 +145,11 @@ function Forms() {
 			name === "pessoasAutorizadas"
 		)
 			maskedValue = maskName(value);
-
 		// Atualiza o campo normalmente
 		setFormData((prev) => ({
 			...prev,
 			[stepName]: { ...prev[stepName], [name]: maskedValue },
 		}));
-
 		// Se for o CEP da mãe, busca o nome da rua automaticamente
 		if (name === "cepMae" || name === "cepPai") {
 			const cepNumeros = value.replace(/\D/g, "");
@@ -173,7 +159,6 @@ function Forms() {
 						`https://viacep.com.br/ws/${cepNumeros}/json/`
 					);
 					const data = await response.json();
-
 					if (!data.erro && data.logradouro) {
 						setFormData((prev) => ({
 							...prev,
@@ -191,60 +176,10 @@ function Forms() {
 		}
 	};
 
-	const validationSchema = yup.object().shape({
-		aluno: yup.object().shape({
-			nome: yup.string().required("O nome é obrigatório"),
-			dataNascimento: yup
-				.string()
-				.required("A data de nascimento é obrigatória"),
-			naturalidade: yup.string().required("A naturalidade é obrigatória"),
-			nacionalidade: yup.string().required("A nacionalidade é obrigatória"),
-			sexo: yup.string().required("O sexo é obrigatório"),
-			cpf: yup.string().required("O CPF é obrigatório"),
-			rg: yup.string().required("O RG é obrigatório"),
-			anoLetivo: yup.string().required("O ano letivo é obrigatório"),
-			termo: yup.string().required("O termo é obrigatório"),
-			folha: yup.string().required("A folha é obrigatória"),
-			livro: yup.string().required("O livro é obrigatório"),
-			matricula: yup.string().required("A matricula é obrigatória"),
-			turno: yup.string().required("O turno é obrigatório"),
-			tipoSanguineo: yup.string().required("O tipo sanguineo é obrigatório"),
-			raca: yup.string().required("A raca é obrigatória"),
-		}),
-		mae: yup.object().when("temMae", {
-			is: true,
-			then: yup.object().shape({
-				nomeMae: yup.string().required("O nome da mae é obrigatório"),
-				nascimentoMae: yup
-					.string()
-					.required("A data de nascimento é obrigatória"),
-				enderecoMae: yup.string().required("O endereço da mae é obrigatório"),
-				cepMae: yup.string().required("O CEP da mae é obrigatório"),
-				cpfMae: yup.string().required("O CPF da mae é obrigatório"),
-			}),
-		}),
-		pai: yup.object().when("temPai", {
-			is: true,
-			then: yup.object().shape({
-				nomePai: yup.string().required("O nome do pai é obrigatório"),
-				nascimentoPai: yup
-					.string()
-					.required("A data de nascimento é obrigatória"),
-				enderecoPai: yup.string().required("O endereço do pai é obrigatório"),
-				cepPai: yup.string().required("O CEP do pai é obrigatório"),
-				cpfPai: yup.string().required("O CPF do pai é obrigatório"),
-			}),
-		}),
-		observacoes: yup.object().shape({
-			respNome: yup.string().required("As observações é obrigatória"),
-		}),
-	});
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
 		setError(null);
-
 		try {
 			if (formData.aluno.nome.trim().toLowerCase() === "golden freddy") {
 				setJumpscare(true);
@@ -255,29 +190,33 @@ function Forms() {
 				setLoading(false);
 				return;
 			}
-
 			if (formData.aluno.nome.trim().toLowerCase() === "milkshake de morango") {
 				const audio = new Audio(milkshake);
 				audio.play();
 				setLoading(false);
 				return;
 			}
-
 			// Enviar os dados de cada seção separadamente endpoints
 			const alunoResponse = await api.post("/alunos", formData.aluno);
-			const alunoId = alunoResponse.data.id;
-			const maeData = { ...formData.mae, alunoId };
-			await api.post("/maes", maeData);
-			const paiData = { ...formData.pai, alunoId };
-			await api.post("/pais", paiData);
-			const observacoesData = { ...formData.observacoes, alunoId };
-			await api.post("/observacoes", observacoesData);
-
-			alert(
-				`Aluno ${alunoResponse.data.nome} e informações relacionadas cadastrados com sucesso!`
+			const maeResponse = await api.post("/maes", formData.mae);
+			const paiResponse = await api.post("/pais", formData.pai);
+			const observacoesResponse = await api.post(
+				"/observacoes",
+				formData.observacoes
 			);
-			resetForm();
-			// }
+			const isSuccess = (response) =>
+				response.status === 200 || response.status === 201;
+			if (
+				isSuccess(alunoResponse) &&
+				isSuccess(maeResponse) &&
+				isSuccess(paiResponse) &&
+				isSuccess(observacoesResponse)
+			) {
+				alert(
+					`Aluno ${alunoResponse.data.nome} e informações relacionadas cadastrados com sucesso!`
+				);
+				resetForm();
+			}
 		} catch (error) {
 			console.error("Erro:", error);
 			setError(
@@ -310,7 +249,7 @@ function Forms() {
 			},
 			mae: {
 				nomeMae: "",
-				nascimentoMae: "",
+				dataNascimentoMae: "",
 				enderecoMae: "",
 				cepMae: "",
 				cpfMae: "",
@@ -387,7 +326,7 @@ function Forms() {
 						formData={formData.observacoes}
 						onChange={(e) => handleChange("observacoes", e)}
 						loading={loading}
-						error={error} // Passa o erro como prop
+						error={error}
 					/>
 				)}
 			</form>
@@ -400,7 +339,6 @@ function Forms() {
 					/>
 				</div>
 			)}
-
 			<audio ref={audioRef} src={sound} preload='auto' />
 		</div>
 	);
