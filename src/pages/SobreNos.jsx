@@ -6,7 +6,7 @@ function SobreNos() {
 	return (
 		<div>
 			<Header />
-			<main className='mb-'>
+			<main>
 				<Sobre />
 			</main>
 			<Footer />

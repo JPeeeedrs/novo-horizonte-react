@@ -222,64 +222,6 @@ function Edit() {
 		}
 	};
 
-	// const resetForm = () => {
-	// 	setFormData({
-	// 		aluno: {
-	// 			nome: "",
-	// 			dataNascimento: "",
-	// 			naturalidade: "",
-	// 			nacionalidade: "",
-	// 			sexo: "",
-	// 			cpf: "",
-	// 			rg: "",
-	// 			anoLetivo: "",
-	// 			termo: "",
-	// 			folha: "",
-	// 			livro: "",
-	// 			matricula: "",
-	// 			turno: "",
-	// 			tipoSanguineo: "",
-	// 			raca: "",
-	// 		},
-	// 		mae: {
-	// 			nomeMae: "",
-	// 			dataNascimentoMae: "",
-	// 			enderecoMae: "",
-	// 			numeroCasaMae: "",
-	// 			cepMae: "",
-	// 			cpfMae: "",
-	// 			rgMae: "",
-	// 			telefoneMae: "",
-	// 			emailMae: "",
-	// 			profissaoMae: "",
-	// 			localTrabalhoMae: "",
-	// 			telefoneTrabalhoMae: "",
-	// 		},
-	// 		pai: {
-	// 			nomePai: "",
-	// 			nascimentoPai: "",
-	// 			enderecoPai: "",
-	// 			numeroCasaPai: "",
-	// 			cepPai: "",
-	// 			cpfPai: "",
-	// 			rgPai: "",
-	// 			telefonfonePai: "",
-	// 			emailPai: "",
-	// 			profissaoPai: "",
-	// 			trabalhoPai: "",
-	// 			telefonfoneTrabalhoPai: "",
-	// 		},
-	// 		observacoes: {
-	// 			medicamentos: "",
-	// 			temirmao
-	// 			respNome: "",
-	// 			resptelefonFone: "",
-	// 			pessoasAutorizadas: "",
-	// 		},
-	// 	});
-	// 	setStep(1);
-	// };
-
 	return (
 		<div>
 			<Header />

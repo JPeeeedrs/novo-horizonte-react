@@ -46,7 +46,7 @@
 	width: auto; /* Largura padrão dos botões */
 	font-weight: bolder;
 	text-align: center; /* Centraliza o texto */
-	align-items: center;/* Alinha os itens com Flexbox */
+	align-items: center; /* Alinha os itens com Flexbox */
 }
 
 /* === HOVER E FOCUS GERAL DOS BOTÕES === */
@@ -58,13 +58,22 @@
 	outline: none; /* Remove contorno ao focar */
 }
 
+.btn-lgpd {
+	background-color: #902121;
+}
+
+.btn-lgpd:hover {
+	background-color: #502121; /* Cor de fundo verde escuro */
+	color: #dedbd7; /* Cor do texto ao passar o mouse */
+}
+
 /* === BOTÃO DE NAVEGAÇÃO === */
 .btn-nav {
 	background-color: #902121;
 	margin: 10px auto;
 }
 
-#btn-nav-anterior{
+#btn-nav-anterior {
 	background-color: #902121;
 	margin: 10px auto;
 }
@@ -127,17 +136,16 @@
 }
 
 @media (max-width: 800px) {
-	.btn-email, .btn-termo, #btn-nav-anterior{
+	.btn-email,
+	.btn-termo,
+	#btn-nav-anterior {
 		width: 100%;
 		text-align: center;
 	}
 }
 
-
 @media (max-width: 650px) {
 	#form {
-		
 		margin: 0;
 	}
-
 }

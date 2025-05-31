@@ -5,7 +5,8 @@
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-    background:#c5c5c5;
+	width: 100vw;
+	background: #c5c5c5;
 	font-family: Arial, sans-serif;
 }
 

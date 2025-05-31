@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import "../../styles/alunos.css";
+import "../../styles/login.css"; // Importa o CSS do login
 import SearchBar from "./SearchBar";
 import StudentCardItem from "./CardItem";
 
@@ -12,7 +12,23 @@ const StudentCard = () => {
 	const [error, setError] = useState(null);
 	const [allData, setAllData] = useState([]);
 	const [openDropdowns, setOpenDropdowns] = useState({});
-	const navigate = useNavigate();
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [user, setUser] = useState("");
+	const [pass, setPass] = useState("");
+
+	async function handleLogin(login, senha) {
+		const res = await fetch("http://localhost:8080/usuarios/senhas", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ login, senha }),
+		});
+
+		if (res.ok) {
+			console.log("Login bem-sucedido!");
+		} else {
+			console.log("Usuário ou senha inválidos.");
+		}
+	}
 
 	function nameNull(value) {
 		if (
@@ -60,7 +76,10 @@ const StudentCard = () => {
 
 	// Carrega dados iniciais
 	useEffect(() => {
+		if (!isLoggedIn) return;
+
 		const fetchInitialData = async () => {
+			setLoading(true);
 			try {
 				const [alunosRes, maesRes, paisRes, observacoesRes] = await Promise.all(
 					[
@@ -118,10 +137,12 @@ const StudentCard = () => {
 		};
 
 		fetchInitialData();
-	}, []);
+	}, [isLoggedIn]);
 
 	// Busca dinâmica
 	useEffect(() => {
+		if (!isLoggedIn) return;
+
 		const controller = new AbortController();
 
 		const fetchData = async () => {
@@ -131,57 +152,39 @@ const StudentCard = () => {
 					return;
 				}
 
-				// Faz todas as requisições em paralelo
 				const [alunosPorNome, maesPorNome, paisPorNome, alunosPorCpf] =
 					await Promise.all([
 						axios.get(
 							`http://localhost:8080/alunos/buscarPorNome?nome=${searchTerm}`,
-							{
-								signal: controller.signal,
-							}
+							{ signal: controller.signal }
 						),
 						axios.get(
 							`http://localhost:8080/maes/buscarPorNome?nomeMae=${searchTerm}`,
-							{
-								signal: controller.signal,
-							}
+							{ signal: controller.signal }
 						),
 						axios.get(
 							`http://localhost:8080/pais/buscarPorNome?nomePai=${searchTerm}`,
-							{
-								signal: controller.signal,
-							}
+							{ signal: controller.signal }
 						),
 						axios.get(
 							`http://localhost:8080/alunos/buscarPorCpf?cpf=${searchTerm}`,
-							{
-								signal: controller.signal,
-							}
+							{ signal: controller.signal }
 						),
 					]);
 
-				// Coleta todos os IDs relevantes
 				const alunoIds = new Set();
 
-				// 1. Alunos por nome
 				alunosPorNome.data.forEach((aluno) => alunoIds.add(aluno.id));
-
-				// 2. Mães encontradas -> busca alunos relacionados
 				maesPorNome.data.forEach((mae) => {
 					const alunosDaMae = allData.filter((aluno) => aluno.id === mae.idMae);
 					alunosDaMae.forEach((aluno) => alunoIds.add(aluno.id));
 				});
-
-				// 3. Pais encontrados -> busca alunos relacionados
 				paisPorNome.data.forEach((pai) => {
 					const alunosDoPai = allData.filter((aluno) => aluno.id === pai.idPai);
 					alunosDoPai.forEach((aluno) => alunoIds.add(aluno.id));
 				});
-
-				// 4. Alunos por CPF
 				alunosPorCpf.data.forEach((aluno) => alunoIds.add(aluno.id));
 
-				// Filtra alunos com base nos IDs coletados
 				const resultados = Array.from(alunoIds)
 					.map((id) => allData.find((aluno) => aluno.id === id))
 					.filter(Boolean);
@@ -200,7 +203,33 @@ const StudentCard = () => {
 			controller.abort();
 			clearTimeout(debounceTimer);
 		};
-	}, [searchTerm, allData]);
+	}, [searchTerm, allData, isLoggedIn]);
+
+	if (!isLoggedIn) {
+		return (
+			<div className='login-container'>
+				<div className='login-form'>
+					<h2>Login</h2>
+					<form onSubmit={handleLogin}>
+						<label>Usuário</label>
+						<input
+							value={user}
+							onChange={(e) => setUser(e.target.value)}
+							required
+						/>
+						<label>Senha</label>
+						<input
+							type='password'
+							value={pass}
+							onChange={(e) => setPass(e.target.value)}
+							required
+						/>
+						<button type='submit'>Entrar</button>
+					</form>
+				</div>
+			</div>
+		);
+	}
 
 	if (loading) return <p>Carregando...</p>;
 	if (error) return <p className='text-danger'>{error}</p>;

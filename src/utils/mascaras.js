@@ -1,10 +1,10 @@
 export const maskCPF = (value) => {
 	return value
-		.replace(/\D/g, "") // Remove tudo que não é dígito
-		.slice(0, 11) // Limita a 11 dígitos
-		.replace(/(\d{3})(\d)/, "$1.$2") // Coloca o ponto após os 3 primeiros dígitos
-		.replace(/(\d{3})(\d)/, "$1.$2") // Coloca o ponto após os 6 primeiros dígitos
-		.replace(/(\d{3})(\d{1,2})$/, "$1-$2"); // Coloca o traço antes dos últimos 2 dígitos
+		.replace(/\D/g, "")
+		.slice(0, 11)
+		.replace(/(\d{3})(\d)/, "$1.$2")
+		.replace(/(\d{3})(\d)/, "$1.$2")
+		.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
 };
 
 export const maskPhone = (value) => {
@@ -17,34 +17,34 @@ export const maskPhone = (value) => {
 
 export const maskRG = (value) => {
 	return value
-		.replace(/\D/g, "") // Remove tudo que não é dígito
-		.slice(0, 9) // Limita a 9 dígitos
-		.replace(/(\d{2})(\d)/, "$1.$2") // Coloca o ponto após os 2 primeiros dígitos
-		.replace(/(\d{3})(\d)/, "$1.$2") // Coloca o ponto após os 5 primeiros dígitos
-		.replace(/(\d{3})(\d{1})$/, "$1-$2"); // Coloca o traço antes do último dígito
+		.replace(/\D/g, "")
+		.slice(0, 9)
+		.replace(/(\d{2})(\d)/, "$1.$2")
+		.replace(/(\d{3})(\d)/, "$1.$2")
+		.replace(/(\d{3})(\d{1})$/, "$1-$2");
 };
 
 export const maskCEP = (value) => {
 	return value
-		.replace(/\D/g, "") // Remove tudo que não é dígito
-		.slice(0, 8) // Limita a 8 dígitos
-		.replace(/(\d{5})(\d)/, "$1-$2"); // Coloca o traço após os 5 primeiros dígitos
+		.replace(/\D/g, "")
+		.slice(0, 8)
+		.replace(/(\d{5})(\d)/, "$1-$2");
 };
 
 export const maskEmail = (value) => {
 	return value
-		.trim() // Remove espaços extras no início e no final
-		.toLowerCase() // Converte para letras minúsculas
-		.replace(/[^a-z0-9@._-]/g, ""); // Remove caracteres inválidos
+		.trim()
+		.toLowerCase()
+		.replace(/[^a-z0-9@._-]/g, "");
 };
 
 export const maskDate = (value) => {
 	const currentYear = new Date().getFullYear();
 	let maskedValue = value
-		.replace(/\D/g, "") // Remove tudo que não é dígito
-		.slice(0, 8) // Limita a 8 dígitos
-		.replace(/(\d{2})(\d)/, "$1/$2") // Coloca a barra após os 2 primeiros dígitos
-		.replace(/(\d{2})(\d)/, "$1/$2"); // Coloca a barra após os 4 primeiros dígitos
+		.replace(/\D/g, "")
+		.slice(0, 8)
+		.replace(/(\d{2})(\d)/, "$1/$2")
+		.replace(/(\d{2})(\d)/, "$1/$2");
 
 	const parts = maskedValue.split("/");
 
@@ -53,7 +53,6 @@ export const maskDate = (value) => {
 		parts[1] = "12";
 	}
 
-	// Valida o ano
 	if (
 		parts[2] &&
 		parts[2].length === 4 &&
@@ -62,14 +61,12 @@ export const maskDate = (value) => {
 		parts[2] = currentYear.toString();
 	}
 
-	// Valida o dia apenas se o mês e o ano estiverem completos
 	if (parts[0] && parts[1] && parts[2] && parts[2].length === 4) {
 		const day = parseInt(parts[0], 10);
 		const month = parseInt(parts[1], 10);
 		const year = parseInt(parts[2], 10);
 
 		if (month === 2) {
-			// Verifica se é ano bissexto
 			const isLeapYear =
 				year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
 			if (day > (isLeapYear ? 29 : 28)) {
@@ -86,9 +83,5 @@ export const maskDate = (value) => {
 };
 
 export const maskName = (value) => {
-	return (
-		value
-			// .trim() //comentado pq tava bugando // Remove espaços extras no início e no final
-			.replace(/[^A-Za-zÀ-ÿ\s]/g, "")
-	); // Remove caracteres inválidos
+	return value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
 };

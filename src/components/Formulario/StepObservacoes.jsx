@@ -1,6 +1,7 @@
 import termos from "../../assets/images/termos.pdf";
 import InputField from "../../common/inputs/InputField";
 import SelectField from "../../common/inputs/SelectField";
+import { Link } from "react-router-dom";
 
 function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 	const safeFormData = {
@@ -281,6 +282,10 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 					>
 						Baixar Termos
 					</a>
+					{/* Link para a página LGPD */}
+					<Link to='/lgpd-info' className='btn btn-lgpd'>
+						Sobre LGPD
+					</Link>
 				</div>
 			</div>
 		</div>
