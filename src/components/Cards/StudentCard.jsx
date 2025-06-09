@@ -16,19 +16,36 @@ const StudentCard = () => {
 	const [user, setUser] = useState("");
 	const [pass, setPass] = useState("");
 
-	async function handleLogin(login, senha) {
-		const res = await fetch("http://localhost:8080/usuarios/senhas", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ login, senha }),
-		});
-
-		if (res.ok) {
-			console.log("Login bem-sucedido!");
-		} else {
-			console.log("Usuário ou senha inválidos.");
+	const handleLogin = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await fetch("http://localhost:8080/api/login", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ login: user, senha: pass }),
+			});
+			if (response.ok) {
+				const data = await response.text();
+				if (data === "ok") {
+					alert("Login realizado com sucesso!");
+					setIsLoggedIn(true);
+					localStorage.setItem(
+						"userSession",
+						JSON.stringify({
+							login: user,
+							expiration: new Date().getTime() + 60 * 60 * 1000,
+						})
+					);
+				} else {
+					alert("Usuário ou senha incorretos!");
+				}
+			} else {
+				throw new Error("Login inválido");
+			}
+		} catch (error) {
+			alert(error.message);
 		}
-	}
+	};
 
 	function nameNull(value) {
 		if (
