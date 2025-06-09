@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/alunos.css";
-import "../../styles/login.css"; // Importa o CSS do login
+import "../../styles/login.css";
 import SearchBar from "./SearchBar";
 import StudentCardItem from "./CardItem";
+import { useAuth } from "../../contexts/AuthContext";
 
 const StudentCard = () => {
 	const [alunos, setAlunos] = useState([]);
@@ -12,21 +13,43 @@ const StudentCard = () => {
 	const [error, setError] = useState(null);
 	const [allData, setAllData] = useState([]);
 	const [openDropdowns, setOpenDropdowns] = useState({});
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [user, setUser] = useState("");
-	const [pass, setPass] = useState("");
+	const { isLoggedIn, user, pass, login } = useAuth();
+	const [loginUser, setLoginUser] = useState("");
+	const [loginPass, setLoginPass] = useState("");
 
-	async function handleLogin(login, senha) {
-		const res = await fetch("http://localhost:8080/usuarios/senhas", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ login, senha }),
-		});
+	async function handleLoginSubmit(event) {
+		// Previne que o formulário recarregue a página
+		event.preventDefault(); 
 
-		if (res.ok) {
-			console.log("Login bem-sucedido!");
-		} else {
-			console.log("Usuário ou senha inválidos.");
+		// --- INÍCIO DA DEPURAÇÃO ---
+		console.log("--- Iniciando tentativa de login ---");
+		console.log("URL de destino:", "http://localhost:8080/login");
+		console.log("Login enviado:", loginUser);
+		console.log("Senha enviada:", loginPass);
+		// --- FIM DA DEPURAÇÃO ---
+	
+		try {
+			const res = await fetch("http://localhost:8080/login", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				// Usa as variáveis 'user' e 'pass' do estado do componente
+				body: JSON.stringify({ login: loginUser, senha: loginPass }), 
+			});
+	
+			if (res.ok) {
+				// Se a API retornar sucesso (status 200-299)
+				console.log("Login bem-sucedido!");
+				login(loginUser, loginPass);
+				// Removido: localStorage.setItem("user", user);
+				// Removido: localStorage.setItem("pass", pass);
+			} else {
+				const errorMsg = await res.text();
+				alert("Usuário ou senha inválidos. Mensagem do servidor: " + errorMsg);
+			}
+		} catch (error) {
+			// Se houver um erro de rede (API offline, etc.)
+			alert("Erro ao tentar conectar com o servidor. Verifique se a API está rodando.");
+			console.error("Erro de rede no login:", error);
 		}
 	}
 
@@ -60,10 +83,11 @@ const StudentCard = () => {
 				return;
 			}
 
-			await axios.delete(`http://localhost:8080/alunos/${id}`);
-			await axios.delete(`http://localhost:8080/maes/${id}`);
-			await axios.delete(`http://localhost:8080/pais/${id}`);
-			await axios.delete(`http://localhost:8080/observacoes/${id}`);
+			const authConfig = { auth: { username: user, password: pass } };
+			await axios.delete(`http://localhost:8080/alunos/${id}`, authConfig);
+			await axios.delete(`http://localhost:8080/maes/${id}`, authConfig);
+			await axios.delete(`http://localhost:8080/pais/${id}`, authConfig);
+			await axios.delete(`http://localhost:8080/observacoes/${id}`, authConfig);
 			setAlunos((prevAlunos) => prevAlunos.filter((aluno) => aluno.id !== id));
 			setAllData((prevAllData) =>
 				prevAllData.filter((aluno) => aluno.id !== id)
@@ -81,12 +105,19 @@ const StudentCard = () => {
 		const fetchInitialData = async () => {
 			setLoading(true);
 			try {
+				const authConfig = {
+					auth: {
+						username: user, // A variável 'user' do seu estado com o login
+						password: pass, // A variável 'pass' do seu estado com a senha
+					},
+				};
+				
 				const [alunosRes, maesRes, paisRes, observacoesRes] = await Promise.all(
 					[
-						axios.get("http://localhost:8080/alunos"),
-						axios.get("http://localhost:8080/maes"),
-						axios.get("http://localhost:8080/pais"),
-						axios.get("http://localhost:8080/observacoes"),
+						axios.get("http://localhost:8080/alunos", authConfig),
+						axios.get("http://localhost:8080/maes", authConfig),
+						axios.get("http://localhost:8080/pais", authConfig),
+						axios.get("http://localhost:8080/observacoes", authConfig),
 					]
 				);
 
@@ -137,7 +168,7 @@ const StudentCard = () => {
 		};
 
 		fetchInitialData();
-	}, [isLoggedIn]);
+	}, [isLoggedIn, user, pass]);
 
 	// Busca dinâmica
 	useEffect(() => {
@@ -152,23 +183,24 @@ const StudentCard = () => {
 					return;
 				}
 
+				const authConfig = { auth: { username: user, password: pass } };
 				const [alunosPorNome, maesPorNome, paisPorNome, alunosPorCpf] =
 					await Promise.all([
 						axios.get(
 							`http://localhost:8080/alunos/buscarPorNome?nome=${searchTerm}`,
-							{ signal: controller.signal }
+							{ signal: controller.signal, ...authConfig }
 						),
 						axios.get(
 							`http://localhost:8080/maes/buscarPorNome?nomeMae=${searchTerm}`,
-							{ signal: controller.signal }
+							{ signal: controller.signal, ...authConfig }
 						),
 						axios.get(
 							`http://localhost:8080/pais/buscarPorNome?nomePai=${searchTerm}`,
-							{ signal: controller.signal }
+							{ signal: controller.signal, ...authConfig }
 						),
 						axios.get(
 							`http://localhost:8080/alunos/buscarPorCpf?cpf=${searchTerm}`,
-							{ signal: controller.signal }
+							{ signal: controller.signal, ...authConfig }
 						),
 					]);
 
@@ -203,25 +235,25 @@ const StudentCard = () => {
 			controller.abort();
 			clearTimeout(debounceTimer);
 		};
-	}, [searchTerm, allData, isLoggedIn]);
+	}, [searchTerm, allData, isLoggedIn, user, pass]);
 
 	if (!isLoggedIn) {
 		return (
 			<div className='login-container'>
 				<div className='login-form'>
 					<h2>Login</h2>
-					<form onSubmit={handleLogin}>
+					<form onSubmit={handleLoginSubmit}>
 						<label>Usuário</label>
 						<input
-							value={user}
-							onChange={(e) => setUser(e.target.value)}
+							value={loginUser}
+							onChange={(e) => setLoginUser(e.target.value)}
 							required
 						/>
 						<label>Senha</label>
 						<input
 							type='password'
-							value={pass}
-							onChange={(e) => setPass(e.target.value)}
+							value={loginPass}
+							onChange={(e) => setLoginPass(e.target.value)}
 							required
 						/>
 						<button type='submit'>Entrar</button>

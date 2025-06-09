@@ -24,6 +24,7 @@ import {
 	maskEmail,
 	maskDate,
 } from "../../utils/mascaras";
+import { useAuth } from "../../contexts/AuthContext";
 
 // Configuração global do Axios
 const api = axios.create({
@@ -107,16 +108,24 @@ function Edit() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
+	const { user, pass } = useAuth();
+
 	// Carregar informações do aluno
 	useEffect(() => {
 		const fetchStudentData = async () => {
 			try {
 				setLoading(true);
+				const authConfig = {
+					auth: {
+						username: user,
+						password: pass,
+					},
+				};
 				const [alunoRes, maeRes, paiRes, observacoesRes] = await Promise.all([
-					api.get(`/alunos/${alunoId}`),
-					api.get(`/maes/${alunoId}`),
-					api.get(`/pais/${alunoId}`),
-					api.get(`/observacoes/${alunoId}`),
+					api.get(`/alunos/${alunoId}`, authConfig),
+					api.get(`/maes/${alunoId}`, authConfig),
+					api.get(`/pais/${alunoId}`, authConfig),
+					api.get(`/observacoes/${alunoId}`, authConfig),
 				]);
 
 				setFormData({
@@ -134,7 +143,7 @@ function Edit() {
 		};
 
 		if (alunoId) fetchStudentData();
-	}, [alunoId]);
+	}, [alunoId, user, pass]);
 
 	const nextStep = () => setStep((prev) => prev + 1);
 	const prevStep = () => setStep((prev) => prev - 1);
@@ -187,13 +196,20 @@ function Edit() {
 				return;
 			}
 
+			const authConfig = {
+				auth: {
+					username: user,
+					password: pass,
+				},
+			};
 			// Atualizar os dados de cada seção separadamente
-			const alunoResponse = await api.put(`/alunos/${alunoId}`, formData.aluno);
-			const maeResponse = await api.put(`/maes/${alunoId}`, formData.mae);
-			const paiResponse = await api.put(`/pais/${alunoId}`, formData.pai);
+			const alunoResponse = await api.put(`/alunos/${alunoId}`, formData.aluno, authConfig);
+			const maeResponse = await api.put(`/maes/${alunoId}`, formData.mae, authConfig);
+			const paiResponse = await api.put(`/pais/${alunoId}`, formData.pai, authConfig);
 			const observacoesResponse = await api.put(
 				`/observacoes/${alunoId}`,
-				formData.observacoes
+				formData.observacoes,
+				authConfig
 			);
 
 			const isSuccess = (response) => {
