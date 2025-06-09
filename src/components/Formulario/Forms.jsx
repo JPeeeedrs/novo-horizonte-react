@@ -196,6 +196,15 @@ function Forms() {
 				setLoading(false);
 				return;
 			}
+
+			const lgpdMsg =
+				"Ao prosseguir com o cadastro, você declara estar ciente e de acordo com a coleta e tratamento dos dados pessoais informados, conforme previsto na Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018). As informações serão utilizadas exclusivamente para fins administrativos e educacionais, respeitando os princípios de segurança, privacidade e transparência. Para mais informações acesse ''Sobre LGPD''\n\nDeseja continuar?";
+			const confirmed = window.confirm(lgpdMsg);
+			if (!confirmed) {
+				setLoading(false);
+				return;
+			}
+
 			// Enviar os dados de cada seção separadamente endpoints
 			const alunoResponse = await api.post("/alunos", formData.aluno);
 			const maeResponse = await api.post("/maes", formData.mae);

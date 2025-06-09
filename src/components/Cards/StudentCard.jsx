@@ -51,7 +51,7 @@ const StudentCard = () => {
 			alert("Erro ao tentar conectar com o servidor. Verifique se a API está rodando.");
 			console.error("Erro de rede no login:", error);
 		}
-	}
+	};
 
 	function nameNull(value) {
 		if (
