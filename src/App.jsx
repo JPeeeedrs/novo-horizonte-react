@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Formulario from "./pages/Formulario";
 import LgpdInfo from "./pages/LgpdInfo";
 import Alunos from "./pages/Alunos";
+import Download from "./pages/Download";
 import Edit from "./components/EditStudent/Edit";
 import SobreNos from "./pages/SobreNos";
 
@@ -19,6 +20,7 @@ function App() {
 				<Route path='/formulario' element={<Formulario />} />
 				<Route path='/lgpd-info' element={<LgpdInfo />} />
 				<Route path='/alunos' element={<Alunos />} />
+				<Route path='/download' element={<Download />} />
 				<Route path='/editar/:id' element={<Edit />} />
 				<Route path='sobrenos' element={<SobreNos />} />
 			</Routes>

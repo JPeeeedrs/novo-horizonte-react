@@ -36,6 +36,9 @@ function Header() {
 				<Link to='/alunos' className='text-white text-decoration-none'>
 					ALUNOS
 				</Link>
+				<Link to='/download' className='text-white text-decoration-none'>
+					DOWNLOAD
+				</Link>
 			</nav>
 		</header>
 	);

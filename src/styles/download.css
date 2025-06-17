@@ -1,0 +1,96 @@
+/* Estilos Globais */
+body {
+	background-color: #f8f8f8; /* Um cinza bem claro para o fundo da página */
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, sans-serif;
+}
+
+/* Container Principal do Texto */
+.text {
+	max-width: 800px; /* Limita a largura para melhor legibilidade em telas grandes */
+	margin: 40px auto; /* Centraliza o container na página */
+	padding: 40px;
+	background-color: #ffffff; /* Fundo branco para o card de texto */
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	text-align: center; /* Centraliza todo o texto dentro do container */
+}
+
+/* Título Principal (h1) */
+.text h1 {
+	color: #902121; /* Cor principal aplicada aqui */
+	font-size: 2.5rem; /* Tamanho de fonte grande e impactante */
+	margin-bottom: 20px;
+	font-weight: 700;
+}
+
+/* Parágrafo (p) */
+.text p {
+	color: #555555; /* Um cinza escuro para o texto, para não cansar a vista */
+	font-size: 1.1rem;
+	line-height: 1.6; /* Espaçamento entre linhas para conforto na leitura */
+	margin-bottom: 35px;
+}
+
+/* Lista (ul e li) */
+.text ul {
+	list-style: none; /* Remove os marcadores padrão da lista */
+	padding: 0;
+	margin: 0;
+	text-align: left; /* Alinha o texto da lista à esquerda dentro do container centralizado */
+	display: inline-block; /* Faz a lista se ajustar ao conteúdo */
+}
+
+.text li {
+	color: #333333;
+	font-size: 1rem;
+	margin-bottom: 15px;
+	display: flex;
+	align-items: center;
+}
+
+/* Adiciona um ícone de "check" personalizado antes de cada item da lista */
+.text li::before {
+	content: "✔";
+	color: #902121; /* Cor principal no ícone */
+	font-size: 1.2rem;
+	margin-right: 12px;
+	font-weight: bold;
+}
+
+/* Estilo para o Botão de Download */
+.download-btn {
+	display: inline-block;
+	background-color: #902121; /* Cor principal no fundo do botão */
+	color: #ffffff; /* Texto branco para contraste */
+	padding: 15px 35px;
+	border-radius: 8px;
+	font-size: 1.1rem;
+	font-weight: bold;
+	text-decoration: none; /* Remove o sublinhado de links */
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	margin-bottom: 35px; /* Espaçamento abaixo do botão */
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+.download-btn:hover {
+	background-color: #7a1c1c; /* Um tom um pouco mais escuro da cor principal */
+	transform: translateY(-2px); /* Leve animação de "subir" */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Media Query para telas menores (celulares) */
+@media (max-width: 600px) {
+	.text {
+		padding: 25px;
+		margin: 20px 10px;
+	}
+
+	.text h1 {
+		font-size: 2rem;
+	}
+
+	.text p {
+		font-size: 1rem;
+	}
+}

@@ -52,7 +52,7 @@ function Forms() {
 		mae: {
 			temMae: true,
 			nomeMae: "",
-			dataNascimentoMae: "",
+			nascimentoMae: "",
 			enderecoMae: "",
 			numeroCasaMae: "",
 			cepMae: "",
@@ -61,7 +61,7 @@ function Forms() {
 			telefoneMae: "",
 			emailMae: "",
 			profissaoMae: "",
-			localTrabalhoMae: "",
+			trabalhoMae: "",
 			telefoneTrabalhoMae: "",
 		},
 		pai: {
@@ -105,7 +105,7 @@ function Forms() {
 	const prevStep = () => setStep((prev) => prev - 1);
 
 	const handleChange = async (stepName, e) => {
-		const { name, value, type, checked } = e.target;
+		const { name, value } = e.target;
 		let maskedValue = value;
 		// Aplica as máscaras
 		if (name === "cpf" || name === "cpfMae" || name === "cpfPai")
@@ -258,7 +258,7 @@ function Forms() {
 			},
 			mae: {
 				nomeMae: "",
-				dataNascimentoMae: "",
+				nascimentoMae: "",
 				enderecoMae: "",
 				cepMae: "",
 				cpfMae: "",
@@ -266,7 +266,7 @@ function Forms() {
 				telefoneMae: "",
 				emailMae: "",
 				profissaoMae: "",
-				localTrabalhoMae: "",
+				trabalhoMae: "",
 				telefoneTrabalhoMae: "",
 			},
 			pai: {

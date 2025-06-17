@@ -19,7 +19,7 @@ const StudentCard = () => {
 
 	async function handleLoginSubmit(event) {
 		// Previne que o formulário recarregue a página
-		event.preventDefault(); 
+		event.preventDefault();
 
 		// --- INÍCIO DA DEPURAÇÃO ---
 		console.log("--- Iniciando tentativa de login ---");
@@ -27,15 +27,15 @@ const StudentCard = () => {
 		console.log("Login enviado:", loginUser);
 		console.log("Senha enviada:", loginPass);
 		// --- FIM DA DEPURAÇÃO ---
-	
+
 		try {
 			const res = await fetch("http://localhost:8080/login", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				// Usa as variáveis 'user' e 'pass' do estado do componente
-				body: JSON.stringify({ login: loginUser, senha: loginPass }), 
+				body: JSON.stringify({ login: loginUser, senha: loginPass }),
 			});
-	
+
 			if (res.ok) {
 				// Se a API retornar sucesso (status 200-299)
 				console.log("Login bem-sucedido!");
@@ -48,17 +48,20 @@ const StudentCard = () => {
 			}
 		} catch (error) {
 			// Se houver um erro de rede (API offline, etc.)
-			alert("Erro ao tentar conectar com o servidor. Verifique se a API está rodando.");
+			alert(
+				"Erro ao tentar conectar com o servidor. Verifique se a API está rodando."
+			);
 			console.error("Erro de rede no login:", error);
 		}
-	};
+	}
 
 	function nameNull(value) {
 		if (
 			!value ||
 			value.trim() === "" ||
 			value === "00/00/0000" ||
-			value === "(00) 00000-0000"
+			value === "(00) 00000-0000" ||
+			value === 0
 		) {
 			return "Não informado";
 		}
@@ -111,7 +114,7 @@ const StudentCard = () => {
 						password: pass, // A variável 'pass' do seu estado com a senha
 					},
 				};
-				
+
 				const [alunosRes, maesRes, paisRes, observacoesRes] = await Promise.all(
 					[
 						axios.get("http://localhost:8080/alunos", authConfig),
