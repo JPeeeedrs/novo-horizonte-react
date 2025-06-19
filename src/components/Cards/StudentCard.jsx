@@ -13,45 +13,20 @@ const StudentCard = () => {
 	const [error, setError] = useState(null);
 	const [allData, setAllData] = useState([]);
 	const [openDropdowns, setOpenDropdowns] = useState({});
-	const { isLoggedIn, user, pass, login } = useAuth();
+	const { isLoggedIn, login } = useAuth(); // Removido user/pass
 	const [loginUser, setLoginUser] = useState("");
 	const [loginPass, setLoginPass] = useState("");
 
+	// Login apenas no front, não faz requisição para o backend
 	async function handleLoginSubmit(event) {
-		// Previne que o formulário recarregue a página
 		event.preventDefault();
-
-		// --- INÍCIO DA DEPURAÇÃO ---
-		console.log("--- Iniciando tentativa de login ---");
-		console.log("URL de destino:", "http://localhost:8080/login");
-		console.log("Login enviado:", loginUser);
-		console.log("Senha enviada:", loginPass);
-		// --- FIM DA DEPURAÇÃO ---
-
-		try {
-			const res = await fetch("http://localhost:8080/login", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				// Usa as variáveis 'user' e 'pass' do estado do componente
-				body: JSON.stringify({ login: loginUser, senha: loginPass }),
-			});
-
-			if (res.ok) {
-				// Se a API retornar sucesso (status 200-299)
-				console.log("Login bem-sucedido!");
-				login(loginUser, loginPass);
-				// Removido: localStorage.setItem("user", user);
-				// Removido: localStorage.setItem("pass", pass);
-			} else {
-				const errorMsg = await res.text();
-				alert("Usuário ou senha inválidos. Mensagem do servidor: " + errorMsg);
-			}
-		} catch (error) {
-			// Se houver um erro de rede (API offline, etc.)
-			alert(
-				"Erro ao tentar conectar com o servidor. Verifique se a API está rodando."
-			);
-			console.error("Erro de rede no login:", error);
+		// Simula login local (apenas front)
+		const usuarioValido = "admin";
+		const senhaValida = "1234";
+		if (loginUser === usuarioValido && loginPass === senhaValida) {
+			login(loginUser, loginPass);
+		} else {
+			alert("Usuário ou senha inválidos.");
 		}
 	}
 
@@ -86,11 +61,11 @@ const StudentCard = () => {
 				return;
 			}
 
-			const authConfig = { auth: { username: user, password: pass } };
-			await axios.delete(`http://localhost:8080/alunos/${id}`, authConfig);
-			await axios.delete(`http://localhost:8080/maes/${id}`, authConfig);
-			await axios.delete(`http://localhost:8080/pais/${id}`, authConfig);
-			await axios.delete(`http://localhost:8080/observacoes/${id}`, authConfig);
+			// Removido auth dos endpoints
+			await axios.delete(`http://191.252.195.227:8080/alunos/${id}`);
+			await axios.delete(`http://191.252.195.227:8080/maes/${id}`);
+			await axios.delete(`http://191.252.195.227:8080/pais/${id}`);
+			await axios.delete(`http://191.252.195.227:8080/observacoes/${id}`);
 			setAlunos((prevAlunos) => prevAlunos.filter((aluno) => aluno.id !== id));
 			setAllData((prevAllData) =>
 				prevAllData.filter((aluno) => aluno.id !== id)
@@ -108,19 +83,13 @@ const StudentCard = () => {
 		const fetchInitialData = async () => {
 			setLoading(true);
 			try {
-				const authConfig = {
-					auth: {
-						username: user, // A variável 'user' do seu estado com o login
-						password: pass, // A variável 'pass' do seu estado com a senha
-					},
-				};
-
+				// Removido auth dos endpoints
 				const [alunosRes, maesRes, paisRes, observacoesRes] = await Promise.all(
 					[
-						axios.get("http://localhost:8080/alunos", authConfig),
-						axios.get("http://localhost:8080/maes", authConfig),
-						axios.get("http://localhost:8080/pais", authConfig),
-						axios.get("http://localhost:8080/observacoes", authConfig),
+						axios.get("http://191.252.195.227:8080/alunos"),
+						axios.get("http://191.252.195.227:8080/maes"),
+						axios.get("http://191.252.195.227:8080/pais"),
+						axios.get("http://191.252.195.227:8080/observacoes"),
 					]
 				);
 
@@ -171,7 +140,7 @@ const StudentCard = () => {
 		};
 
 		fetchInitialData();
-	}, [isLoggedIn, user, pass]);
+	}, [isLoggedIn]);
 
 	// Busca dinâmica
 	useEffect(() => {
@@ -186,24 +155,24 @@ const StudentCard = () => {
 					return;
 				}
 
-				const authConfig = { auth: { username: user, password: pass } };
+				// Removido auth dos endpoints
 				const [alunosPorNome, maesPorNome, paisPorNome, alunosPorCpf] =
 					await Promise.all([
 						axios.get(
-							`http://localhost:8080/alunos/buscarPorNome?nome=${searchTerm}`,
-							{ signal: controller.signal, ...authConfig }
+							`http://191.252.195.227:8080/alunos/buscarPorNome?nome=${searchTerm}`,
+							{ signal: controller.signal }
 						),
 						axios.get(
-							`http://localhost:8080/maes/buscarPorNome?nomeMae=${searchTerm}`,
-							{ signal: controller.signal, ...authConfig }
+							`http://191.252.195.227:8080/maes/buscarPorNome?nomeMae=${searchTerm}`,
+							{ signal: controller.signal }
 						),
 						axios.get(
-							`http://localhost:8080/pais/buscarPorNome?nomePai=${searchTerm}`,
-							{ signal: controller.signal, ...authConfig }
+							`http://191.252.195.227:8080/pais/buscarPorNome?nomePai=${searchTerm}`,
+							{ signal: controller.signal }
 						),
 						axios.get(
-							`http://localhost:8080/alunos/buscarPorCpf?cpf=${searchTerm}`,
-							{ signal: controller.signal, ...authConfig }
+							`http://191.252.195.227:8080/alunos/buscarPorCpf?cpf=${searchTerm}`,
+							{ signal: controller.signal }
 						),
 					]);
 
@@ -238,7 +207,7 @@ const StudentCard = () => {
 			controller.abort();
 			clearTimeout(debounceTimer);
 		};
-	}, [searchTerm, allData, isLoggedIn, user, pass]);
+	}, [searchTerm, allData, isLoggedIn]);
 
 	if (!isLoggedIn) {
 		return (

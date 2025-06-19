@@ -28,7 +28,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 // Configuração global do Axios
 const api = axios.create({
-	baseURL: "http://localhost:8080",
+	baseURL: "http://191.252.195.227:8080",
 	timeout: 10000,
 	headers: {
 		"Content-Type": "application/json",
@@ -36,8 +36,8 @@ const api = axios.create({
 });
 
 function Edit() {
-	const { id: alunoId } = useParams(); // Obtém o ID do aluno da URL
-	const navigate = useNavigate(); // Hook para redirecionamento
+	const { id: alunoId } = useParams();
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		aluno: {
 			nome: "",
@@ -108,24 +108,16 @@ function Edit() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
-	const { user, pass } = useAuth();
-
 	// Carregar informações do aluno
 	useEffect(() => {
 		const fetchStudentData = async () => {
 			try {
 				setLoading(true);
-				const authConfig = {
-					auth: {
-						username: user,
-						password: pass,
-					},
-				};
 				const [alunoRes, maeRes, paiRes, observacoesRes] = await Promise.all([
-					api.get(`/alunos/${alunoId}`, authConfig),
-					api.get(`/maes/${alunoId}`, authConfig),
-					api.get(`/pais/${alunoId}`, authConfig),
-					api.get(`/observacoes/${alunoId}`, authConfig),
+					api.get(`/alunos/${alunoId}`),
+					api.get(`/maes/${alunoId}`),
+					api.get(`/pais/${alunoId}`),
+					api.get(`/observacoes/${alunoId}`),
 				]);
 
 				setFormData({
@@ -143,7 +135,7 @@ function Edit() {
 		};
 
 		if (alunoId) fetchStudentData();
-	}, [alunoId, user, pass]);
+	}, [alunoId]);
 
 	const nextStep = () => setStep((prev) => prev + 1);
 	const prevStep = () => setStep((prev) => prev - 1);
@@ -196,20 +188,13 @@ function Edit() {
 				return;
 			}
 
-			const authConfig = {
-				auth: {
-					username: user,
-					password: pass,
-				},
-			};
-			// Atualizar os dados de cada seção separadamente
-			const alunoResponse = await api.put(`/alunos/${alunoId}`, formData.aluno, authConfig);
-			const maeResponse = await api.put(`/maes/${alunoId}`, formData.mae, authConfig);
-			const paiResponse = await api.put(`/pais/${alunoId}`, formData.pai, authConfig);
+			// Removido o uso de auth nos endpoints
+			const alunoResponse = await api.put(`/alunos/${alunoId}`, formData.aluno);
+			const maeResponse = await api.put(`/maes/${alunoId}`, formData.mae);
+			const paiResponse = await api.put(`/pais/${alunoId}`, formData.pai);
 			const observacoesResponse = await api.put(
 				`/observacoes/${alunoId}`,
-				formData.observacoes,
-				authConfig
+				formData.observacoes
 			);
 
 			const isSuccess = (response) => {
@@ -225,7 +210,7 @@ function Edit() {
 				alert(
 					`Aluno ${alunoResponse.data.nome} e informações relacionadas atualizados com sucesso!`
 				);
-				navigate("/alunos"); // Redireciona para a página de alunos
+				navigate("/alunos");
 			}
 		} catch (error) {
 			console.error("Erro:", error);

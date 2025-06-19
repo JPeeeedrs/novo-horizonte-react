@@ -25,7 +25,7 @@ import {
 
 // Configuração global do Axios
 const api = axios.create({
-	baseURL: "http://localhost:8080",
+	baseURL: "http://191.252.195.227:8080",
 	timeout: 10000,
 	headers: { "Content-Type": "application/json" },
 });
@@ -73,11 +73,11 @@ function Forms() {
 			cepPai: "",
 			cpfPai: "",
 			rgPai: "",
-			telefonfonePai: "",
+			telefonePai: "",
 			emailPai: "",
 			profissaoPai: "",
 			trabalhoPai: "",
-			telefonfoneTrabalhoPai: "",
+			telefoneTrabalhoPai: "",
 		},
 		observacoes: {
 			matriculaTipo: "",
@@ -107,7 +107,6 @@ function Forms() {
 	const handleChange = async (stepName, e) => {
 		const { name, value } = e.target;
 		let maskedValue = value;
-		// Aplica as máscaras
 		if (name === "cpf" || name === "cpfMae" || name === "cpfPai")
 			maskedValue = maskCPF(value);
 		if (name === "rg" || name === "rgMae" || name === "rgPai")
@@ -145,12 +144,10 @@ function Forms() {
 			name === "pessoasAutorizadas"
 		)
 			maskedValue = maskName(value);
-		// Atualiza o campo normalmente
 		setFormData((prev) => ({
 			...prev,
 			[stepName]: { ...prev[stepName], [name]: maskedValue },
 		}));
-		// Se for o CEP da mãe, busca o nome da rua automaticamente
 		if (name === "cepMae" || name === "cepPai") {
 			const cepNumeros = value.replace(/\D/g, "");
 			if (cepNumeros.length === 8) {
@@ -270,17 +267,18 @@ function Forms() {
 				telefoneTrabalhoMae: "",
 			},
 			pai: {
+				temPai: true,
 				nomePai: "",
 				nascimentoPai: "",
 				enderecoPai: "",
 				cepPai: "",
 				cpfPai: "",
 				rgPai: "",
-				telefonfonePai: "",
+				telefonePai: "",
 				emailPai: "",
 				profissaoPai: "",
 				trabalhoPai: "",
-				telefonfoneTrabalhoPai: "",
+				telefoneTrabalhoPai: "",
 			},
 			observacoes: {
 				matriculaTipo: "",
