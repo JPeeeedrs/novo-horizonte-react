@@ -62,10 +62,10 @@ const StudentCard = () => {
 			}
 
 			// Removido auth dos endpoints
-			await axios.delete(`http://191.252.195.227:8080/alunos/${id}`);
-			await axios.delete(`http://191.252.195.227:8080/maes/${id}`);
-			await axios.delete(`http://191.252.195.227:8080/pais/${id}`);
-			await axios.delete(`http://191.252.195.227:8080/observacoes/${id}`);
+			await axios.delete(`http://localhost:8080/alunos/${id}`);
+			await axios.delete(`http://localhost:8080/maes/${id}`);
+			await axios.delete(`http://localhost:8080/pais/${id}`);
+			await axios.delete(`http://localhost:8080/observacoes/${id}`);
 			setAlunos((prevAlunos) => prevAlunos.filter((aluno) => aluno.id !== id));
 			setAllData((prevAllData) =>
 				prevAllData.filter((aluno) => aluno.id !== id)
@@ -86,10 +86,10 @@ const StudentCard = () => {
 				// Removido auth dos endpoints
 				const [alunosRes, maesRes, paisRes, observacoesRes] = await Promise.all(
 					[
-						axios.get("http://191.252.195.227:8080/alunos"),
-						axios.get("http://191.252.195.227:8080/maes"),
-						axios.get("http://191.252.195.227:8080/pais"),
-						axios.get("http://191.252.195.227:8080/observacoes"),
+						axios.get("http://localhost:8080/alunos"),
+						axios.get("http://localhost:8080/maes"),
+						axios.get("http://localhost:8080/pais"),
+						axios.get("http://localhost:8080/observacoes"),
 					]
 				);
 
@@ -159,19 +159,19 @@ const StudentCard = () => {
 				const [alunosPorNome, maesPorNome, paisPorNome, alunosPorCpf] =
 					await Promise.all([
 						axios.get(
-							`http://191.252.195.227:8080/alunos/buscarPorNome?nome=${searchTerm}`,
+							`http://localhost:8080/alunos/buscarPorNome?nome=${searchTerm}`,
 							{ signal: controller.signal }
 						),
 						axios.get(
-							`http://191.252.195.227:8080/maes/buscarPorNome?nomeMae=${searchTerm}`,
+							`http://localhost:8080/maes/buscarPorNome?nomeMae=${searchTerm}`,
 							{ signal: controller.signal }
 						),
 						axios.get(
-							`http://191.252.195.227:8080/pais/buscarPorNome?nomePai=${searchTerm}`,
+							`http://localhost:8080/pais/buscarPorNome?nomePai=${searchTerm}`,
 							{ signal: controller.signal }
 						),
 						axios.get(
-							`http://191.252.195.227:8080/alunos/buscarPorCpf?cpf=${searchTerm}`,
+							`http://localhost:8080/alunos/buscarPorCpf?cpf=${searchTerm}`,
 							{ signal: controller.signal }
 						),
 					]);

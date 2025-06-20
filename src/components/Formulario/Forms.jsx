@@ -25,7 +25,7 @@ import {
 
 // Configuração global do Axios
 const api = axios.create({
-	baseURL: "http://191.252.195.227:8080",
+	baseURL: "http://localhost:8080",
 	timeout: 10000,
 	headers: { "Content-Type": "application/json" },
 });
