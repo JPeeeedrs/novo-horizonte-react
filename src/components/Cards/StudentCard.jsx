@@ -6,6 +6,13 @@ import SearchBar from "./SearchBar";
 import StudentCardItem from "./CardItem";
 import { useAuth } from "../../contexts/AuthContext";
 
+// Adicione as credenciais básicas para autenticação nos endpoints protegidos
+const axiosInstance = axios.create({
+	baseURL: "https://api.novohorizonteteresopolis.com.br",
+	headers: { "Content-Type": "application/json" },
+	withCredentials: true, // Garante envio de cookies em todas as requisições
+});
+
 const StudentCard = () => {
 	const [alunos, setAlunos] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
@@ -13,20 +20,33 @@ const StudentCard = () => {
 	const [error, setError] = useState(null);
 	const [allData, setAllData] = useState([]);
 	const [openDropdowns, setOpenDropdowns] = useState({});
-	const { isLoggedIn, login } = useAuth(); // Removido user/pass
+	const { isLoggedIn, user, pass, login } = useAuth();
 	const [loginUser, setLoginUser] = useState("");
 	const [loginPass, setLoginPass] = useState("");
 
-	// Login apenas no front, não faz requisição para o backend
 	async function handleLoginSubmit(event) {
 		event.preventDefault();
-		// Simula login local (apenas front)
-		const usuarioValido = "admin";
-		const senhaValida = "1234";
-		if (loginUser === usuarioValido && loginPass === senhaValida) {
-			login(loginUser, loginPass);
-		} else {
-			alert("Usuário ou senha inválidos.");
+		try {
+			const res = await fetch(
+				"https://api.novohorizonteteresopolis.com.br/login",
+				{
+					method: "POST",
+					credentials: "include", // Garante envio/recebimento de cookies de sessão
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ login: loginUser, senha: loginPass }),
+				}
+			);
+			if (res.ok) {
+				login(loginUser, loginPass);
+			} else {
+				const errorMsg = await res.text();
+				alert("Usuário ou senha inválidos. Mensagem do servidor: " + errorMsg);
+			}
+		} catch (error) {
+			alert(
+				"Erro ao tentar conectar com o servidor. Verifique se a API está rodando."
+			);
+			console.error("Erro de rede no login:", error);
 		}
 	}
 
@@ -50,6 +70,9 @@ const StudentCard = () => {
 		}));
 	};
 
+	const basicAuth =
+		user && pass ? { auth: { username: user, password: pass } } : {};
+
 	const deleteStudent = async (id) => {
 		try {
 			const palavraChave = "DELETAR";
@@ -61,11 +84,10 @@ const StudentCard = () => {
 				return;
 			}
 
-			// Removido auth dos endpoints
-			await axios.delete(`http://191.252.195.227:8080/alunos/${id}`);
-			await axios.delete(`http://191.252.195.227:8080/maes/${id}`);
-			await axios.delete(`http://191.252.195.227:8080/pais/${id}`);
-			await axios.delete(`http://191.252.195.227:8080/observacoes/${id}`);
+			await axiosInstance.delete(`/alunos/${id}`, basicAuth);
+			await axiosInstance.delete(`/maes/${id}`, basicAuth);
+			await axiosInstance.delete(`/pais/${id}`, basicAuth);
+			await axiosInstance.delete(`/observacoes/${id}`, basicAuth);
 			setAlunos((prevAlunos) => prevAlunos.filter((aluno) => aluno.id !== id));
 			setAllData((prevAllData) =>
 				prevAllData.filter((aluno) => aluno.id !== id)
@@ -83,13 +105,12 @@ const StudentCard = () => {
 		const fetchInitialData = async () => {
 			setLoading(true);
 			try {
-				// Removido auth dos endpoints
 				const [alunosRes, maesRes, paisRes, observacoesRes] = await Promise.all(
 					[
-						axios.get("http://191.252.195.227:8080/alunos"),
-						axios.get("http://191.252.195.227:8080/maes"),
-						axios.get("http://191.252.195.227:8080/pais"),
-						axios.get("http://191.252.195.227:8080/observacoes"),
+						axiosInstance.get("/alunos", basicAuth),
+						axiosInstance.get("/maes", basicAuth),
+						axiosInstance.get("/pais", basicAuth),
+						axiosInstance.get("/observacoes", basicAuth),
 					]
 				);
 
@@ -140,7 +161,7 @@ const StudentCard = () => {
 		};
 
 		fetchInitialData();
-	}, [isLoggedIn]);
+	}, [isLoggedIn, user, pass]);
 
 	// Busca dinâmica
 	useEffect(() => {
@@ -155,25 +176,24 @@ const StudentCard = () => {
 					return;
 				}
 
-				// Removido auth dos endpoints
 				const [alunosPorNome, maesPorNome, paisPorNome, alunosPorCpf] =
 					await Promise.all([
-						axios.get(
-							`http://191.252.195.227:8080/alunos/buscarPorNome?nome=${searchTerm}`,
-							{ signal: controller.signal }
-						),
-						axios.get(
-							`http://191.252.195.227:8080/maes/buscarPorNome?nomeMae=${searchTerm}`,
-							{ signal: controller.signal }
-						),
-						axios.get(
-							`http://191.252.195.227:8080/pais/buscarPorNome?nomePai=${searchTerm}`,
-							{ signal: controller.signal }
-						),
-						axios.get(
-							`http://191.252.195.227:8080/alunos/buscarPorCpf?cpf=${searchTerm}`,
-							{ signal: controller.signal }
-						),
+						axiosInstance.get(`/alunos/buscarPorNome?nome=${searchTerm}`, {
+							signal: controller.signal,
+							...basicAuth,
+						}),
+						axiosInstance.get(`/maes/buscarPorNome?nomeMae=${searchTerm}`, {
+							signal: controller.signal,
+							...basicAuth,
+						}),
+						axiosInstance.get(`/pais/buscarPorNome?nomePai=${searchTerm}`, {
+							signal: controller.signal,
+							...basicAuth,
+						}),
+						axiosInstance.get(`/alunos/buscarPorCpf?cpf=${searchTerm}`, {
+							signal: controller.signal,
+							...basicAuth,
+						}),
 					]);
 
 				const alunoIds = new Set();
@@ -207,7 +227,7 @@ const StudentCard = () => {
 			controller.abort();
 			clearTimeout(debounceTimer);
 		};
-	}, [searchTerm, allData, isLoggedIn]);
+	}, [searchTerm, allData, isLoggedIn, user, pass]);
 
 	if (!isLoggedIn) {
 		return (

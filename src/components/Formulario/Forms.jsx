@@ -25,9 +25,10 @@ import {
 
 // Configuração global do Axios
 const api = axios.create({
-	baseURL: "http://191.252.195.227:8080",
+	baseURL: "https://api.novohorizonteteresopolis.com.br",
 	timeout: 10000,
 	headers: { "Content-Type": "application/json" },
+	withCredentials: true, // Garante envio de cookies em todas as requisições
 });
 
 function Forms() {

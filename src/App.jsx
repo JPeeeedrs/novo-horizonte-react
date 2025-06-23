@@ -19,7 +19,7 @@ function App() {
 				<Route path='/' element={<Home />} />
 				<Route path='/formulario' element={<Formulario />} />
 				<Route path='/lgpd-info' element={<LgpdInfo />} />
-				<Route path='/alunos' element={<Alunos />} />
+				<Route path='/estudantes' element={<Alunos />} />
 				<Route path='/download' element={<Download />} />
 				<Route path='/editar/:id' element={<Edit />} />
 				<Route path='sobrenos' element={<SobreNos />} />
