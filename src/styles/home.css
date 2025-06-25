@@ -1,4 +1,3 @@
-/* Container principal do carrossel */
 .carousel-container {
   width: 100%;
   margin: 0 auto;
@@ -6,26 +5,22 @@
   overflow: hidden;
 }
 
-/* Imagens dentro dos itens do carrossel */
 .carousel-item img {
   height: 400px;
   object-fit: cover;
   width: 100%;
 }
 
-/* Barra lateral (usada para layout com colunas) */
 .barra-lateral {
   min-height: 100vh;
   border-right: 1px solid #dee2e6;
 }
 
-/* Define a borda esquerda na última coluna */
 .barra-lateral:last-child {
   border-right: none;
   border-left: 1px solid #dee2e6;
 }
 
-/* Container para o mapa */
 .map-container {
   width: 100%;
   height: 400px;
@@ -33,7 +28,6 @@
   max-width: 900px;
 }
 
-/* Estilização do iframe do mapa */
 .map-container iframe {
   width: 100%;
   height: 100%;
@@ -41,7 +35,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilização do titulo do mapa */
 #map-title {
   text-align: center;
   font-size: 2.5rem;
@@ -49,14 +42,12 @@
   margin-top: 20px;
 }
 
-/* Estilização do endereço do mapa */
 #map-address {
   text-align: center;
   font-size: 1.25rem;
   margin-top: 10px;
 }
 
-/* Seção com a citação do diretor */
 .director-quote-section {
   background-color: #902121;
   border-radius: 25px;
@@ -64,7 +55,6 @@
   color: white;
 }
 
-/* Texto da citação */
 .director-quote {
   font-size: 2rem;
   line-height: 1.8;
@@ -73,7 +63,6 @@
   text-align: justify;
 }
 
-/* Container da imagem do diretor */
 .director-image-container {
   width: 250px;
   height: 250px;
@@ -83,14 +72,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilização da imagem do diretor */
 .director-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Nome do diretor */
 .director-name {
   color: white;
   font-size: 2rem;
@@ -98,24 +85,20 @@
   font-weight: bold;
 }
 
-/* Cargo do diretor */
 .director-title {
   color: rgba(255, 255, 255, 0.9);
   font-size: 1.5rem;
 }
 
-/* Cartão de segmento */
 .segmento-card {
   padding: 20px;
   transition: transform 0.3s ease;
 }
 
-/* Animação ao passar o mouse no cartão */
 .segmento-card:hover {
   transform: translateY(-5px);
 }
 
-/* Container da imagem do segmento */
 .segmento-image-container {
   width: 330px;
   height: 330px;
@@ -127,7 +110,6 @@
   padding: 3px;
 }
 
-/* Imagem dentro do container */
 .segmento-image-container img {
   width: 100%;
   height: 100%;
@@ -135,14 +117,12 @@
   border-radius: 6px;
 }
 
-/* Título do segmento */
 .segmento-title {
   color: #333;
   font-size: 2rem;
   margin: 15px 0;
 }
 
-/* Descrição do segmento */
 .segmento-description {
   color: #666;
   font-size: 1.25rem;
@@ -151,7 +131,6 @@
   padding: 0 10px;
 }
 
-/* Texto da missão */
 .mission-text {
   font-size: 1.5rem;
   line-height: 1.8;
@@ -159,7 +138,6 @@
   text-align: justify;
 }
 
-/* Container da imagem da missão */
 .mission-image-container {
   padding: 3px;
   border: 4px solid #902121;
@@ -168,21 +146,18 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Imagem da missão */
 .mission-image-container img {
   width: 100%;
   height: auto;
   border-radius: 6px;
 }
 
-/* Repetição da imagem do carrossel (idem acima) */
 .carousel-item img {
   height: 400px;
   object-fit: cover;
   width: 100%;
 }
 
-/* Container do carrossel dividido */
 .split-carousel-container {
   width: 100%;
   margin: 40px 0;
@@ -190,28 +165,24 @@
   overflow: hidden;
 }
 
-/* Conteúdo do carrossel dividido com texto e imagem */
 .split-carousel-content {
   display: flex;
   align-items: center;
   height: 400px;
 }
 
-/* Parte de texto do carrossel */
 .text-content {
   flex: 1;
   padding: 110px 50px 110px 110px;
   background-color: #e1e1e1;
 }
 
-/* Título na parte de texto */
 .text-content h2 {
   color: #902121;
   margin-bottom: 20px;
   font-size: 2.5rem;
 }
 
-/* Parágrafo na parte de texto */
 .text-content p {
   font-size: 1.5rem;
   line-height: 1.6;
@@ -219,27 +190,23 @@
   text-align: justify;
 }
 
-/* Parte da imagem no carrossel dividido */
 .image-content {
   flex: 1;
   height: 400px;
 }
 
-/* Imagem dentro da parte de imagem */
 .image-content img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Botões de navegação do carrossel dividido */
 .split-carousel-container .carousel-control-prev,
 .split-carousel-container .carousel-control-next {
   width: 5%;
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* Indicadores do carrossel */
 .split-carousel-container .carousel-indicators {
   bottom: 0;
 }
@@ -303,7 +270,6 @@
   }
 }
 
-/* Estilos responsivos para telas menores */
 @media (max-width: 768px) {
   #nav-elementos a {
     font-size: 1rem;

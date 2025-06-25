@@ -48,7 +48,6 @@ export const maskDate = (value) => {
 
 	const parts = maskedValue.split("/");
 
-	// Valida o mês
 	if (parts[1] && parseInt(parts[1], 10) > 12) {
 		parts[1] = "12";
 	}

@@ -1,40 +1,35 @@
-/* === ESTILO DO FORMULÁRIO PRINCIPAL === */
 #form {
-	margin: 0 15vw; /* Espaçamento lateral responsivo */
-	background-color: #c5c5c5; /* Fundo cinza claro */
-	padding: 30px; /* Espaçamento interno */
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); /* Sombra suave */
-	min-height: 100%; /* Altura mínima para preencher a tela */
-	display: flex; /* Alinhamento com Flexbox */
-	justify-content: center; /* Centraliza horizontalmente */
-	align-items: center; /* Centraliza verticalmente */
+	margin: 0 15vw;
+	background-color: #c5c5c5;
+	padding: 30px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	min-height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-/* === LABELS DO FORMULÁRIO === */
 .form-label {
-	text-align: center; /* Centraliza o texto das labels */
+	text-align: center;
 }
 
-/* botão para enviar documentos por email */
 .btn-email {
 	background-color: #902121;
 	text-decoration: none;
 }
 
-/* === HOVER E FOCUS DO BOTÃO DE EMAIL === */
 .btn-email:hover {
-	background-color: #502121; /* Cor de fundo verde escuro */
-	transform: scale(1.01); /* Efeito de zoom leve */
-	color: #dedbd7; /* Cor do texto ao passar o mouse */
+	background-color: #502121;
+	transform: scale(1.01);
+	color: #dedbd7;
 }
 
 .btn-email:focus {
-	outline: none; /* Remove contorno ao focar */
+	outline: none;
 }
 
-/* === ESTILIZAÇÃO DOS BOTÕES GERAIS === */
 .btn {
-	color: #fff; /* Cor do texto */
+	color: #fff;
 	font-weight: 500;
 	border: none;
 	padding: 7.5px 20px;
@@ -43,19 +38,18 @@
 	cursor: pointer;
 	transition: background-color 0.3s ease, transform 0.2s ease;
 	margin: 10px auto;
-	width: auto; /* Largura padrão dos botões */
+	width: auto;
 	font-weight: bolder;
-	text-align: center; /* Centraliza o texto */
-	align-items: center; /* Alinha os itens com Flexbox */
+	text-align: center;
+	align-items: center;
 }
 
-/* === HOVER E FOCUS GERAL DOS BOTÕES === */
 .btn:hover {
-	transform: scale(1.05); /* Efeito de zoom leve */
+	transform: scale(1.05);
 	color: #dedbd7;
 }
 .btn:focus {
-	outline: none; /* Remove contorno ao focar */
+	outline: none;
 }
 
 .btn-lgpd {
@@ -63,11 +57,10 @@
 }
 
 .btn-lgpd:hover {
-	background-color: #502121; /* Cor de fundo verde escuro */
-	color: #dedbd7; /* Cor do texto ao passar o mouse */
+	background-color: #502121;
+	color: #dedbd7;
 }
 
-/* === BOTÃO DE NAVEGAÇÃO === */
 .btn-nav {
 	background-color: #902121;
 	margin: 10px auto;
@@ -85,7 +78,6 @@
 	box-shadow: 0 0 0 3px rgba(144, 33, 33, 0.5);
 }
 
-/* Contêiner fixo para botões de navegação */
 .step-buttons {
 	bottom: 0;
 	padding: 15px;
@@ -94,7 +86,6 @@
 	gap: 10px;
 }
 
-/* === BOTÃO DE SUBMISSÃO (AZUL) === */
 .btn-submit {
 	background-color: #0000aa;
 	font-weight: 500;
@@ -106,7 +97,7 @@
 	cursor: pointer;
 	transition: background-color 0.3s ease, transform 0.2s ease;
 	font-weight: bolder;
-	margin: 20px auto; /* Margem automática para centralizar */
+	margin: 20px auto;
 	color: #fff;
 
 	text-align: center;
@@ -118,7 +109,6 @@
 	box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.5);
 }
 
-/* === BOTÃO DE TERMO (LARANJA) === */
 .btn-termo {
 	background-color: #902121;
 }
