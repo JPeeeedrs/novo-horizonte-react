@@ -4,10 +4,11 @@ import Nerd from "../../assets/images/nerd-face.png";
 function Sobre() {
 	return (
 		<div className='sobre-container'>
-			<h1>Sobre os dizimvulvidures</h1>
+			{/* Sobre os dizimvulvidures*/}
+			<h1>Sobre os Desenvolvedores</h1>
 
 			<div className='dev-group'>
-				<h3>Beatriz Hyath Carvalho</h3>
+				<h3>Beatriz Hyath Carvalho 📖❤️</h3>
 				<div className='buttons'>
 					<a
 						className='button-sobre linkedin'
@@ -31,6 +32,7 @@ function Sobre() {
 			<div className='dev-group'>
 				<h3>
 					Gabriel Nogueira Pereira <img className='nerd-face' src={Nerd} />
+					🎩
 				</h3>
 				<div className='buttons'>
 					<a
@@ -53,7 +55,7 @@ function Sobre() {
 			</div>
 
 			<div className='dev-group'>
-				<h3>Hugo Figueiredo Ottati Silva</h3>
+				<h3>Hugo Figueiredo Ottati Silva 🏋️‍♂️🏀</h3>
 				<div className='buttons'>
 					<a
 						className='button-sobre linkedin'
@@ -75,7 +77,7 @@ function Sobre() {
 			</div>
 
 			<div className='dev-group'>
-				<h3>João Pedro Daumas Correa 🕴️</h3>
+				<h3>João Pedro Daumas Correa 🕴️🕵️‍♂️</h3>
 				<div className='buttons'>
 					<a
 						className='button-sobre linkedin'
@@ -97,7 +99,7 @@ function Sobre() {
 			</div>
 
 			<div className='dev-group'>
-				<h3>João Pedro Sciammarella Pereira Paes 🍓🏳️‍🌈</h3>
+				<h3>João Pedro Sciammarella Pereira Paes ⚽🇦🇱</h3>
 				<div className='buttons'>
 					<a
 						className='button-sobre linkedin'
@@ -119,7 +121,7 @@ function Sobre() {
 			</div>
 
 			<div className='dev-group'>
-				<h3>Kauan da Costa Moraes</h3>
+				<h3>Kauan da Costa Moraes 🌿🇨🇦</h3>
 				<div className='buttons'>
 					<a
 						className='button-sobre linkedin'
@@ -141,7 +143,7 @@ function Sobre() {
 			</div>
 
 			<div className='dev-group'>
-				<h3>Lívia Caldeira</h3>
+				<h3>Lívia Caldeira 📚🖨️</h3>
 				<div className='buttons'>
 					<a
 						className='button-sobre linkedin'
@@ -163,7 +165,7 @@ function Sobre() {
 			</div>
 
 			<div className='dev-group'>
-				<h3>Matheus de Oliveira Paim 🦇🫡</h3>
+				<h3>Matheus de Oliveira Paim 🧛‍♂️🫡</h3>
 				<div className='buttons'>
 					<a
 						className='button-sobre linkedin'
@@ -185,7 +187,7 @@ function Sobre() {
 			</div>
 
 			<div className='dev-group'>
-				<h3>Rebeca Vianna Francklin</h3>
+				<h3>Rebeca Vianna Francklin 🎨🎥</h3>
 				<div className='buttons'>
 					<a
 						className='button-sobre linkedin'
@@ -207,7 +209,7 @@ function Sobre() {
 			</div>
 
 			<div className='dev-group'>
-				<h3>Vitor Mendes Moreira Gallo 🥸</h3>
+				<h3>Vitor Mendes Moreira Gallo 🥸👨‍🔬</h3>
 				<div className='buttons'>
 					<a
 						className='button-sobre linkedin'

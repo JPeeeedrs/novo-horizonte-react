@@ -2,7 +2,6 @@ import termos from "../../assets/images/termos.pdf";
 import InputField from "../../common/inputs/InputField";
 import SelectField from "../../common/inputs/SelectField";
 import { Link } from "react-router-dom";
-
 function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 	const safeFormData = {
 		matriculaTipo: formData.matriculaTipo || "inicial",
@@ -252,7 +251,9 @@ function StepObservacoes({ onBack, formData, onChange, loading, error }) {
 
 				{/* Alerta de erro */}
 				{error && (
-					<div className='alert alert-danger mt-3 text-center'>{error}</div>
+					<div id='error' className='alert alert-danger mt-3 text-center'>
+						{error}
+					</div>
 				)}
 
 				{/* Botões */}

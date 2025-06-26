@@ -211,7 +211,7 @@ function Edit() {
 				alert(
 					`Aluno ${alunoResponse.data.nome} e informações relacionadas atualizados com sucesso!`
 				);
-				navigate("/alunos");
+				navigate("/estudantes");
 			}
 		} catch (error) {
 			console.error("Erro:", error);

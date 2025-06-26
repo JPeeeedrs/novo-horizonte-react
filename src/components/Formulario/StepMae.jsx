@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import InputField from "../../common/inputs/InputField";
-import SelectField from "../../common/inputs/SelectField";
+import { startErrorTimer } from "../../utils/errorTimer";
 
 function StepMae({ onNext, onBack, formData = {}, onChange }) {
+	const [error, setError] = useState("");
 	const temMae = formData.temMae ?? true;
 	const safeFormData = {
 		nomeMae: formData.nomeMae || "",
@@ -18,6 +19,36 @@ function StepMae({ onNext, onBack, formData = {}, onChange }) {
 		trabalhoMae: formData.trabalhoMae || "",
 		telefoneTrabalhoMae: formData.telefoneTrabalhoMae || "",
 	};
+
+	function handleNext() {
+		if (!temMae) {
+			setError("");
+			onNext();
+			return;
+		}
+		const requiredFields = [
+			{ key: "nomeMae", label: "Nome da Mãe" },
+			{ key: "nascimentoMae", label: "Nascimento da Mãe" },
+			{ key: "enderecoMae", label: "Endereço da Mãe" },
+			{ key: "cepMae", label: "CEP da Mãe" },
+			{ key: "cpfMae", label: "CPF da Mãe" },
+			{ key: "rgMae", label: "RG da Mãe" },
+			{ key: "telefoneMae", label: "Telefone da Mãe" },
+			{ key: "emailMae", label: "Email da Mãe" },
+		];
+		for (const field of requiredFields) {
+			if (
+				!safeFormData[field.key] ||
+				String(safeFormData[field.key]).trim() === ""
+			) {
+				setError(`Preencha o campo: ${field.label}`);
+				startErrorTimer(setError);
+				return;
+			}
+		}
+		setError("");
+		onNext();
+	}
 
 	// Function to set all fields to "não informado"
 	function setFieldsToNaoInformado() {
@@ -239,10 +270,15 @@ function StepMae({ onNext, onBack, formData = {}, onChange }) {
 				<button type='button' className='btn btn-nav' onClick={onBack}>
 					Anterior
 				</button>
-				<button type='button' className='btn btn-nav' onClick={onNext}>
+				<button type='button' className='btn btn-nav' onClick={handleNext}>
 					Próximo
 				</button>
 			</div>
+			{error && (
+				<div id='error' className='alert alert-danger mt-3 text-center'>
+					{error}
+				</div>
+			)}
 		</div>
 	);
 }

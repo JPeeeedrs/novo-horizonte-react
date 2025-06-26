@@ -23,12 +23,11 @@ import {
 	maskDate,
 } from "../../utils/mascaras";
 
-// Configuração global do Axios
 const api = axios.create({
 	baseURL: "https://api.novohorizonteteresopolis.com.br",
 	timeout: 10000,
 	headers: { "Content-Type": "application/json" },
-	withCredentials: true, // Garante envio de cookies em todas as requisições
+	withCredentials: true,
 });
 
 function Forms() {

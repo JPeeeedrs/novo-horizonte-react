@@ -82,5 +82,5 @@ export const maskDate = (value) => {
 };
 
 export const maskName = (value) => {
-	return value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
+	return value.replace(/[^A-Za-zÀ-ÿ\s,\.]/g, "");
 };

@@ -86,6 +86,10 @@
 	gap: 10px;
 }
 
+#error {
+	display: block;
+}
+
 .btn-submit {
 	background-color: #0000aa;
 	font-weight: 500;

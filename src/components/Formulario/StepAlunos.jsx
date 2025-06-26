@@ -1,7 +1,10 @@
+import { useState } from "react";
+import { startErrorTimer } from "../../utils/errorTimer";
 import InputField from "../../common/inputs/InputField";
 import SelectField from "../../common/inputs/SelectField";
 
 function StepAluno({ onNext, formData = {}, onChange }) {
+	const [error, setError] = useState("");
 	const safeFormData = {
 		nome: formData.nome || "",
 		dataNascimento: formData.dataNascimento || "",
@@ -19,6 +22,38 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 		tipoSanguineo: formData.tipoSanguineo || "",
 		raca: formData.raca || "",
 	};
+
+	function handleNext() {
+		const requiredFields = [
+			{ key: "nome", label: "Nome" },
+			{ key: "dataNascimento", label: "Data de Nascimento" },
+			{ key: "naturalidade", label: "Naturalidade" },
+			{ key: "nacionalidade", label: "Nacionalidade" },
+			{ key: "sexo", label: "Sexo" },
+			{ key: "cpf", label: "CPF" },
+			{ key: "rg", label: "RG" },
+			{ key: "anoLetivo", label: "Ano Letivo" },
+			{ key: "termo", label: "Termo" },
+			{ key: "folha", label: "Folha" },
+			{ key: "livro", label: "Livro" },
+			{ key: "matricula", label: "Matrícula" },
+			{ key: "turno", label: "Turno" },
+			{ key: "tipoSanguineo", label: "Tipo Sanguíneo" },
+			{ key: "raca", label: "Raça" },
+		];
+		for (const field of requiredFields) {
+			if (
+				!safeFormData[field.key] ||
+				String(safeFormData[field.key]).trim() === ""
+			) {
+				setError(`Preencha o campo: ${field.label}`);
+				startErrorTimer(setError);
+				return;
+			}
+		}
+		setError("");
+		onNext();
+	}
 
 	return (
 		<div className='step' id='aluno'>
@@ -229,9 +264,14 @@ function StepAluno({ onNext, formData = {}, onChange }) {
 					required={true}
 				/>
 
-				<button type='button' className='btn btn-nav' onClick={onNext}>
+				<button type='button' className='btn btn-nav' onClick={handleNext}>
 					Próximo
 				</button>
+				{error && (
+					<div id='error' className='alert alert-danger mt-3 text-center'>
+						{error}
+					</div>
+				)}
 			</div>
 		</div>
 	);

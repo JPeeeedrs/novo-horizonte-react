@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../../common/inputs/InputField";
+import { startErrorTimer } from "../../utils/errorTimer";
 
 function StepPai({ onNext, onBack, formData = {}, onChange }) {
+	const [error, setError] = useState("");
 	const temPai = formData.temPai ?? true;
 	const safeFormData = {
 		nomePai: formData.nomePai || "",
@@ -17,6 +19,36 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 		trabalhoPai: formData.trabalhoPai || "",
 		telefoneTrabalhoPai: formData.telefoneTrabalhoPai || "",
 	};
+
+	function handleNext() {
+		if (!temPai) {
+			setError("");
+			onNext();
+			return;
+		}
+		const requiredFields = [
+			{ key: "nomePai", label: "Nome do Pai" },
+			{ key: "nascimentoPai", label: "Nascimento do Pai" },
+			{ key: "enderecoPai", label: "Endereço do Pai" },
+			{ key: "cepPai", label: "CEP do Pai" },
+			{ key: "cpfPai", label: "CPF do Pai" },
+			{ key: "rgPai", label: "RG do Pai" },
+			{ key: "telefonePai", label: "Telefone do Pai" },
+			{ key: "emailPai", label: "Email do Pai" },
+		];
+		for (const field of requiredFields) {
+			if (
+				!safeFormData[field.key] ||
+				String(safeFormData[field.key]).trim() === ""
+			) {
+				setError(`Preencha o campo: ${field.label}`);
+				startErrorTimer(setError);
+				return;
+			}
+		}
+		setError("");
+		onNext();
+	}
 
 	// Function to set all fields to "não informado"
 	function setFieldsToNaoInformado() {
@@ -238,10 +270,15 @@ function StepPai({ onNext, onBack, formData = {}, onChange }) {
 				<button type='button' className='btn btn-nav' onClick={onBack}>
 					Anterior
 				</button>
-				<button type='button' className='btn btn-nav' onClick={onNext}>
+				<button type='button' className='btn btn-nav' onClick={handleNext}>
 					Próximo
 				</button>
 			</div>
+			{error && (
+				<div id='error' className='alert alert-danger mt-3 text-center'>
+					{error}
+				</div>
+			)}
 		</div>
 	);
 }
