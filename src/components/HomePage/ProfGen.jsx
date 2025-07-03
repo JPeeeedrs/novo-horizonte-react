@@ -1,4 +1,4 @@
-import profgen from "../../assets/images/profGenerica.jpg";
+import profgen from "../../assets/images/missao.png";
 
 function ProfGen() {
 	return (
